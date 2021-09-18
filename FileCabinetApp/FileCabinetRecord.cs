@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileCabinetApp
 {
-    class FileCabinetRecord
+    public class FileCabinetRecord
     {
         public int Id { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileCabinetApp
 {
-    class FileCabinetService
+    public class FileCabinetService
     {
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
 
@@ -25,7 +25,7 @@ namespace FileCabinetApp
         public int GetStat()
         {
             // TODO: добавьте реализацию метода
-            return 0;
+            return this.list.Count;
         }
     }
 }
