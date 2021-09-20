@@ -19,6 +19,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("create", Create),
             new Tuple<string, Action<string>>("stat", Stat),
             new Tuple<string, Action<string>>("list", List),
+            new Tuple<string, Action<string>>("edit", Edit),
             new Tuple<string, Action<string>>("exit", Exit),
         };
 
@@ -28,6 +29,7 @@ namespace FileCabinetApp
             new string[] { "create", "create a new record", "The 'create' command creates a new record." },
             new string[] { "stat", "prints the record's statistics", "The 'stat' command prints the record's statistics." },
             new string[] { "list", "shows existing records", "The 'list' command shows existing records." },
+            new string[] { "edit", "edits an existing record", "The 'edit' command edits an existing records." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
@@ -221,6 +223,131 @@ namespace FileCabinetApp
             }
 
             Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
+        }
+
+        private static void Edit(string parameters)
+        {
+            int recordId = int.Parse(parameters);
+            if (!fileCabinetService.IsRecordExist(recordId))
+            {
+                Console.WriteLine($"#{recordId} record is not found.");
+            }
+            else
+            {
+                string firstName = string.Empty;
+                string lastName = string.Empty;
+                DateTime dateOfBirth = DateTime.Now;
+                short height = 0;
+                decimal weight = 0;
+                char gender = 'm';
+                bool isCorrect = false;
+                while (!isCorrect)
+                {
+                    Console.Write("First name: ");
+                    firstName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(firstName))
+                    {
+                        Console.WriteLine("First name shouldn't be empty. Please input again");
+                    }
+                    else if (firstName.Length < 2 || firstName.Length > 60)
+                    {
+                        Console.WriteLine("First name's length should more than 1 and less than 61. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
+                }
+
+                isCorrect = false;
+                while (!isCorrect)
+                {
+                    Console.Write("Last name: ");
+                    lastName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(lastName))
+                    {
+                        Console.WriteLine("Last name shouldn't be empty. Please input again");
+                    }
+                    else if (lastName.Length < 2 || lastName.Length > 60)
+                    {
+                        Console.WriteLine("Last name's length should more than 1 and less than 61. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
+                }
+
+                isCorrect = false;
+                while (!isCorrect)
+                {
+                    try
+                    {
+                        Console.Write("Date of birth: ");
+                        var inputs = Console.ReadLine().Split('/', 3);
+                        dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
+                        if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+                        {
+                            Console.WriteLine("Wrong date of birth");
+                        }
+                        else
+                        {
+                            isCorrect = true;
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Wrong date of birth");
+                    }
+                }
+
+                isCorrect = false;
+                while (!isCorrect)
+                {
+                    Console.Write("Height (cm): ");
+                    height = short.Parse(Console.ReadLine());
+                    if (height < 30 || height > 250)
+                    {
+                        Console.WriteLine("Height should more than 29 and less than 251. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
+                }
+
+                isCorrect = false;
+                while (!isCorrect)
+                {
+                    Console.Write("Weight (kg): ");
+                    weight = decimal.Parse(Console.ReadLine());
+                    if (weight <= 0)
+                    {
+                        Console.WriteLine("Height should more than 0. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
+                }
+
+                isCorrect = false;
+                while (!isCorrect)
+                {
+                    Console.WriteLine("Gender (m - male, f - female, a - another): ");
+                    gender = char.Parse(Console.ReadLine());
+                    if (gender != 'm' && gender != 'f' && gender != 'a')
+                    {
+                        Console.WriteLine("Gender  should be: m - male, f - female, a - another. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
+                }
+                Program.fileCabinetService.EditRecord(recordId, firstName, lastName, dateOfBirth, height, weight, gender);
+                Console.WriteLine($"Record #{recordId} is updated.");
+            }
         }
 
         private static void List(string parameters)

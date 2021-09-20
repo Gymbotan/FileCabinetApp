@@ -63,7 +63,7 @@ namespace FileCabinetApp
             };
 
             this.list.Add(record);
-
+            
             return record.Id;
         }
 
@@ -75,6 +75,69 @@ namespace FileCabinetApp
                     $"{record.DateOfBirth.Year}-{record.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{record.DateOfBirth.Day}, " +
                     $"{record.Height}cm, {record.Weight}kg, {record.Gender}");
             }
+        }
+
+        public bool IsRecordExist(int id)
+        {
+            if (this.list.Exists(x => x.Id == id))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void EditRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
+        {
+            FileCabinetRecord record = this.list.Find(x => x.Id == id);
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentNullException(firstName);
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentNullException(lastName);
+            }
+
+            if (firstName.Length < 2 || firstName.Length > 60)
+            {
+                throw new ArgumentException(firstName);
+            }
+
+            if (lastName.Length < 2 || lastName.Length > 60)
+            {
+                throw new ArgumentException(lastName);
+            }
+
+            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            {
+                throw new ArgumentException("Wrong dateOfBirth");
+            }
+
+            if (height < 30 || height > 250)
+            {
+                throw new ArgumentException(height.ToString());
+            }
+
+            if (weight <= 0)
+            {
+                throw new ArgumentException(weight.ToString());
+            }
+
+            if (gender != 'm' && gender != 'f' && gender != 'a')
+            {
+                throw new ArgumentException(gender.ToString());
+            }
+
+            record.FirstName = firstName;
+            record.LastName = lastName;
+            record.DateOfBirth = dateOfBirth;
+            record.Height = height;
+            record.Weight = weight;
+            record.Gender = gender;
         }
 
         public FileCabinetRecord[] GetRecords()
