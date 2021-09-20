@@ -11,6 +11,46 @@ namespace FileCabinetApp
 
         public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentNullException(firstName);
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentNullException(lastName);
+            }
+
+            if (firstName.Length < 2 || firstName.Length > 60)
+            {
+                throw new ArgumentException(firstName);
+            }
+
+            if (lastName.Length < 2 || lastName.Length > 60)
+            {
+                throw new ArgumentException(lastName);
+            }
+
+            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            {
+                throw new ArgumentException("Wrong dateOfBirth");
+            }
+
+            if (height < 30 || height > 250)
+            {
+                throw new ArgumentException(height.ToString());
+            }
+
+            if (weight <= 0)
+            {
+                throw new ArgumentException(weight.ToString());
+            }
+
+            if (gender != 'm' && gender != 'f' && gender != 'a')
+            {
+                throw new ArgumentException(gender.ToString());
+            }
+
             var record = new FileCabinetRecord
             {
                 Id = this.list.Count + 1,
