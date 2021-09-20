@@ -221,45 +221,11 @@ namespace FileCabinetApp
             }
 
             Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
-
-
-
-
-            /*try
-            {
-                Console.Write("First name: ");
-                string firstName = Console.ReadLine();
-                Console.Write("Last name: ");
-                string lastName = Console.ReadLine();
-                Console.Write("Date of birth: ");
-                var inputs = Console.ReadLine().Split('/', 3);
-                DateTime dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-                Console.Write("Height (cm): ");
-                short height = short.Parse(Console.ReadLine());
-                Console.Write("Weight (kg): ");
-                decimal weight = decimal.Parse(Console.ReadLine());
-                Console.WriteLine("Gender (m - male, f - female, a - another): ");
-                char gender = char.Parse(Console.ReadLine());
-                Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-            }*/
         }
 
         private static void List(string parameters)
         {
             Program.fileCabinetService.ListRecords();
-
-            /*Console.Write("First name: ");
-            string firstName = Console.ReadLine();
-            Console.Write("Last name: ");
-            string lastName = Console.ReadLine();
-            Console.Write("Date of birth: ");
-            var inputs = Console.ReadLine().Split('/', 3);
-            DateTime dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-            Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth)} is created");*/
         }
 
         private static void Exit(string parameters)
