@@ -9,7 +9,7 @@ namespace FileCabinetApp
     {
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
 
-        public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth)
+        public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             var record = new FileCabinetRecord
             {
@@ -17,6 +17,9 @@ namespace FileCabinetApp
                 FirstName = firstName,
                 LastName = lastName,
                 DateOfBirth = dateOfBirth,
+                Height = height,
+                Weight = weight,
+                Gender = gender,
             };
 
             this.list.Add(record);
@@ -28,7 +31,9 @@ namespace FileCabinetApp
         {
             foreach (FileCabinetRecord record in this.list)
             {
-                Console.WriteLine($"#{record.Id}, {record.FirstName}, {record.LastName}, {record.DateOfBirth.Year}-{record.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{record.DateOfBirth.Day}");
+                Console.WriteLine($"#{record.Id}, {record.FirstName}, {record.LastName}, " +
+                    $"{record.DateOfBirth.Year}-{record.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{record.DateOfBirth.Day}, " +
+                    $"{record.Height}cm, {record.Weight}kg, {record.Gender}");
             }
         }
 
