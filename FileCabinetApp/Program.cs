@@ -2,6 +2,7 @@
 namespace FileCabinetApp
 {
     using System;
+    using System.Globalization;
 
     public static class Program
     {
@@ -20,6 +21,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("stat", Stat),
             new Tuple<string, Action<string>>("list", List),
             new Tuple<string, Action<string>>("edit", Edit),
+            new Tuple<string, Action<string>>("find", Find),
             new Tuple<string, Action<string>>("exit", Exit),
         };
 
@@ -29,7 +31,8 @@ namespace FileCabinetApp
             new string[] { "create", "create a new record", "The 'create' command creates a new record." },
             new string[] { "stat", "prints the record's statistics", "The 'stat' command prints the record's statistics." },
             new string[] { "list", "shows existing records", "The 'list' command shows existing records." },
-            new string[] { "edit", "edits an existing record", "The 'edit' command edits an existing records." },
+            new string[] { "edit", "edits an existing record", "The 'edit' command edits an existing record." },
+            new string[] { "find", "finds existing records", "The 'find' command finds existing records." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
@@ -347,6 +350,26 @@ namespace FileCabinetApp
                 }
                 Program.fileCabinetService.EditRecord(recordId, firstName, lastName, dateOfBirth, height, weight, gender);
                 Console.WriteLine($"Record #{recordId} is updated.");
+            }
+        }
+
+        private static void Find(string parameters)
+        {
+            var inputs = parameters.Split(' ', 2);
+            switch (inputs[0].ToLower())
+            {
+                case "firstname":
+                    FileCabinetRecord[] array = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'",""));
+                    foreach (var ar in array)
+                    {
+                        Console.WriteLine($"#{ar.Id}, {ar.FirstName}, {ar.LastName}, " +
+                    $"{ar.DateOfBirth.Year}-{ar.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{ar.DateOfBirth.Day}, " +
+                    $"{ar.Height}cm, {ar.Weight}kg, {ar.Gender}");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("You unput wrong parameters.");
+                    break;
             }
         }
 

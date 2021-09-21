@@ -4,6 +4,7 @@ namespace FileCabinetApp
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
         
     public class FileCabinetService
     {
@@ -138,6 +139,14 @@ namespace FileCabinetApp
             record.Height = height;
             record.Weight = weight;
             record.Gender = gender;
+        }
+
+        public FileCabinetRecord[] FindByFirstName(string firstName) 
+        {
+            var result = from rec in this.list
+                         where rec.FirstName.ToUpper() == firstName.ToUpper()
+                         select rec;
+            return result.ToArray();
         }
 
         public FileCabinetRecord[] GetRecords()
