@@ -3,6 +3,7 @@ namespace FileCabinetApp
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -22,5 +23,12 @@ namespace FileCabinetApp
         public decimal Weight { get; set; }
 
         public char Gender { get; set; }
+
+        public void ShowRecord()
+        {
+            Console.WriteLine($"#{Id}, {FirstName}, {LastName}, " +
+                    $"{DateOfBirth.Year}-{DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{DateOfBirth.Day}, " +
+                    $"{Height}cm, {Weight}kg, {Gender}");
+        }
     }
 }

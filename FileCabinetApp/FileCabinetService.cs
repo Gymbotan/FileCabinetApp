@@ -72,9 +72,7 @@ namespace FileCabinetApp
         {
             foreach (FileCabinetRecord record in this.list)
             {
-                Console.WriteLine($"#{record.Id}, {record.FirstName}, {record.LastName}, " +
-                    $"{record.DateOfBirth.Year}-{record.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{record.DateOfBirth.Day}, " +
-                    $"{record.Height}cm, {record.Weight}kg, {record.Gender}");
+                record.ShowRecord();
             }
         }
 
@@ -145,6 +143,22 @@ namespace FileCabinetApp
         {
             var result = from rec in this.list
                          where rec.FirstName.ToUpper() == firstName.ToUpper()
+                         select rec;
+            return result.ToArray();
+        }
+
+        public FileCabinetRecord[] FindByLastName(string firstName)
+        {
+            var result = from rec in this.list
+                         where rec.LastName.ToUpper() == firstName.ToUpper()
+                         select rec;
+            return result.ToArray();
+        }
+
+        public FileCabinetRecord[] FindByDateOfBirth(string firstName)
+        {
+            var result = from rec in this.list
+                         where $"{rec.DateOfBirth.Year}-{rec.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{rec.DateOfBirth.Day}".ToUpper() == firstName.ToUpper()
                          select rec;
             return result.ToArray();
         }

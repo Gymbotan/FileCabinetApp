@@ -213,7 +213,7 @@ namespace FileCabinetApp
             isCorrect = false;
             while (!isCorrect)
             {
-                Console.WriteLine("Gender (m - male, f - female, a - another): ");
+                Console.Write("Gender (m - male, f - female, a - another): ");
                 gender = char.Parse(Console.ReadLine());
                 if (gender != 'm' && gender != 'f' && gender != 'a')
                 {
@@ -337,7 +337,7 @@ namespace FileCabinetApp
                 isCorrect = false;
                 while (!isCorrect)
                 {
-                    Console.WriteLine("Gender (m - male, f - female, a - another): ");
+                    Console.Write("Gender (m - male, f - female, a - another): ");
                     gender = char.Parse(Console.ReadLine());
                     if (gender != 'm' && gender != 'f' && gender != 'a')
                     {
@@ -362,9 +362,21 @@ namespace FileCabinetApp
                     FileCabinetRecord[] array = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'",""));
                     foreach (var ar in array)
                     {
-                        Console.WriteLine($"#{ar.Id}, {ar.FirstName}, {ar.LastName}, " +
-                    $"{ar.DateOfBirth.Year}-{ar.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{ar.DateOfBirth.Day}, " +
-                    $"{ar.Height}cm, {ar.Weight}kg, {ar.Gender}");
+                        ar.ShowRecord();
+                    }
+                    break;
+                case "lastname":
+                    array = Program.fileCabinetService.FindByLastName(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    foreach (var ar in array)
+                    {
+                        ar.ShowRecord();
+                    }
+                    break;
+                case "dateofbirth":
+                   array = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    foreach (var ar in array)
+                    {
+                        ar.ShowRecord();
                     }
                     break;
                 default:
