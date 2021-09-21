@@ -10,6 +10,29 @@ namespace FileCabinetApp
     {
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
 
+        private readonly Dictionary<string, List<FileCabinetRecord>> firstNameDictionary = new Dictionary<string, List<FileCabinetRecord>>();
+
+        private readonly Dictionary<string, List<FileCabinetRecord>> lastNameDictionary = new Dictionary<string, List<FileCabinetRecord>>();
+
+        private readonly Dictionary<string, List<FileCabinetRecord>> dateOfBirthDictionary = new Dictionary<string, List<FileCabinetRecord>>();
+
+        public static string GetDateAsString(DateTime date)
+        {
+            return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();
+        }
+
+        public void AddToDictionary(Dictionary<string, List<FileCabinetRecord>> dictionary, string value, FileCabinetRecord record)
+        {
+            if (dictionary.ContainsKey(value))
+            {
+                dictionary[value].Add(record);
+            }
+            else
+            {
+                dictionary.Add(value, new List<FileCabinetRecord> { record });
+            }
+        }
+
         public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             if (string.IsNullOrWhiteSpace(firstName))
@@ -52,20 +75,16 @@ namespace FileCabinetApp
                 throw new ArgumentException(gender.ToString());
             }
 
-            var record = new FileCabinetRecord
-            {
-                Id = this.list.Count + 1,
-                FirstName = firstName,
-                LastName = lastName,
-                DateOfBirth = dateOfBirth,
-                Height = height,
-                Weight = weight,
-                Gender = gender,
-            };
-
-            this.list.Add(record);
+            int id = this.list.Count + 1;
             
-            return record.Id;
+            this.list.Add(new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+
+            this.AddToDictionary(this.firstNameDictionary, firstName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            this.AddToDictionary(this.lastNameDictionary, lastName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            string dateAsString = GetDateAsString(dateOfBirth);
+            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+
+            return id;
         }
 
         public void ListRecords()
@@ -131,36 +150,66 @@ namespace FileCabinetApp
                 throw new ArgumentException(gender.ToString());
             }
 
-            record.FirstName = firstName;
-            record.LastName = lastName;
-            record.DateOfBirth = dateOfBirth;
-            record.Height = height;
-            record.Weight = weight;
-            record.Gender = gender;
+            FileCabinetRecord itemToDelete = this.firstNameDictionary[record.FirstName.ToUpper()].SingleOrDefault(x => x.Id == id); 
+            this.firstNameDictionary[record.FirstName.ToUpper()].Remove(itemToDelete);
+
+            itemToDelete = this.lastNameDictionary[record.LastName.ToUpper()].SingleOrDefault(x => x.Id == id);
+            this.lastNameDictionary[record.LastName.ToUpper()].Remove(itemToDelete);
+            
+            string dateAsString = GetDateAsString(record.DateOfBirth);
+            itemToDelete = this.dateOfBirthDictionary[dateAsString].SingleOrDefault(x => x.Id == id);
+            this.dateOfBirthDictionary[dateAsString].Remove(record);
+
+            this.AddToDictionary(this.firstNameDictionary, firstName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            this.AddToDictionary(this.lastNameDictionary, lastName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            dateAsString = GetDateAsString(dateOfBirth);
+            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+
+            record.UpdateRecord(firstName, lastName, dateOfBirth, height, weight, gender);
         }
 
         public FileCabinetRecord[] FindByFirstName(string firstName) 
         {
-            var result = from rec in this.list
+            /*var result = from rec in this.list
                          where rec.FirstName.ToUpper() == firstName.ToUpper()
                          select rec;
-            return result.ToArray();
+            return result.ToArray();*/ //Realization with LINQ
+            if (firstNameDictionary.ContainsKey(firstName.ToUpper()) && this.firstNameDictionary[firstName.ToUpper()].Count > 0)
+            {
+                return this.firstNameDictionary[firstName.ToUpper()].ToArray();
+            }
+            else
+            {
+                Console.WriteLine($"There are no records with first name {firstName}");
+                return null;
+            }
         }
 
-        public FileCabinetRecord[] FindByLastName(string firstName)
+        public FileCabinetRecord[] FindByLastName(string lastName)
         {
-            var result = from rec in this.list
-                         where rec.LastName.ToUpper() == firstName.ToUpper()
-                         select rec;
-            return result.ToArray();
+            if (lastNameDictionary.ContainsKey(lastName.ToUpper()) && this.lastNameDictionary[lastName.ToUpper()].Count > 0)
+            {
+                return this.lastNameDictionary[lastName.ToUpper()].ToArray();
+            }
+            else
+            {
+                Console.WriteLine($"There are no records with last name {lastName}");
+                return null;
+            }
         }
 
-        public FileCabinetRecord[] FindByDateOfBirth(string firstName)
+        public FileCabinetRecord[] FindByDateOfBirth(string dateOfBirth)
         {
-            var result = from rec in this.list
-                         where $"{rec.DateOfBirth.Year}-{rec.DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{rec.DateOfBirth.Day}".ToUpper() == firstName.ToUpper()
-                         select rec;
-            return result.ToArray();
+            if (dateOfBirthDictionary.ContainsKey(dateOfBirth) && this.dateOfBirthDictionary[dateOfBirth.ToUpper()].Count > 0)
+            {
+                return this.dateOfBirthDictionary[dateOfBirth.ToUpper()].ToArray();
+            }
+            else
+            {
+                Console.WriteLine($"There are no records with date of birth {dateOfBirth}");
+                return null;
+            }
+            
         }
 
         public FileCabinetRecord[] GetRecords()

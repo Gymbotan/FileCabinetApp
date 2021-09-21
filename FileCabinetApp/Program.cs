@@ -360,23 +360,32 @@ namespace FileCabinetApp
             {
                 case "firstname":
                     FileCabinetRecord[] array = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'",""));
-                    foreach (var ar in array)
+                    if (array != null)
                     {
-                        ar.ShowRecord();
+                        foreach (var ar in array)
+                        {
+                            ar.ShowRecord();
+                        }
                     }
                     break;
                 case "lastname":
                     array = Program.fileCabinetService.FindByLastName(inputs[1].Replace("\"", "").Replace("\'", ""));
-                    foreach (var ar in array)
+                    if (array != null)
                     {
-                        ar.ShowRecord();
+                        foreach (var ar in array)
+                        {
+                            ar.ShowRecord();
+                        }
                     }
                     break;
                 case "dateofbirth":
-                   array = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", "").Replace("\'", ""));
-                    foreach (var ar in array)
+                    array = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    if (array != null)
                     {
-                        ar.ShowRecord();
+                        foreach (var ar in array)
+                        {
+                            ar.ShowRecord();
+                        }
                     }
                     break;
                 default:

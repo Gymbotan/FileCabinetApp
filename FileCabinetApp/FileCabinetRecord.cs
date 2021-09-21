@@ -10,7 +10,23 @@ namespace FileCabinetApp
 
     public class FileCabinetRecord
     {
-        public int Id { get; set; }
+        public FileCabinetRecord()
+        {
+
+        }
+
+        public FileCabinetRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Height = height;
+            Weight = weight;
+            Gender = gender;
+        }
+
+    public int Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -29,6 +45,16 @@ namespace FileCabinetApp
             Console.WriteLine($"#{Id}, {FirstName}, {LastName}, " +
                     $"{DateOfBirth.Year}-{DateOfBirth.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{DateOfBirth.Day}, " +
                     $"{Height}cm, {Weight}kg, {Gender}");
+        }
+
+        public void UpdateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Height = height;
+            Weight = weight;
+            Gender = gender;
         }
     }
 }
