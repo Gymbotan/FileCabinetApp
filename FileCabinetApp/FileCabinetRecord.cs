@@ -10,11 +10,6 @@ namespace FileCabinetApp
 
     public class FileCabinetRecord
     {
-        public FileCabinetRecord()
-        {
-
-        }
-
         public FileCabinetRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             Id = id;
@@ -26,7 +21,7 @@ namespace FileCabinetApp
             Gender = gender;
         }
 
-    public int Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 

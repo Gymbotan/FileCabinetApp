@@ -119,6 +119,92 @@ namespace FileCabinetApp
             short height = 0;
             decimal weight = 0;
             char gender = 'm';
+
+            InputFirstName(ref firstName);
+            InputLastName(ref lastName);
+            InputDateOfBirth(ref dateOfBirth);
+            InputHeight(ref height);
+            InputWeight(ref weight);
+            InputGender(ref gender);
+
+            Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
+        }
+
+        private static void Edit(string parameters)
+        {
+            int recordId = int.Parse(parameters);
+            if (!fileCabinetService.IsRecordExist(recordId))
+            {
+                Console.WriteLine($"#{recordId} record is not found.");
+            }
+            else
+            {
+                string firstName = string.Empty;
+                string lastName = string.Empty;
+                DateTime dateOfBirth = DateTime.Now;
+                short height = 0;
+                decimal weight = 0;
+                char gender = 'm';
+
+                InputFirstName(ref firstName);
+                InputLastName(ref lastName);
+                InputDateOfBirth(ref dateOfBirth);
+                InputHeight(ref height);
+                InputWeight(ref weight);
+                InputGender(ref gender);
+                
+                Program.fileCabinetService.EditRecord(recordId, firstName, lastName, dateOfBirth, height, weight, gender);
+                Console.WriteLine($"Record #{recordId} is updated.");
+            }
+        }
+
+        private static void Find(string parameters)
+        {
+            var inputs = parameters.Split(' ', 2);
+            switch (inputs[0].ToLower())
+            {
+                case "firstname":
+                    FileCabinetRecord[] findedArray = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    ShowArray(findedArray);
+                    break;
+                case "lastname":
+                    findedArray = Program.fileCabinetService.FindByLastName(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    ShowArray(findedArray);
+                    break;
+                case "dateofbirth":
+                    findedArray = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    ShowArray(findedArray);
+                    break;
+                default:
+                    Console.WriteLine("You unput wrong parameters.");
+                    break;
+            }
+        }
+
+        private static void ShowArray(FileCabinetRecord[] array)
+        {
+            if (array != null)
+            {
+                foreach (var ar in array)
+                {
+                    ar.ShowRecord();
+                }
+            }
+        }
+
+        private static void List(string parameters)
+        {
+            Program.fileCabinetService.ListRecords();
+        }
+
+        private static void Exit(string parameters)
+        {
+            Console.WriteLine("Exiting an application...");
+            isRunning = false;
+        }
+
+        private static void InputFirstName(ref string firstName)
+        {
             bool isCorrect = false;
             while (!isCorrect)
             {
@@ -137,8 +223,11 @@ namespace FileCabinetApp
                     isCorrect = true;
                 }
             }
+        }
 
-            isCorrect = false;
+        private static void InputLastName(ref string lastName)
+        {
+            bool isCorrect = false;
             while (!isCorrect)
             {
                 Console.Write("Last name: ");
@@ -156,8 +245,11 @@ namespace FileCabinetApp
                     isCorrect = true;
                 }
             }
+        }
 
-            isCorrect = false;
+        private static void InputDateOfBirth(ref DateTime dateOfBirth)
+        {
+            bool isCorrect = false;
             while (!isCorrect)
             {
                 try
@@ -179,8 +271,11 @@ namespace FileCabinetApp
                     Console.WriteLine("Wrong date of birth");
                 }
             }
+        }
 
-            isCorrect = false;
+        private static void InputHeight(ref short height)
+        {
+            bool isCorrect = false;
             while (!isCorrect)
             {
                 Console.Write("Height (cm): ");
@@ -194,215 +289,46 @@ namespace FileCabinetApp
                     isCorrect = true;
                 }
             }
+        }
 
-            isCorrect = false;
+        private static void InputWeight(ref decimal weight)
+        {
+            bool isCorrect = false;
             while (!isCorrect)
             {
                 Console.Write("Weight (kg): ");
                 weight = decimal.Parse(Console.ReadLine());
                 if (weight <= 0)
                 {
-                    Console.WriteLine("Height should more than 0. Please input again");
+                    Console.WriteLine("Weight should more than 0. Please input again");
                 }
                 else
                 {
                     isCorrect = true;
                 }
             }
+        }
 
-            isCorrect = false;
+        private static void InputGender(ref char gender)
+        {
+            bool isCorrect = false;
             while (!isCorrect)
             {
                 Console.Write("Gender (m - male, f - female, a - another): ");
                 gender = char.Parse(Console.ReadLine());
-                if (gender != 'm' && gender != 'f' && gender != 'a')
+                if (char.IsWhiteSpace(gender))
                 {
-                    Console.WriteLine("Gender  should be: m - male, f - female, a - another. Please input again");
+                    Console.WriteLine("Gender shouldn't be empty. Please input again");
+                }
+                else if (gender != 'm' && gender != 'f' && gender != 'a')
+                {
+                    Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
                 }
                 else
                 {
                     isCorrect = true;
                 }
             }
-
-            Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
-        }
-
-        private static void Edit(string parameters)
-        {
-            int recordId = int.Parse(parameters);
-            if (!fileCabinetService.IsRecordExist(recordId))
-            {
-                Console.WriteLine($"#{recordId} record is not found.");
-            }
-            else
-            {
-                string firstName = string.Empty;
-                string lastName = string.Empty;
-                DateTime dateOfBirth = DateTime.Now;
-                short height = 0;
-                decimal weight = 0;
-                char gender = 'm';
-                bool isCorrect = false;
-                while (!isCorrect)
-                {
-                    Console.Write("First name: ");
-                    firstName = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(firstName))
-                    {
-                        Console.WriteLine("First name shouldn't be empty. Please input again");
-                    }
-                    else if (firstName.Length < 2 || firstName.Length > 60)
-                    {
-                        Console.WriteLine("First name's length should more than 1 and less than 61. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-
-                isCorrect = false;
-                while (!isCorrect)
-                {
-                    Console.Write("Last name: ");
-                    lastName = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(lastName))
-                    {
-                        Console.WriteLine("Last name shouldn't be empty. Please input again");
-                    }
-                    else if (lastName.Length < 2 || lastName.Length > 60)
-                    {
-                        Console.WriteLine("Last name's length should more than 1 and less than 61. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-
-                isCorrect = false;
-                while (!isCorrect)
-                {
-                    try
-                    {
-                        Console.Write("Date of birth: ");
-                        var inputs = Console.ReadLine().Split('/', 3);
-                        dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-                        if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
-                        {
-                            Console.WriteLine("Wrong date of birth");
-                        }
-                        else
-                        {
-                            isCorrect = true;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Wrong date of birth");
-                    }
-                }
-
-                isCorrect = false;
-                while (!isCorrect)
-                {
-                    Console.Write("Height (cm): ");
-                    height = short.Parse(Console.ReadLine());
-                    if (height < 30 || height > 250)
-                    {
-                        Console.WriteLine("Height should more than 29 and less than 251. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-
-                isCorrect = false;
-                while (!isCorrect)
-                {
-                    Console.Write("Weight (kg): ");
-                    weight = decimal.Parse(Console.ReadLine());
-                    if (weight <= 0)
-                    {
-                        Console.WriteLine("Height should more than 0. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-
-                isCorrect = false;
-                while (!isCorrect)
-                {
-                    Console.Write("Gender (m - male, f - female, a - another): ");
-                    gender = char.Parse(Console.ReadLine());
-                    if (gender != 'm' && gender != 'f' && gender != 'a')
-                    {
-                        Console.WriteLine("Gender  should be: m - male, f - female, a - another. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-                Program.fileCabinetService.EditRecord(recordId, firstName, lastName, dateOfBirth, height, weight, gender);
-                Console.WriteLine($"Record #{recordId} is updated.");
-            }
-        }
-
-        private static void Find(string parameters)
-        {
-            var inputs = parameters.Split(' ', 2);
-            switch (inputs[0].ToLower())
-            {
-                case "firstname":
-                    FileCabinetRecord[] array = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'",""));
-                    if (array != null)
-                    {
-                        foreach (var ar in array)
-                        {
-                            ar.ShowRecord();
-                        }
-                    }
-                    break;
-                case "lastname":
-                    array = Program.fileCabinetService.FindByLastName(inputs[1].Replace("\"", "").Replace("\'", ""));
-                    if (array != null)
-                    {
-                        foreach (var ar in array)
-                        {
-                            ar.ShowRecord();
-                        }
-                    }
-                    break;
-                case "dateofbirth":
-                    array = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", "").Replace("\'", ""));
-                    if (array != null)
-                    {
-                        foreach (var ar in array)
-                        {
-                            ar.ShowRecord();
-                        }
-                    }
-                    break;
-                default:
-                    Console.WriteLine("You unput wrong parameters.");
-                    break;
-            }
-        }
-
-        private static void List(string parameters)
-        {
-            Program.fileCabinetService.ListRecords();
-        }
-
-        private static void Exit(string parameters)
-        {
-            Console.WriteLine("Exiting an application...");
-            isRunning = false;
         }
     }
 }

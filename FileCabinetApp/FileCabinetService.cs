@@ -132,7 +132,7 @@ namespace FileCabinetApp
 
             if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
             {
-                throw new ArgumentException("Wrong dateOfBirth");
+                throw new ArgumentException("Wrong date of birth");
             }
 
             if (height < 30 || height > 250)
@@ -209,7 +209,6 @@ namespace FileCabinetApp
                 Console.WriteLine($"There are no records with date of birth {dateOfBirth}");
                 return null;
             }
-            
         }
 
         public FileCabinetRecord[] GetRecords()
@@ -220,7 +219,6 @@ namespace FileCabinetApp
 
         public int GetStat()
         {
-            // TODO: добавьте реализацию метода
             return this.list.Count;
         }
     }
