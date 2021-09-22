@@ -3,7 +3,9 @@ namespace FileCabinetApp
 {
     using System;
     using System.Globalization;
-
+    /// <summary>
+    /// Main class with main functionality
+    /// </summary>
     public static class Program
     {
         private const string DeveloperName = "Anatoliy Pecherny";
@@ -72,12 +74,20 @@ namespace FileCabinetApp
             while (isRunning);
         }
 
+        /// <summary>
+        /// Prints information about missed command
+        /// </summary>
+        /// <param name="command">command's name</param>
         private static void PrintMissedCommandInfo(string command)
         {
             Console.WriteLine($"There is no '{command}' command.");
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Prints help for existing commsnds
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void PrintHelp(string parameters)
         {
             if (!string.IsNullOrEmpty(parameters))
@@ -105,12 +115,20 @@ namespace FileCabinetApp
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Shows amount of records
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void Stat(string parameters)
         {
             var recordsCount = Program.fileCabinetService.GetStat();
             Console.WriteLine($"{recordsCount} record(s).");
         }
 
+        /// <summary>
+        /// Creates new record
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void Create(string parameters)
         {
             string firstName = string.Empty;
@@ -130,6 +148,10 @@ namespace FileCabinetApp
             Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
         }
 
+        /// <summary>
+        /// Edits an existing record
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void Edit(string parameters)
         {
             int recordId = int.Parse(parameters);
@@ -158,6 +180,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Finds records that fit inputed conditions
+        /// </summary>
+        /// <param name="parameters">2 parameters: field for search, value for search</param>
         private static void Find(string parameters)
         {
             var inputs = parameters.Split(' ', 2);
@@ -181,6 +207,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Prints an array
+        /// </summary>
+        /// <param name="array">Array to print</param>
         private static void ShowArray(FileCabinetRecord[] array)
         {
             if (array != null)
@@ -192,17 +222,29 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Shows all the records
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void List(string parameters)
         {
             Program.fileCabinetService.ListRecords();
         }
 
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
         private static void Exit(string parameters)
         {
             Console.WriteLine("Exiting an application...");
             isRunning = false;
         }
 
+        /// <summary>
+        /// Allows you to input first name of a record
+        /// </summary>
+        /// <param name="firstName">First name</param>
         private static void InputFirstName(ref string firstName)
         {
             bool isCorrect = false;
@@ -225,6 +267,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Allows you to input larst name of a record
+        /// </summary>
+        /// <param name="lastName">Last name</param>
         private static void InputLastName(ref string lastName)
         {
             bool isCorrect = false;
@@ -247,6 +293,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Allows you to input date of birth of a record
+        /// </summary>
+        /// <param name="dateOfBirth">Date of birth</param>
         private static void InputDateOfBirth(ref DateTime dateOfBirth)
         {
             bool isCorrect = false;
@@ -273,6 +323,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Allows you to input height of a record
+        /// </summary>
+        /// <param name="height">Height</param>
         private static void InputHeight(ref short height)
         {
             bool isCorrect = false;
@@ -291,6 +345,10 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Allows you to input weight of a record
+        /// </summary>
+        /// <param name="weight">Weight</param>
         private static void InputWeight(ref decimal weight)
         {
             bool isCorrect = false;
@@ -309,24 +367,36 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Allows you to input gender of a record
+        /// </summary>
+        /// <param name="gender">Gender</param>
         private static void InputGender(ref char gender)
         {
             bool isCorrect = false;
             while (!isCorrect)
             {
                 Console.Write("Gender (m - male, f - female, a - another): ");
-                gender = char.Parse(Console.ReadLine());
-                if (char.IsWhiteSpace(gender))
+                string gen = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(gen))
                 {
                     Console.WriteLine("Gender shouldn't be empty. Please input again");
                 }
-                else if (gender != 'm' && gender != 'f' && gender != 'a')
+                else if (gen.Length > 1)
                 {
                     Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
                 }
                 else
                 {
-                    isCorrect = true;
+                    gender = char.Parse(gen);
+                    if (gender != 'm' && gender != 'f' && gender != 'a')
+                    {
+                        Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
+                    }
+                    else
+                    {
+                        isCorrect = true;
+                    }
                 }
             }
         }

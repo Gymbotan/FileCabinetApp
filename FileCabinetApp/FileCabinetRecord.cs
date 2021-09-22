@@ -8,8 +8,21 @@ namespace FileCabinetApp
     using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// FileCabinetRecord class
+    /// </summary>
     public class FileCabinetRecord
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="firstName">FirstName</param>
+        /// <param name="lastName">LastName</param>
+        /// <param name="dateOfBirth">DateOfBirth</param>
+        /// <param name="height">Height</param>
+        /// <param name="weight">Weight</param>
+        /// <param name="gender">Gender</param>
         public FileCabinetRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             Id = id;
@@ -35,6 +48,9 @@ namespace FileCabinetApp
 
         public char Gender { get; set; }
 
+        /// <summary>
+        /// Prints information about this record
+        /// </summary>
         public void ShowRecord()
         {
             Console.WriteLine($"#{Id}, {FirstName}, {LastName}, " +
@@ -42,6 +58,15 @@ namespace FileCabinetApp
                     $"{Height}cm, {Weight}kg, {Gender}");
         }
 
+        /// <summary>
+        /// Updates information about this record
+        /// </summary>
+        /// <param name="firstName">FirstName</param>
+        /// <param name="lastName">LastName</param>
+        /// <param name="dateOfBirth">DateOfBirth</param>
+        /// <param name="height">Height</param>
+        /// <param name="weight">Weight</param>
+        /// <param name="gender">Gender</param>
         public void UpdateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             FirstName = firstName;

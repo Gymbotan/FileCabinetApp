@@ -4,5 +4,230 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.FileCabinetRecord">
+            <summary>
+            FileCabinetRecord class
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecord.#ctor(System.Int32,System.String,System.String,System.DateTime,System.Int16,System.Decimal,System.Char)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">Id</param>
+            <param name="firstName">FirstName</param>
+            <param name="lastName">LastName</param>
+            <param name="dateOfBirth">DateOfBirth</param>
+            <param name="height">Height</param>
+            <param name="weight">Weight</param>
+            <param name="gender">Gender</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecord.ShowRecord">
+            <summary>
+            Prints information about this record
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecord.UpdateRecord(System.String,System.String,System.DateTime,System.Int16,System.Decimal,System.Char)">
+            <summary>
+            Updates information about this record
+            </summary>
+            <param name="firstName">FirstName</param>
+            <param name="lastName">LastName</param>
+            <param name="dateOfBirth">DateOfBirth</param>
+            <param name="height">Height</param>
+            <param name="weight">Weight</param>
+            <param name="gender">Gender</param>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetService">
+            <summary>
+            Class that realizes all the services of the main class
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetDateAsString(System.DateTime)">
+            <summary>
+            Transforms DateTime to string in special format
+            </summary>
+            <param name="date">Date to transform</param>
+            <returns>String format of date</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.AddToDictionary(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{FileCabinetApp.FileCabinetRecord}},System.String,FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Adds record to a chosen dictionary
+            </summary>
+            <param name="dictionary">Chosen dictionary</param>
+            <param name="value">Key for a record</param>
+            <param name="record">Record to add</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.RemoveFromDictionary(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{FileCabinetApp.FileCabinetRecord}},System.String,System.Int32)">
+            <summary>
+            Removes a record from a chosen dictionary
+            </summary>
+            <param name="dictionary">A chosen dictionary</param>
+            <param name="value">Key for a record</param>
+            <param name="id">Record's id</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CreateRecord(System.String,System.String,System.DateTime,System.Int16,System.Decimal,System.Char)">
+            <summary>
+            Creates new record
+            </summary>
+            <param name="firstName">FirstName</param>
+            <param name="lastName">LastName</param>
+            <param name="dateOfBirth">DateOfBirth</param>
+            <param name="height">Height</param>
+            <param name="weight">Weight</param>
+            <param name="gender">Gender</param>
+            <returns>Id of a record</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.ListRecords">
+            <summary>
+            Prints all the existing records
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.IsRecordExist(System.Int32)">
+            <summary>
+            Checks is a record with this id is exist
+            </summary>
+            <param name="id">Id</param>
+            <returns>Is a record exist or no</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.EditRecord(System.Int32,System.String,System.String,System.DateTime,System.Int16,System.Decimal,System.Char)">
+            <summary>
+            Edits an existing record
+            </summary>
+            <param name="id">Id</param>
+            <param name="firstName">FirstName</param>
+            <param name="lastName">LastName</param>
+            <param name="dateOfBirth">DateOfBirth</param>
+            <param name="height">Height</param>
+            <param name="weight">Weight</param>
+            <param name="gender">Gender</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.FindByFirstName(System.String)">
+            <summary>
+            Finds all the records with chosen first name
+            </summary>
+            <param name="firstName">FirstName</param>
+            <returns>Array of finded records</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.FindByLastName(System.String)">
+            <summary>
+            Finds all the records withchosen last name
+            </summary>
+            <param name="lastName">LastName</param>
+            <returns>Array of finded records</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.FindByDateOfBirth(System.String)">
+            <summary>
+            Finds all the records with chosen date of birth
+            </summary>
+            <param name="dateOfBirth">DateOfBirth</param>
+            <returns>Array of finded records</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetRecords">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetStat">
+            <summary>
+            Returns amount of records
+            </summary>
+            <returns>Amount of records</returns>
+        </member>
+        <member name="T:FileCabinetApp.Program">
+            <summary>
+            Main class with main functionality
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.Program.PrintMissedCommandInfo(System.String)">
+            <summary>
+            Prints information about missed command
+            </summary>
+            <param name="command">command's name</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.PrintHelp(System.String)">
+            <summary>
+            Prints help for existing commsnds
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.Stat(System.String)">
+            <summary>
+            Shows amount of records
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.Create(System.String)">
+            <summary>
+            Creates new record
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.Edit(System.String)">
+            <summary>
+            Edits an existing record
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.Find(System.String)">
+            <summary>
+            Finds records that fit inputed conditions
+            </summary>
+            <param name="parameters">2 parameters: field for search, value for search</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.ShowArray(FileCabinetApp.FileCabinetRecord[])">
+            <summary>
+            Prints an array
+            </summary>
+            <param name="array">Array to print</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.List(System.String)">
+            <summary>
+            Shows all the records
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.Exit(System.String)">
+            <summary>
+            Exit
+            </summary>
+            <param name="parameters">Parameters</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputFirstName(System.String@)">
+            <summary>
+            Allows you to input first name of a record
+            </summary>
+            <param name="firstName">First name</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputLastName(System.String@)">
+            <summary>
+            Allows you to input larst name of a record
+            </summary>
+            <param name="lastName">Last name</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputDateOfBirth(System.DateTime@)">
+            <summary>
+            Allows you to input date of birth of a record
+            </summary>
+            <param name="dateOfBirth">Date of birth</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputHeight(System.Int16@)">
+            <summary>
+            Allows you to input height of a record
+            </summary>
+            <param name="height">Height</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputWeight(System.Decimal@)">
+            <summary>
+            Allows you to input weight of a record
+            </summary>
+            <param name="weight">Weight</param>
+        </member>
+        <member name="M:FileCabinetApp.Program.InputGender(System.Char@)">
+            <summary>
+            Allows you to input gender of a record
+            </summary>
+            <param name="gender">Gender</param>
+        </member>
     </members>
 </doc>

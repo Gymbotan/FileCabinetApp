@@ -6,6 +6,9 @@ namespace FileCabinetApp
     using System.Globalization;
     using System.Linq;
         
+    /// <summary>
+    /// Class that realizes all the services of the main class
+    /// </summary>
     public class FileCabinetService
     {
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
@@ -16,11 +19,22 @@ namespace FileCabinetApp
 
         private readonly Dictionary<string, List<FileCabinetRecord>> dateOfBirthDictionary = new Dictionary<string, List<FileCabinetRecord>>();
 
+        /// <summary>
+        /// Transforms DateTime to string in special format
+        /// </summary>
+        /// <param name="date">Date to transform</param>
+        /// <returns>String format of date</returns>
         public static string GetDateAsString(DateTime date)
         {
             return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();
         }
 
+        /// <summary>
+        /// Adds record to a chosen dictionary
+        /// </summary>
+        /// <param name="dictionary">Chosen dictionary</param>
+        /// <param name="value">Key for a record</param>
+        /// <param name="record">Record to add</param>
         public void AddToDictionary(Dictionary<string, List<FileCabinetRecord>> dictionary, string value, FileCabinetRecord record)
         {
             if (dictionary.ContainsKey(value))
@@ -33,6 +47,28 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Removes a record from a chosen dictionary
+        /// </summary>
+        /// <param name="dictionary">A chosen dictionary</param>
+        /// <param name="value">Key for a record</param>
+        /// <param name="id">Record's id</param>
+        public void RemoveFromDictionary(Dictionary<string, List<FileCabinetRecord>> dictionary, string value, int id)
+        {
+            FileCabinetRecord itemToDelete = dictionary[value].SingleOrDefault(x => x.Id == id);
+            dictionary[value].Remove(itemToDelete);
+        }
+
+        /// <summary>
+        /// Creates new record
+        /// </summary>
+        /// <param name="firstName">FirstName</param>
+        /// <param name="lastName">LastName</param>
+        /// <param name="dateOfBirth">DateOfBirth</param>
+        /// <param name="height">Height</param>
+        /// <param name="weight">Weight</param>
+        /// <param name="gender">Gender</param>
+        /// <returns>Id of a record</returns>
         public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             if (string.IsNullOrWhiteSpace(firstName))
@@ -87,6 +123,9 @@ namespace FileCabinetApp
             return id;
         }
 
+        /// <summary>
+        /// Prints all the existing records
+        /// </summary>
         public void ListRecords()
         {
             foreach (FileCabinetRecord record in this.list)
@@ -95,6 +134,11 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Checks is a record with this id is exist
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>Is a record exist or no</returns>
         public bool IsRecordExist(int id)
         {
             if (this.list.Exists(x => x.Id == id))
@@ -107,6 +151,16 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Edits an existing record
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="firstName">FirstName</param>
+        /// <param name="lastName">LastName</param>
+        /// <param name="dateOfBirth">DateOfBirth</param>
+        /// <param name="height">Height</param>
+        /// <param name="weight">Weight</param>
+        /// <param name="gender">Gender</param>
         public void EditRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             FileCabinetRecord record = this.list.Find(x => x.Id == id);
@@ -150,16 +204,11 @@ namespace FileCabinetApp
                 throw new ArgumentException(gender.ToString());
             }
 
-            FileCabinetRecord itemToDelete = this.firstNameDictionary[record.FirstName.ToUpper()].SingleOrDefault(x => x.Id == id); 
-            this.firstNameDictionary[record.FirstName.ToUpper()].Remove(itemToDelete);
-
-            itemToDelete = this.lastNameDictionary[record.LastName.ToUpper()].SingleOrDefault(x => x.Id == id);
-            this.lastNameDictionary[record.LastName.ToUpper()].Remove(itemToDelete);
-            
+            this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), id);
+            this.RemoveFromDictionary(this.lastNameDictionary, record.LastName.ToUpper(), id);
             string dateAsString = GetDateAsString(record.DateOfBirth);
-            itemToDelete = this.dateOfBirthDictionary[dateAsString].SingleOrDefault(x => x.Id == id);
-            this.dateOfBirthDictionary[dateAsString].Remove(record);
-
+            this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, id);
+            
             this.AddToDictionary(this.firstNameDictionary, firstName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
             this.AddToDictionary(this.lastNameDictionary, lastName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
             dateAsString = GetDateAsString(dateOfBirth);
@@ -168,6 +217,11 @@ namespace FileCabinetApp
             record.UpdateRecord(firstName, lastName, dateOfBirth, height, weight, gender);
         }
 
+        /// <summary>
+        /// Finds all the records with chosen first name
+        /// </summary>
+        /// <param name="firstName">FirstName</param>
+        /// <returns>Array of finded records</returns>
         public FileCabinetRecord[] FindByFirstName(string firstName) 
         {
             /*var result = from rec in this.list
@@ -185,6 +239,11 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Finds all the records withchosen last name
+        /// </summary>
+        /// <param name="lastName">LastName</param>
+        /// <returns>Array of finded records</returns>
         public FileCabinetRecord[] FindByLastName(string lastName)
         {
             if (lastNameDictionary.ContainsKey(lastName.ToUpper()) && this.lastNameDictionary[lastName.ToUpper()].Count > 0)
@@ -198,9 +257,14 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Finds all the records with chosen date of birth
+        /// </summary>
+        /// <param name="dateOfBirth">DateOfBirth</param>
+        /// <returns>Array of finded records</returns>
         public FileCabinetRecord[] FindByDateOfBirth(string dateOfBirth)
         {
-            if (dateOfBirthDictionary.ContainsKey(dateOfBirth) && this.dateOfBirthDictionary[dateOfBirth.ToUpper()].Count > 0)
+            if (dateOfBirthDictionary.ContainsKey(dateOfBirth.ToUpper()) && this.dateOfBirthDictionary[dateOfBirth.ToUpper()].Count > 0)
             {
                 return this.dateOfBirthDictionary[dateOfBirth.ToUpper()].ToArray();
             }
@@ -211,12 +275,20 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public FileCabinetRecord[] GetRecords()
         {
             // TODO: добавьте реализацию метода
             return Array.Empty<FileCabinetRecord>();
         }
 
+        /// <summary>
+        /// Returns amount of records
+        /// </summary>
+        /// <returns>Amount of records</returns>
         public int GetStat()
         {
             return this.list.Count;
