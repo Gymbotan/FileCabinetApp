@@ -4,7 +4,7 @@ namespace FileCabinetApp
     using System;
     using System.Globalization;
     /// <summary>
-    /// Main class with main functionality
+    /// Main class with main functionality.
     /// </summary>
     public static class Program
     {
@@ -75,9 +75,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Prints information about missed command
+        /// Prints information about missed command.
         /// </summary>
-        /// <param name="command">command's name</param>
+        /// <param name="command">command's name.</param>
         private static void PrintMissedCommandInfo(string command)
         {
             Console.WriteLine($"There is no '{command}' command.");
@@ -85,9 +85,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Prints help for existing commsnds
+        /// Prints help for existing commands.
         /// </summary>
-        /// <param name="parameters">Parameters</param>
+        /// <param name="parameters">Parameters.</param>
         private static void PrintHelp(string parameters)
         {
             if (!string.IsNullOrEmpty(parameters))
@@ -126,9 +126,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Creates new record
+        /// Creates new record.
         /// </summary>
-        /// <param name="parameters">Parameters</param>
+        /// <param name="parameters">Parameters.</param>
         private static void Create(string parameters)
         {
             string firstName = string.Empty;
@@ -145,13 +145,15 @@ namespace FileCabinetApp
             InputWeight(ref weight);
             InputGender(ref gender);
 
-            Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(firstName, lastName, dateOfBirth, height, weight, gender)} is created");
+            DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
+
+            Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(data)} is created");
         }
 
         /// <summary>
-        /// Edits an existing record
+        /// Edits an existing record.
         /// </summary>
-        /// <param name="parameters">Parameters</param>
+        /// <param name="parameters">Parameters.</param>
         private static void Edit(string parameters)
         {
             int recordId = int.Parse(parameters);
@@ -174,16 +176,18 @@ namespace FileCabinetApp
                 InputHeight(ref height);
                 InputWeight(ref weight);
                 InputGender(ref gender);
-                
-                Program.fileCabinetService.EditRecord(recordId, firstName, lastName, dateOfBirth, height, weight, gender);
+
+                DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
+
+                Program.fileCabinetService.EditRecord(recordId, data);
                 Console.WriteLine($"Record #{recordId} is updated.");
             }
         }
 
         /// <summary>
-        /// Finds records that fit inputed conditions
+        /// Finds records that fit inputed conditions.
         /// </summary>
-        /// <param name="parameters">2 parameters: field for search, value for search</param>
+        /// <param name="parameters">2 parameters: field for search, value for search.</param>
         private static void Find(string parameters)
         {
             var inputs = parameters.Split(' ', 2);
@@ -208,9 +212,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Prints an array
+        /// Prints an array.
         /// </summary>
-        /// <param name="array">Array to print</param>
+        /// <param name="array">Array to print.</param>
         private static void ShowArray(FileCabinetRecord[] array)
         {
             if (array != null)
@@ -223,18 +227,18 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Shows all the records
+        /// Shows all the records.
         /// </summary>
-        /// <param name="parameters">Parameters</param>
+        /// <param name="parameters">Parameters.</param>
         private static void List(string parameters)
         {
             Program.fileCabinetService.ListRecords();
         }
 
         /// <summary>
-        /// Exit
+        /// Exit.
         /// </summary>
-        /// <param name="parameters">Parameters</param>
+        /// <param name="parameters">Parameters.</param>
         private static void Exit(string parameters)
         {
             Console.WriteLine("Exiting an application...");
@@ -242,9 +246,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input first name of a record
+        /// Allows you to input first name of a record.
         /// </summary>
-        /// <param name="firstName">First name</param>
+        /// <param name="firstName">First name.</param>
         private static void InputFirstName(ref string firstName)
         {
             bool isCorrect = false;
@@ -268,9 +272,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input larst name of a record
+        /// Allows you to input larst name of a record.
         /// </summary>
-        /// <param name="lastName">Last name</param>
+        /// <param name="lastName">Last name.</param>
         private static void InputLastName(ref string lastName)
         {
             bool isCorrect = false;
@@ -294,9 +298,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input date of birth of a record
+        /// Allows you to input date of birth of a record.
         /// </summary>
-        /// <param name="dateOfBirth">Date of birth</param>
+        /// <param name="dateOfBirth">Date of birth.</param>
         private static void InputDateOfBirth(ref DateTime dateOfBirth)
         {
             bool isCorrect = false;
@@ -324,9 +328,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input height of a record
+        /// Allows you to input height of a record.
         /// </summary>
-        /// <param name="height">Height</param>
+        /// <param name="height">Height.</param>
         private static void InputHeight(ref short height)
         {
             bool isCorrect = false;
@@ -346,9 +350,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input weight of a record
+        /// Allows you to input weight of a record.
         /// </summary>
-        /// <param name="weight">Weight</param>
+        /// <param name="weight">Weight.</param>
         private static void InputWeight(ref decimal weight)
         {
             bool isCorrect = false;
@@ -368,9 +372,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Allows you to input gender of a record
+        /// Allows you to input gender of a record.
         /// </summary>
-        /// <param name="gender">Gender</param>
+        /// <param name="gender">Gender.</param>
         private static void InputGender(ref char gender)
         {
             bool isCorrect = false;

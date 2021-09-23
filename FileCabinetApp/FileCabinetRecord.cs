@@ -14,15 +14,15 @@ namespace FileCabinetApp
     public class FileCabinetRecord
     {
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
-        /// <param name="id">Id</param>
-        /// <param name="firstName">FirstName</param>
-        /// <param name="lastName">LastName</param>
-        /// <param name="dateOfBirth">DateOfBirth</param>
-        /// <param name="height">Height</param>
-        /// <param name="weight">Weight</param>
-        /// <param name="gender">Gender</param>
+        /// <param name="id">Id.</param>
+        /// <param name="firstName">FirstName.</param>
+        /// <param name="lastName">LastName.</param>
+        /// <param name="dateOfBirth">DateOfBirth.</param>
+        /// <param name="height">Height.</param>
+        /// <param name="weight">Weight.</param>
+        /// <param name="gender">Gender.</param>
         public FileCabinetRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             Id = id;
@@ -32,6 +32,22 @@ namespace FileCabinetApp
             Height = height;
             Weight = weight;
             Gender = gender;
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        /// <param name="data">Data for a record.</param>
+        public FileCabinetRecord(int id, DataForRecord data)
+        {
+            Id = id;
+            FirstName = data.FirstName;
+            LastName = data.LastName;
+            DateOfBirth = data.DateOfBirth;
+            Height = data.Height;
+            Weight = data.Weight;
+            Gender = data.Gender;
         }
 
         public int Id { get; set; }
@@ -49,7 +65,7 @@ namespace FileCabinetApp
         public char Gender { get; set; }
 
         /// <summary>
-        /// Prints information about this record
+        /// Prints information about this record.
         /// </summary>
         public void ShowRecord()
         {
@@ -59,14 +75,14 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Updates information about this record
+        /// Updates information about this record.
         /// </summary>
-        /// <param name="firstName">FirstName</param>
-        /// <param name="lastName">LastName</param>
-        /// <param name="dateOfBirth">DateOfBirth</param>
-        /// <param name="height">Height</param>
-        /// <param name="weight">Weight</param>
-        /// <param name="gender">Gender</param>
+        /// <param name="firstName">FirstName.</param>
+        /// <param name="lastName">LastName.</param>
+        /// <param name="dateOfBirth">DateOfBirth.</param>
+        /// <param name="height">Height.</param>
+        /// <param name="weight">Weight.</param>
+        /// <param name="gender">Gender.</param>
         public void UpdateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
         {
             FirstName = firstName;
@@ -75,6 +91,15 @@ namespace FileCabinetApp
             Height = height;
             Weight = weight;
             Gender = gender;
+        }
+
+        /// <summary>
+        /// Updates information about this record.
+        /// </summary>
+        /// <param name="newData">New data for a record.</param>
+        public void UpdateRecord(DataForRecord newData)
+        {
+            UpdateRecord(newData.FirstName, newData.LastName, newData.DateOfBirth, newData.Height, newData.Weight, newData.Gender);
         }
     }
 }

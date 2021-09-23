@@ -7,7 +7,7 @@ namespace FileCabinetApp
     using System.Linq;
         
     /// <summary>
-    /// Class that realizes all the services of the main class
+    /// Class that realizes all the services of the main class.
     /// </summary>
     public class FileCabinetService
     {
@@ -20,21 +20,21 @@ namespace FileCabinetApp
         private readonly Dictionary<string, List<FileCabinetRecord>> dateOfBirthDictionary = new Dictionary<string, List<FileCabinetRecord>>();
 
         /// <summary>
-        /// Transforms DateTime to string in special format
+        /// Transforms DateTime to string in special format.
         /// </summary>
-        /// <param name="date">Date to transform</param>
-        /// <returns>String format of date</returns>
+        /// <param name="date">Date to transform.</param>
+        /// <returns>String format of date.</returns>
         public static string GetDateAsString(DateTime date)
         {
             return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();
         }
 
         /// <summary>
-        /// Adds record to a chosen dictionary
+        /// Adds record to a chosen dictionary.
         /// </summary>
-        /// <param name="dictionary">Chosen dictionary</param>
-        /// <param name="value">Key for a record</param>
-        /// <param name="record">Record to add</param>
+        /// <param name="dictionary">Chosen dictionary.</param>
+        /// <param name="value">Key for a record.</param>
+        /// <param name="record">Record to add.</param>
         public void AddToDictionary(Dictionary<string, List<FileCabinetRecord>> dictionary, string value, FileCabinetRecord record)
         {
             if (dictionary.ContainsKey(value))
@@ -48,11 +48,11 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Removes a record from a chosen dictionary
+        /// Removes a record from a chosen dictionary.
         /// </summary>
-        /// <param name="dictionary">A chosen dictionary</param>
-        /// <param name="value">Key for a record</param>
-        /// <param name="id">Record's id</param>
+        /// <param name="dictionary">A chosen dictionary.</param>
+        /// <param name="value">Key for a record.</param>
+        /// <param name="id">Record's id.</param>
         public void RemoveFromDictionary(Dictionary<string, List<FileCabinetRecord>> dictionary, string value, int id)
         {
             FileCabinetRecord itemToDelete = dictionary[value].SingleOrDefault(x => x.Id == id);
@@ -62,69 +62,63 @@ namespace FileCabinetApp
         /// <summary>
         /// Creates new record
         /// </summary>
-        /// <param name="firstName">FirstName</param>
-        /// <param name="lastName">LastName</param>
-        /// <param name="dateOfBirth">DateOfBirth</param>
-        /// <param name="height">Height</param>
-        /// <param name="weight">Weight</param>
-        /// <param name="gender">Gender</param>
-        /// <returns>Id of a record</returns>
-        public int CreateRecord(string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
+        /// <param name="data">Data for a new record</param>
+        public int CreateRecord(DataForRecord data)
         {
-            if (string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(data.FirstName))
             {
-                throw new ArgumentNullException(firstName);
+                throw new ArgumentNullException(data.FirstName);
             }
 
-            if (string.IsNullOrWhiteSpace(lastName))
+            if (string.IsNullOrWhiteSpace(data.LastName))
             {
-                throw new ArgumentNullException(lastName);
+                throw new ArgumentNullException(data.LastName);
             }
 
-            if (firstName.Length < 2 || firstName.Length > 60)
+            if (data.FirstName.Length < 2 || data.FirstName.Length > 60)
             {
-                throw new ArgumentException(firstName);
+                throw new ArgumentException(data.FirstName);
             }
 
-            if (lastName.Length < 2 || lastName.Length > 60)
+            if (data.LastName.Length < 2 || data.LastName.Length > 60)
             {
-                throw new ArgumentException(lastName);
+                throw new ArgumentException(data.LastName);
             }
 
-            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            if (data.DateOfBirth < new DateTime(1950, 01, 01) || data.DateOfBirth > DateTime.Now)
             {
                 throw new ArgumentException("Wrong dateOfBirth");
             }
 
-            if (height < 30 || height > 250)
+            if (data.Height < 30 || data.Height > 250)
             {
-                throw new ArgumentException(height.ToString());
+                throw new ArgumentException(data.Height.ToString());
             }
 
-            if (weight <= 0)
+            if (data.Weight <= 0)
             {
-                throw new ArgumentException(weight.ToString());
+                throw new ArgumentException(data.Weight.ToString());
             }
 
-            if (gender != 'm' && gender != 'f' && gender != 'a')
+            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
             {
-                throw new ArgumentException(gender.ToString());
+                throw new ArgumentException(data.Gender.ToString());
             }
 
             int id = this.list.Count + 1;
             
-            this.list.Add(new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            this.list.Add(new FileCabinetRecord(id, data));
 
-            this.AddToDictionary(this.firstNameDictionary, firstName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
-            this.AddToDictionary(this.lastNameDictionary, lastName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
-            string dateAsString = GetDateAsString(dateOfBirth);
-            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            this.AddToDictionary(this.firstNameDictionary, data.FirstName.ToUpper(), new FileCabinetRecord(id, data));
+            this.AddToDictionary(this.lastNameDictionary, data.LastName.ToUpper(), new FileCabinetRecord(id, data));
+            string dateAsString = GetDateAsString(data.DateOfBirth);
+            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, data));
 
             return id;
         }
 
         /// <summary>
-        /// Prints all the existing records
+        /// Prints all the existing records.
         /// </summary>
         public void ListRecords()
         {
@@ -135,10 +129,10 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Checks is a record with this id is exist
+        /// Checks is a record with this id is exist.
         /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns>Is a record exist or no</returns>
+        /// <param name="id">Id.</param>
+        /// <returns>Is a record exist or no.</returns>
         public bool IsRecordExist(int id)
         {
             if (this.list.Exists(x => x.Id == id))
@@ -152,56 +146,51 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Edits an existing record
+        /// Edits an existing record.
         /// </summary>
-        /// <param name="id">Id</param>
-        /// <param name="firstName">FirstName</param>
-        /// <param name="lastName">LastName</param>
-        /// <param name="dateOfBirth">DateOfBirth</param>
-        /// <param name="height">Height</param>
-        /// <param name="weight">Weight</param>
-        /// <param name="gender">Gender</param>
-        public void EditRecord(int id, string firstName, string lastName, DateTime dateOfBirth, short height, decimal weight, char gender)
+        /// <param name="id">Id.</param>
+        /// <param name="data">Data for a new record.</param>
+        public void EditRecord(int id, DataForRecord data)
         {
             FileCabinetRecord record = this.list.Find(x => x.Id == id);
-            if (string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(data.FirstName))
             {
-                throw new ArgumentNullException(firstName);
+                throw new ArgumentNullException(data.FirstName);
             }
 
-            if (string.IsNullOrWhiteSpace(lastName))
+            if (string.IsNullOrWhiteSpace(data.LastName))
             {
-                throw new ArgumentNullException(lastName);
+                throw new ArgumentNullException(data.LastName);
             }
 
-            if (firstName.Length < 2 || firstName.Length > 60)
+            if (data.FirstName.Length < 2 || data.FirstName.Length > 60)
             {
-                throw new ArgumentException(firstName);
+                throw new ArgumentException(data.FirstName);
             }
 
-            if (lastName.Length < 2 || lastName.Length > 60)
+            if (data.LastName.Length < 2 || data.LastName.Length > 60)
             {
-                throw new ArgumentException(lastName);
+                throw new ArgumentException(data.LastName);
             }
 
-            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            if (data.DateOfBirth < new DateTime(1950, 01, 01) || data.DateOfBirth > DateTime.Now)
             {
                 throw new ArgumentException("Wrong date of birth");
             }
 
-            if (height < 30 || height > 250)
+            if (data.Height < 30 || data.Height > 250)
             {
-                throw new ArgumentException(height.ToString());
+                throw new ArgumentException(data.Height.ToString());
             }
 
-            if (weight <= 0)
+            if (data.Weight <= 0)
             {
-                throw new ArgumentException(weight.ToString());
+                throw new ArgumentException(data.Weight.ToString());
             }
 
-            if (gender != 'm' && gender != 'f' && gender != 'a')
+            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
             {
-                throw new ArgumentException(gender.ToString());
+                throw new ArgumentException(data.Gender.ToString());
             }
 
             this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), id);
@@ -209,12 +198,12 @@ namespace FileCabinetApp
             string dateAsString = GetDateAsString(record.DateOfBirth);
             this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, id);
             
-            this.AddToDictionary(this.firstNameDictionary, firstName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
-            this.AddToDictionary(this.lastNameDictionary, lastName.ToUpper(), new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
-            dateAsString = GetDateAsString(dateOfBirth);
-            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            this.AddToDictionary(this.firstNameDictionary, data.FirstName.ToUpper(), new FileCabinetRecord(id, data));
+            this.AddToDictionary(this.lastNameDictionary, data.FirstName.ToUpper(), new FileCabinetRecord(id, data));
+            dateAsString = GetDateAsString(data.DateOfBirth);
+            this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, new FileCabinetRecord(id, data));
 
-            record.UpdateRecord(firstName, lastName, dateOfBirth, height, weight, gender);
+            record.UpdateRecord(data);
         }
 
         /// <summary>
