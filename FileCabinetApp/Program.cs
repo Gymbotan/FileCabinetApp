@@ -43,8 +43,21 @@ namespace FileCabinetApp
         public static void Main(string[] args)
         {
             Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
+
+            if (args.Length > 0)
+            {
+                string[] parameters = ParseArgs(args);
+                SetSettings(parameters);
+            }
+            else
+            {
+                Console.WriteLine($"Using default validation rules.");
+            }
+            
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
+
+            //Program.fileCabinetService = new FileCabinetService();
 
             do
             {
@@ -56,6 +69,7 @@ namespace FileCabinetApp
                 if (string.IsNullOrEmpty(command))
                 {
                     Console.WriteLine(Program.HintMessage);
+                    Program.fileCabinetService = new FileCabinetDefaultService();
                     continue;
                 }
 
@@ -138,12 +152,12 @@ namespace FileCabinetApp
             decimal weight = 0;
             char gender = 'm';
 
-            InputFirstName(ref firstName);
-            InputLastName(ref lastName);
-            InputDateOfBirth(ref dateOfBirth);
-            InputHeight(ref height);
-            InputWeight(ref weight);
-            InputGender(ref gender);
+            Program.fileCabinetService.InputFirstName(ref firstName);
+            Program.fileCabinetService.InputLastName(ref lastName);
+            Program.fileCabinetService.InputDateOfBirth(ref dateOfBirth);
+            Program.fileCabinetService.InputHeight(ref height);
+            Program.fileCabinetService.InputWeight(ref weight);
+            Program.fileCabinetService.InputGender(ref gender);
 
             DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
@@ -170,12 +184,12 @@ namespace FileCabinetApp
                 decimal weight = 0;
                 char gender = 'm';
 
-                InputFirstName(ref firstName);
-                InputLastName(ref lastName);
-                InputDateOfBirth(ref dateOfBirth);
-                InputHeight(ref height);
-                InputWeight(ref weight);
-                InputGender(ref gender);
+                Program.fileCabinetService.InputFirstName(ref firstName);
+                Program.fileCabinetService.InputLastName(ref lastName);
+                Program.fileCabinetService.InputDateOfBirth(ref dateOfBirth);
+                Program.fileCabinetService.InputHeight(ref height);
+                Program.fileCabinetService.InputWeight(ref weight);
+                Program.fileCabinetService.InputGender(ref gender);
 
                 DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
@@ -245,163 +259,67 @@ namespace FileCabinetApp
             isRunning = false;
         }
 
-        /// <summary>
-        /// Allows you to input first name of a record.
-        /// </summary>
-        /// <param name="firstName">First name.</param>
-        private static void InputFirstName(ref string firstName)
+        private static string[] ParseArgs(string[] args)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            try
             {
-                Console.Write("First name: ");
-                firstName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(firstName))
+                if (args[0].StartsWith("--"))
                 {
-                    Console.WriteLine("First name shouldn't be empty. Please input again");
-                }
-                else if (firstName.Length < 2 || firstName.Length > 60)
-                {
-                    Console.WriteLine("First name's length should more than 1 and less than 61. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input larst name of a record.
-        /// </summary>
-        /// <param name="lastName">Last name.</param>
-        private static void InputLastName(ref string lastName)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Last name: ");
-                lastName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(lastName))
-                {
-                    Console.WriteLine("Last name shouldn't be empty. Please input again");
-                }
-                else if (lastName.Length < 2 || lastName.Length > 60)
-                {
-                    Console.WriteLine("Last name's length should more than 1 and less than 61. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input date of birth of a record.
-        /// </summary>
-        /// <param name="dateOfBirth">Date of birth.</param>
-        private static void InputDateOfBirth(ref DateTime dateOfBirth)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                try
-                {
-                    Console.Write("Date of birth: ");
-                    var inputs = Console.ReadLine().Split('/', 3);
-                    dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-                    if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+                    Console.WriteLine("Work with --");
+                    args[0] = args[0].Replace("--", "");
+                    string[] parameters = args[0].Split('=', 2);
+                    foreach (string par in parameters)
                     {
-                        Console.WriteLine("Wrong date of birth");
+                        Console.WriteLine(par);
                     }
-                    else
-                    {
-                        isCorrect = true;
-                    }
+                    return parameters;
                 }
-                catch
+                else if (args[0].StartsWith('-'))
                 {
-                    Console.WriteLine("Wrong date of birth");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input height of a record.
-        /// </summary>
-        /// <param name="height">Height.</param>
-        private static void InputHeight(ref short height)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Height (cm): ");
-                height = short.Parse(Console.ReadLine());
-                if (height < 30 || height > 250)
-                {
-                    Console.WriteLine("Height should more than 29 and less than 251. Please input again");
+                    string[] parameters = new string[2] { args[0].Replace("-", ""), args[1] };
+                    return parameters;
                 }
                 else
                 {
-                    isCorrect = true;
+                    return null;
                 }
+            }
+            catch(ArgumentException e)
+            {
+                throw new ArgumentException(e.Message);
             }
         }
 
-        /// <summary>
-        /// Allows you to input weight of a record.
-        /// </summary>
-        /// <param name="weight">Weight.</param>
-        private static void InputWeight(ref decimal weight)
+        private static void SetSettings(string[] parameters)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            switch (parameters[0].ToUpper())
             {
-                Console.Write("Weight (kg): ");
-                weight = decimal.Parse(Console.ReadLine());
-                if (weight <= 0)
-                {
-                    Console.WriteLine("Weight should more than 0. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
+                case "V":
+                case "VALIDATION-RULES":
+                    SetValidationRule(parameters[1]);
+                    break;
+                default:
+                    SetValidationRule("Default");
+                    break;
             }
         }
 
-        /// <summary>
-        /// Allows you to input gender of a record.
-        /// </summary>
-        /// <param name="gender">Gender.</param>
-        private static void InputGender(ref char gender)
+        private static void SetValidationRule(string parameter)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            switch (parameter.ToUpper())
             {
-                Console.Write("Gender (m - male, f - female, a - another): ");
-                string gen = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(gen))
-                {
-                    Console.WriteLine("Gender shouldn't be empty. Please input again");
-                }
-                else if (gen.Length > 1)
-                {
-                    Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                }
-                else
-                {
-                    gender = char.Parse(gen);
-                    if (gender != 'm' && gender != 'f' && gender != 'a')
-                    {
-                        Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
+                case "DEFAULT":
+                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Program.fileCabinetService = new FileCabinetDefaultService();
+                    break;
+                case "CUSTOM":
+                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Program.fileCabinetService = new FileCabinetCustomService();
+                    break;
+                default:
+                    Console.WriteLine($"Using default validation rules.");
+                    Program.fileCabinetService = new FileCabinetDefaultService();
+                    break;
             }
         }
     }

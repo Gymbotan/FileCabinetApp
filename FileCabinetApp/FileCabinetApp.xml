@@ -50,6 +50,22 @@
             Gets or sets Gender.
             </summary>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetCustomService">
+            <summary>
+            Class that realizes all the custom services of the main class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomService.ValidateParameter(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates inputed data.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetDefaultService">
+            <summary>
+            Class that realizes all the default services of the main class.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             FileCabinetRecord class
@@ -130,6 +146,12 @@
             </summary>
             <param name="data">Data for a new record</param>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetService.ValidateParameter(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates inputed data.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
         <member name="M:FileCabinetApp.FileCabinetService.ListRecords">
             <summary>
             Prints all the existing records.
@@ -181,6 +203,42 @@
             Returns amount of records
             </summary>
             <returns>Amount of records</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputFirstName(System.String@)">
+            <summary>
+            Allows you to input first name of a record.
+            </summary>
+            <param name="firstName">First name.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputLastName(System.String@)">
+            <summary>
+            Allows you to input larst name of a record.
+            </summary>
+            <param name="lastName">Last name.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputDateOfBirth(System.DateTime@)">
+            <summary>
+            Allows you to input date of birth of a record.
+            </summary>
+            <param name="dateOfBirth">Date of birth.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputHeight(System.Int16@)">
+            <summary>
+            Allows you to input height of a record.
+            </summary>
+            <param name="height">Height.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputWeight(System.Decimal@)">
+            <summary>
+            Allows you to input weight of a record.
+            </summary>
+            <param name="weight">Weight.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.InputGender(System.Char@)">
+            <summary>
+            Allows you to input gender of a record.
+            </summary>
+            <param name="gender">Gender.</param>
         </member>
         <member name="T:FileCabinetApp.Program">
             <summary>
@@ -240,42 +298,6 @@
             Exit.
             </summary>
             <param name="parameters">Parameters.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputFirstName(System.String@)">
-            <summary>
-            Allows you to input first name of a record.
-            </summary>
-            <param name="firstName">First name.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputLastName(System.String@)">
-            <summary>
-            Allows you to input larst name of a record.
-            </summary>
-            <param name="lastName">Last name.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputDateOfBirth(System.DateTime@)">
-            <summary>
-            Allows you to input date of birth of a record.
-            </summary>
-            <param name="dateOfBirth">Date of birth.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputHeight(System.Int16@)">
-            <summary>
-            Allows you to input height of a record.
-            </summary>
-            <param name="height">Height.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputWeight(System.Decimal@)">
-            <summary>
-            Allows you to input weight of a record.
-            </summary>
-            <param name="weight">Weight.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.InputGender(System.Char@)">
-            <summary>
-            Allows you to input gender of a record.
-            </summary>
-            <param name="gender">Gender.</param>
         </member>
     </members>
 </doc>
