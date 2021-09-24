@@ -9,7 +9,7 @@ namespace FileCabinetApp
     /// <summary>
     /// Class that realizes all the services of the main class.
     /// </summary>
-    public class FileCabinetService
+    public class FileCabinetService : IFileCabinetService
     {
         public FileCabinetService(IRecordValidator validator)
         {
@@ -67,9 +67,9 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Creates new record
+        /// Creates new record.
         /// </summary>
-        /// <param name="data">Data for a new record</param>
+        /// <param name="data">Data for a new record.</param>
         public int CreateRecord(DataForRecord data)
         {
             this.validator.ValidateParameters(data);
@@ -138,10 +138,10 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Finds all the records with chosen first name
+        /// Finds all the records with chosen first name.
         /// </summary>
-        /// <param name="firstName">FirstName</param>
-        /// <returns>Array of finded records</returns>
+        /// <param name="firstName">FirstName.</param>
+        /// <returns>Array of finded records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByFirstName(string firstName) 
         {
             /*var result = from rec in this.list
@@ -160,10 +160,10 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Finds all the records withchosen last name
+        /// Finds all the records withchosen last name.
         /// </summary>
-        /// <param name="lastName">LastName</param>
-        /// <returns>Array of finded records</returns>
+        /// <param name="lastName">LastName.</param>
+        /// <returns>Array of finded records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByLastName(string lastName)
         {
             if (lastNameDictionary.ContainsKey(lastName.ToUpper()) && this.lastNameDictionary[lastName.ToUpper()].Count > 0)
@@ -178,10 +178,10 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// Finds all the records with chosen date of birth
+        /// Finds all the records with chosen date of birth.
         /// </summary>
-        /// <param name="dateOfBirth">DateOfBirth</param>
-        /// <returns>Array of finded records</returns>
+        /// <param name="dateOfBirth">DateOfBirth.</param>
+        /// <returns>Array of finded records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByDateOfBirth(string dateOfBirth)
         {
             if (dateOfBirthDictionary.ContainsKey(dateOfBirth.ToUpper()) && this.dateOfBirthDictionary[dateOfBirth.ToUpper()].Count > 0)
@@ -214,194 +214,6 @@ namespace FileCabinetApp
             return this.list.Count;
         }
 
-        /// <summary>
-        /// Allows you to input first name of a record.
-        /// </summary>
-        /// <param name="firstName">First name.</param>
-        public void InputFirstName(ref string firstName)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("First name: ");
-                firstName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(firstName))
-                {
-                    Console.WriteLine("First name shouldn't be empty. Please input again");
-                }
-                else if (firstName.Length < 2 || firstName.Length > 60)
-                {
-                    Console.WriteLine("First name's length should more than 1 and less than 61. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input larst name of a record.
-        /// </summary>
-        /// <param name="lastName">Last name.</param>
-        public void InputLastName(ref string lastName)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Last name: ");
-                lastName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(lastName))
-                {
-                    Console.WriteLine("Last name shouldn't be empty. Please input again");
-                }
-                else if (lastName.Length < 2 || lastName.Length > 60)
-                {
-                    Console.WriteLine("Last name's length should more than 1 and less than 61. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input date of birth of a record.
-        /// </summary>
-        /// <param name="dateOfBirth">Date of birth.</param>
-        public void InputDateOfBirth(ref DateTime dateOfBirth)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                try
-                {
-                    Console.Write("Date of birth: ");
-                    var inputs = Console.ReadLine().Split('/', 3);
-                    dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-                    if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
-                    {
-                        Console.WriteLine("Wrong date of birth");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Wrong date of birth");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input height of a record.
-        /// </summary>
-        /// <param name="height">Height.</param>
-        public void InputHeight(ref short height)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Height (cm): ");
-                string temp = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(temp))
-                {
-                    Console.WriteLine("Height shouldn't be empty. Please input again");
-                }
-                else
-                {
-                    try
-                    {
-                        height = short.Parse(temp);
-                        if (height < 30 || height > 250)
-                        {
-                            Console.WriteLine("Height should be more than 29 and less than 251. Please input again");
-                        }
-                        else
-                        {
-                            isCorrect = true;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Height should be a number. Please imput again");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input weight of a record.
-        /// </summary>
-        /// <param name="weight">Weight.</param>
-        public void InputWeight(ref decimal weight)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Weight (kg): ");
-                string temp = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(temp))
-                {
-                    Console.WriteLine("Weight shouldn't be empty. Please input again");
-                }
-                else
-                {
-                    try
-                    {
-                        weight = decimal.Parse(temp);
-                        if (weight <= 0)
-                        {
-                            Console.WriteLine("Weight should be a positive number. Please input again");
-                        }
-                        else
-                        {
-                            isCorrect = true;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Weight should be a positive number. Please imput again");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Allows you to input gender of a record.
-        /// </summary>
-        /// <param name="gender">Gender.</param>
-        public void InputGender(ref char gender)
-        {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Gender (m - male, f - female, a - another): ");
-                string gen = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(gen))
-                {
-                    Console.WriteLine("Gender shouldn't be empty. Please input again");
-                }
-                else if (gen.Length > 1)
-                {
-                    Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                }
-                else
-                {
-                    gender = char.Parse(gen);
-                    if (gender != 'm' && gender != 'f' && gender != 'a')
-                    {
-                        Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-            }
-        }
+        
     }
 }
