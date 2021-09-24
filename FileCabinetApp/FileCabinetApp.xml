@@ -72,16 +72,6 @@
             </summary>
             <param name="data">Data.</param>
         </member>
-        <member name="T:FileCabinetApp.FileCabinetCustomService">
-            <summary>
-            Class that realizes all the custom services of the main class.
-            </summary>
-        </member>
-        <member name="T:FileCabinetApp.FileCabinetDefaultService">
-            <summary>
-            Class that realizes all the default services of the main class.
-            </summary>
-        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             FileCabinetRecord class

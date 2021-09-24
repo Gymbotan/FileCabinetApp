@@ -26,11 +26,6 @@ namespace FileCabinetApp
 
         public IRecordValidator validator;
         
-        public virtual IRecordValidator CreateValidator()
-        {
-            return new DefaultValidator();
-        }
-
         /// <summary>
         /// Transforms DateTime to string in special format.
         /// </summary>
