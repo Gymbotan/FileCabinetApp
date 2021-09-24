@@ -4,6 +4,17 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.CustomValidator">
+            <summary>
+            Custom validator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameters.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
         <member name="T:FileCabinetApp.DataForRecord">
             <summary>
             Data for FileCabinetRecord.
@@ -50,16 +61,21 @@
             Gets or sets Gender.
             </summary>
         </member>
+        <member name="T:FileCabinetApp.DefaultValidator">
+            <summary>
+            Defult validator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameters.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetCustomService">
             <summary>
             Class that realizes all the custom services of the main class.
             </summary>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomService.ValidateParameter(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates inputed data.
-            </summary>
-            <param name="data">Data.</param>
         </member>
         <member name="T:FileCabinetApp.FileCabinetDefaultService">
             <summary>
@@ -145,12 +161,6 @@
             Creates new record
             </summary>
             <param name="data">Data for a new record</param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.ValidateParameter(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates inputed data.
-            </summary>
-            <param name="data">Data.</param>
         </member>
         <member name="M:FileCabinetApp.FileCabinetService.ListRecords">
             <summary>

@@ -38,7 +38,7 @@ namespace FileCabinetApp
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
-        private static FileCabinetService fileCabinetService = new FileCabinetService();
+        private static FileCabinetService fileCabinetService = new FileCabinetDefaultService();
 
         public static void Main(string[] args)
         {
@@ -56,9 +56,8 @@ namespace FileCabinetApp
             
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
-
-            //Program.fileCabinetService = new FileCabinetService();
-
+            fileCabinetService.validator = fileCabinetService.CreateValidator();
+            
             do
             {
                 Console.Write("> ");
@@ -69,7 +68,6 @@ namespace FileCabinetApp
                 if (string.IsNullOrEmpty(command))
                 {
                     Console.WriteLine(Program.HintMessage);
-                    Program.fileCabinetService = new FileCabinetDefaultService();
                     continue;
                 }
 
