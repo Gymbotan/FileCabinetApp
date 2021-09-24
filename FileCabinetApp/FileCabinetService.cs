@@ -142,7 +142,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">FirstName</param>
         /// <returns>Array of finded records</returns>
-        public FileCabinetRecord[] FindByFirstName(string firstName) 
+        public IReadOnlyCollection<FileCabinetRecord> FindByFirstName(string firstName) 
         {
             /*var result = from rec in this.list
                          where rec.FirstName.ToUpper() == firstName.ToUpper()
@@ -150,7 +150,7 @@ namespace FileCabinetApp
             return result.ToArray();*/ //Realization with LINQ
             if (firstNameDictionary.ContainsKey(firstName.ToUpper()) && this.firstNameDictionary[firstName.ToUpper()].Count > 0)
             {
-                return this.firstNameDictionary[firstName.ToUpper()].ToArray();
+                return this.firstNameDictionary[firstName.ToUpper()];
             }
             else
             {
@@ -164,11 +164,11 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="lastName">LastName</param>
         /// <returns>Array of finded records</returns>
-        public FileCabinetRecord[] FindByLastName(string lastName)
+        public IReadOnlyCollection<FileCabinetRecord> FindByLastName(string lastName)
         {
             if (lastNameDictionary.ContainsKey(lastName.ToUpper()) && this.lastNameDictionary[lastName.ToUpper()].Count > 0)
             {
-                return this.lastNameDictionary[lastName.ToUpper()].ToArray();
+                return this.lastNameDictionary[lastName.ToUpper()];
             }
             else
             {
@@ -182,11 +182,11 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="dateOfBirth">DateOfBirth</param>
         /// <returns>Array of finded records</returns>
-        public FileCabinetRecord[] FindByDateOfBirth(string dateOfBirth)
+        public IReadOnlyCollection<FileCabinetRecord> FindByDateOfBirth(string dateOfBirth)
         {
             if (dateOfBirthDictionary.ContainsKey(dateOfBirth.ToUpper()) && this.dateOfBirthDictionary[dateOfBirth.ToUpper()].Count > 0)
             {
-                return this.dateOfBirthDictionary[dateOfBirth.ToUpper()].ToArray();
+                return this.dateOfBirthDictionary[dateOfBirth.ToUpper()];
             }
             else
             {
@@ -199,7 +199,7 @@ namespace FileCabinetApp
         /// 
         /// </summary>
         /// <returns></returns>
-        public FileCabinetRecord[] GetRecords()
+        public IReadOnlyCollection<FileCabinetRecord> GetRecords()
         {
             // TODO: добавьте реализацию метода
             return Array.Empty<FileCabinetRecord>();

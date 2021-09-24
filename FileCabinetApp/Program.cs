@@ -2,6 +2,7 @@
 namespace FileCabinetApp
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     /// <summary>
     /// Main class with main functionality.
@@ -206,7 +207,7 @@ namespace FileCabinetApp
             switch (inputs[0].ToLower())
             {
                 case "firstname":
-                    FileCabinetRecord[] findedArray = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'", ""));
+                    IReadOnlyCollection<FileCabinetRecord> findedArray = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", "").Replace("\'", ""));
                     ShowArray(findedArray);
                     break;
                 case "lastname":
@@ -227,7 +228,7 @@ namespace FileCabinetApp
         /// Prints an array.
         /// </summary>
         /// <param name="array">Array to print.</param>
-        private static void ShowArray(FileCabinetRecord[] array)
+        private static void ShowArray(IReadOnlyCollection<FileCabinetRecord> array)
         {
             if (array != null)
             {
@@ -308,7 +309,7 @@ namespace FileCabinetApp
             {
                 case "DEFAULT":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    // Program.fileCabinetService = new FileCabinetService(new DefaultValidator());
+                   // Program.fileCabinetService = new FileCabinetService(new DefaultValidator());
                     break;
                 case "CUSTOM":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");

@@ -240,6 +240,17 @@
             </summary>
             <param name="gender">Gender.</param>
         </member>
+        <member name="T:FileCabinetApp.IRecordValidator">
+            <summary>
+            Interface for record validation.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameters.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
         <member name="T:FileCabinetApp.Program">
             <summary>
             Main class with main functionality.
@@ -281,7 +292,7 @@
             </summary>
             <param name="parameters">2 parameters: field for search, value for search.</param>
         </member>
-        <member name="M:FileCabinetApp.Program.ShowArray(FileCabinetApp.FileCabinetRecord[])">
+        <member name="M:FileCabinetApp.Program.ShowArray(System.Collections.Generic.IReadOnlyCollection{FileCabinetApp.FileCabinetRecord})">
             <summary>
             Prints an array.
             </summary>
