@@ -56,7 +56,7 @@ namespace FileCabinetApp
             
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
-            fileCabinetService.validator = fileCabinetService.CreateValidator();
+            //fileCabinetService.validator = fileCabinetService.CreateValidator();
             
             do
             {

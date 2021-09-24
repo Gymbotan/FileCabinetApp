@@ -15,6 +15,9 @@ namespace FileCabinetApp
     /// </summary>
     public class FileCabinetDefaultService : FileCabinetService
     {
+        public FileCabinetDefaultService() : base(new DefaultValidator())
+        { }
+
         public override IRecordValidator CreateValidator()
         {
             Console.WriteLine("Default validator created");

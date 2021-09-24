@@ -11,6 +11,11 @@ namespace FileCabinetApp
     /// </summary>
     public class FileCabinetService
     {
+        public FileCabinetService(IRecordValidator validator)
+        {
+            this.validator = validator;
+        }
+
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
 
         private readonly Dictionary<string, List<FileCabinetRecord>> firstNameDictionary = new Dictionary<string, List<FileCabinetRecord>>();
