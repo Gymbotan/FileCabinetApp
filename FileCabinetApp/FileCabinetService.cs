@@ -13,7 +13,7 @@ namespace FileCabinetApp
     {
         public FileCabinetService(IRecordValidator validator)
         {
-            this.validator = validator;
+            this.Validator = validator;
         }
 
         private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
@@ -24,7 +24,7 @@ namespace FileCabinetApp
 
         private readonly Dictionary<string, List<FileCabinetRecord>> dateOfBirthDictionary = new Dictionary<string, List<FileCabinetRecord>>();
 
-        public IRecordValidator validator;
+        public IRecordValidator Validator { get; set; }
         
         /// <summary>
         /// Transforms DateTime to string in special format.
@@ -72,7 +72,7 @@ namespace FileCabinetApp
         /// <param name="data">Data for a new record.</param>
         public int CreateRecord(DataForRecord data)
         {
-            this.validator.ValidateParameters(data);
+            this.Validator.ValidateParameters(data);
             
             int id = this.list.Count + 1;
 
@@ -121,7 +121,7 @@ namespace FileCabinetApp
         /// <param name="data">Data for a new record.</param>
         public void EditRecord(int id, DataForRecord data)
         {
-            this.validator.ValidateParameters(data);
+            this.Validator.ValidateParameters(data);
             FileCabinetRecord record = this.list.Find(x => x.Id == id);
             
             this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), id);

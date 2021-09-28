@@ -146,22 +146,22 @@ namespace FileCabinetApp
         private static void Create(string parameters)
         {
             Console.Write("First name: ");
-            string firstName = ReadInput<string>(stringConverter, FirstNameValidator);
+            string firstName = ReadInput<string>(stringConverter, Program.fileCabinetService.Validator.FirstNameValidator);
 
             Console.Write("Last name: ");
-            var lastName = ReadInput<string>(stringConverter, LastNameValidator);
+            var lastName = ReadInput<string>(stringConverter, Program.fileCabinetService.Validator.LastNameValidator);
 
             Console.Write("Date of birth: ");
-            var dateOfBirth = ReadInput<DateTime>(dateConverter, DateOfBirthValidator);
+            var dateOfBirth = ReadInput<DateTime>(dateConverter, Program.fileCabinetService.Validator.DateOfBirthValidator);
 
             Console.Write("Height: ");
-            var height = ReadInput<short>(shortConverter, HeightValidator);
+            var height = ReadInput<short>(shortConverter, Program.fileCabinetService.Validator.HeightValidator);
 
             Console.Write("Weight: ");
-            var weight = ReadInput<decimal>(decimalConverter, WeightValidator);
+            var weight = ReadInput<decimal>(decimalConverter, Program.fileCabinetService.Validator.WeightValidator);
 
             Console.Write("Gender (m, f or a): ");
-            var gender = ReadInput<char>(charConverter, GenderValidator);
+            var gender = ReadInput<char>(charConverter, Program.fileCabinetService.Validator.GenderValidator);
             
             DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
@@ -189,22 +189,22 @@ namespace FileCabinetApp
                 else
                 {
                     Console.Write("First name: ");
-                    string firstName = ReadInput<string>(stringConverter, FirstNameValidator);
+                    string firstName = ReadInput<string>(stringConverter, Program.fileCabinetService.Validator.FirstNameValidator);
 
                     Console.Write("Last name: ");
-                    var lastName = ReadInput<string>(stringConverter, LastNameValidator);
+                    var lastName = ReadInput<string>(stringConverter, Program.fileCabinetService.Validator.LastNameValidator);
 
                     Console.Write("Date of birth: ");
-                    var dateOfBirth = ReadInput<DateTime>(dateConverter, DateOfBirthValidator);
+                    var dateOfBirth = ReadInput<DateTime>(dateConverter, Program.fileCabinetService.Validator.DateOfBirthValidator);
 
                     Console.Write("Height: ");
-                    var height = ReadInput<short>(shortConverter, HeightValidator);
+                    var height = ReadInput<short>(shortConverter, Program.fileCabinetService.Validator.HeightValidator);
 
                     Console.Write("Weight: ");
-                    var weight = ReadInput<decimal>(decimalConverter, WeightValidator);
+                    var weight = ReadInput<decimal>(decimalConverter, Program.fileCabinetService.Validator.WeightValidator);
 
                     Console.Write("Gender (m, f or a): ");
-                    var gender = ReadInput<char>(charConverter, GenderValidator);
+                    var gender = ReadInput<char>(charConverter, Program.fileCabinetService.Validator.GenderValidator);
                     
                     DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
@@ -406,70 +406,6 @@ namespace FileCabinetApp
             char ch;
             bool isSuccess = char.TryParse(str, out ch);
             return Tuple.Create(isSuccess, str, ch);
-        }
-
-        public static Tuple<bool, string> FirstNameValidator (string firstName)
-        {
-            bool isSuccess = true;
-            if (firstName.Length < 2 || firstName.Length > 60)
-            {
-                isSuccess = false;
-            }
-            return Tuple.Create(isSuccess, "First name's length should more than 1 and less than 61)");
-        }
-
-        public static Tuple<bool, string> LastNameValidator(string lastName)
-        {
-            bool isSuccess = true;
-            if (lastName.Length < 2 || lastName.Length > 60)
-            {
-                isSuccess = false;
-            }
-            return Tuple.Create(isSuccess, "Last name's length should more than 1 and less than 61");
-        }
-
-        public static Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
-        {
-            bool isSuccess = true;
-            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
-            {
-                isSuccess = false;
-            }
-            string str = "Wrong date of birth";
-            return Tuple.Create(isSuccess, str);
-        }
-
-        public static Tuple<bool, string> HeightValidator(short height)
-        {
-            bool isSuccess = true;
-            if (height < 30 || height > 250)
-            {
-                isSuccess = false;
-            }
-            string str = "Height should be more than 29 and less than 251";
-            return Tuple.Create(isSuccess, str);
-        }
-
-        public static Tuple<bool, string> WeightValidator(decimal weight)
-        {
-            bool isSuccess = true;
-            if (weight <= 0)
-            {
-                isSuccess = false;
-            }
-            string str = "Weight should be a positive number";
-            return Tuple.Create(isSuccess, str);
-        }
-
-        public static Tuple<bool, string> GenderValidator(char gender)
-        {
-            bool isSuccess = true;
-            if (gender != 'm' && gender != 'f' && gender != 'a')
-            {
-                isSuccess = false;
-            }
-            string str = "Gender should be: m - male, f - female, a - another";
-            return Tuple.Create(isSuccess, str);
         }
     }
 }

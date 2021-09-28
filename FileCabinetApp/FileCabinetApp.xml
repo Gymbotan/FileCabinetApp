@@ -15,6 +15,48 @@
             </summary>
             <param name="data">Data.</param>
         </member>
+        <member name="M:FileCabinetApp.CustomValidator.FirstNameValidator(System.String)">
+            <summary>
+            Validation of the first name.
+            </summary>
+            <param name="firstName">First name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.LastNameValidator(System.String)">
+            <summary>
+            Validation of the last name.
+            </summary>
+            <param name="lastName">Last name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.DateOfBirthValidator(System.DateTime)">
+            <summary>
+            Validation of the date of birth.
+            </summary>
+            <param name="dateOfBirth">Date of birth.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.HeightValidator(System.Int16)">
+            <summary>
+            Validation of the height.
+            </summary>
+            <param name="height">Height.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.WeightValidator(System.Decimal)">
+            <summary>
+            Validation of the weight.
+            </summary>
+            <param name="weight">Weight.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.GenderValidator(System.Char)">
+            <summary>
+            Validation of the gender.
+            </summary>
+            <param name="gender">Gender.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
         <member name="T:FileCabinetApp.DataForRecord">
             <summary>
             Data for FileCabinetRecord.
@@ -71,6 +113,48 @@
             Validates parameters.
             </summary>
             <param name="data">Data.</param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.FirstNameValidator(System.String)">
+            <summary>
+            Validation of the first name.
+            </summary>
+            <param name="firstName">First name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.LastNameValidator(System.String)">
+            <summary>
+            Validation of the last name.
+            </summary>
+            <param name="lastName">Last name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.DateOfBirthValidator(System.DateTime)">
+            <summary>
+            Validation of the date of birth.
+            </summary>
+            <param name="dateOfBirth">Date of birth.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.HeightValidator(System.Int16)">
+            <summary>
+            Validation of the height.
+            </summary>
+            <param name="height">Height.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.WeightValidator(System.Decimal)">
+            <summary>
+            Validation of the weight.
+            </summary>
+            <param name="weight">Weight.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.GenderValidator(System.Char)">
+            <summary>
+            Validation of the gender.
+            </summary>
+            <param name="gender">Gender.</param>
+            <returns>Tuple(is successful, error message).</returns>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -209,6 +293,11 @@
             Interface for FileCabinetService.
             </summary>
         </member>
+        <member name="P:FileCabinetApp.IFileCabinetService.Validator">
+            <summary>
+            Gets or sets validator.
+            </summary>
+        </member>
         <member name="M:FileCabinetApp.IFileCabinetService.CreateRecord(FileCabinetApp.DataForRecord)">
             <summary>
             Creates new record.
@@ -272,6 +361,48 @@
             Validates parameters.
             </summary>
             <param name="data">Data.</param>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.FirstNameValidator(System.String)">
+            <summary>
+            Validation of the first name.
+            </summary>
+            <param name="firstName">First name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.LastNameValidator(System.String)">
+            <summary>
+            Validation of the last name.
+            </summary>
+            <param name="lastName">Last name.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.DateOfBirthValidator(System.DateTime)">
+            <summary>
+            Validation of the date of birth.
+            </summary>
+            <param name="dateOfBirth">Date of birth.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.HeightValidator(System.Int16)">
+            <summary>
+            Validation of the height.
+            </summary>
+            <param name="height">Height.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.WeightValidator(System.Decimal)">
+            <summary>
+            Validation of the weight.
+            </summary>
+            <param name="weight">Weight.</param>
+            <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator.GenderValidator(System.Char)">
+            <summary>
+            Validation of the gender.
+            </summary>
+            <param name="gender">Gender.</param>
+            <returns>Tuple(is successful, error message).</returns>
         </member>
         <member name="T:FileCabinetApp.Program">
             <summary>
