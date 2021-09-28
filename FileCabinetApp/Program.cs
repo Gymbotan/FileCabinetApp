@@ -4,6 +4,7 @@ namespace FileCabinetApp
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+
     /// <summary>
     /// Main class with main functionality.
     /// </summary>
@@ -144,20 +145,24 @@ namespace FileCabinetApp
         /// <param name="parameters">Parameters.</param>
         private static void Create(string parameters)
         {
-            string firstName = string.Empty;
-            string lastName = string.Empty;
-            DateTime dateOfBirth = DateTime.Now;
-            short height = 0;
-            decimal weight = 0;
-            char gender = 'm';
+            Console.Write("First name: ");
+            string firstName = ReadInput<string>(stringConverter, FirstNameValidator);
 
-            InputFirstName(ref firstName);
-            InputLastName(ref lastName);
-            InputDateOfBirth(ref dateOfBirth);
-            InputHeight(ref height);
-            InputWeight(ref weight);
-            InputGender(ref gender);
+            Console.Write("Last name: ");
+            var lastName = ReadInput<string>(stringConverter, LastNameValidator);
 
+            Console.Write("Date of birth: ");
+            var dateOfBirth = ReadInput<DateTime>(dateConverter, DateOfBirthValidator);
+
+            Console.Write("Height: ");
+            var height = ReadInput<short>(shortConverter, HeightValidator);
+
+            Console.Write("Weight: ");
+            var weight = ReadInput<decimal>(decimalConverter, WeightValidator);
+
+            Console.Write("Gender (m, f or a): ");
+            var gender = ReadInput<char>(charConverter, GenderValidator);
+            
             DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
             Console.WriteLine($"Record #{Program.fileCabinetService.CreateRecord(data)} is created");
@@ -169,31 +174,43 @@ namespace FileCabinetApp
         /// <param name="parameters">Parameters.</param>
         private static void Edit(string parameters)
         {
-            int recordId = int.Parse(parameters);
-            if (!fileCabinetService.IsRecordExist(recordId))
+            int recordId = -1;
+            
+            if (!int.TryParse(parameters, out recordId))
             {
-                Console.WriteLine($"#{recordId} record is not found.");
+                Console.WriteLine("Record's number is missed. Please input again.");
             }
             else
             {
-                string firstName = string.Empty;
-                string lastName = string.Empty;
-                DateTime dateOfBirth = DateTime.Now;
-                short height = 0;
-                decimal weight = 0;
-                char gender = 'm';
+                if (!fileCabinetService.IsRecordExist(recordId))
+                {
+                    Console.WriteLine($"#{recordId} record is not found.");
+                }
+                else
+                {
+                    Console.Write("First name: ");
+                    string firstName = ReadInput<string>(stringConverter, FirstNameValidator);
 
-                InputFirstName(ref firstName);
-                InputLastName(ref lastName);
-                InputDateOfBirth(ref dateOfBirth);
-                InputHeight(ref height);
-                InputWeight(ref weight);
-                InputGender(ref gender);
+                    Console.Write("Last name: ");
+                    var lastName = ReadInput<string>(stringConverter, LastNameValidator);
 
-                DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
+                    Console.Write("Date of birth: ");
+                    var dateOfBirth = ReadInput<DateTime>(dateConverter, DateOfBirthValidator);
 
-                Program.fileCabinetService.EditRecord(recordId, data);
-                Console.WriteLine($"Record #{recordId} is updated.");
+                    Console.Write("Height: ");
+                    var height = ReadInput<short>(shortConverter, HeightValidator);
+
+                    Console.Write("Weight: ");
+                    var weight = ReadInput<decimal>(decimalConverter, WeightValidator);
+
+                    Console.Write("Gender (m, f or a): ");
+                    var gender = ReadInput<char>(charConverter, GenderValidator);
+                    
+                    DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
+
+                    Program.fileCabinetService.EditRecord(recordId, data);
+                    Console.WriteLine($"Record #{recordId} is updated.");
+                }
             }
         }
 
@@ -309,7 +326,6 @@ namespace FileCabinetApp
             {
                 case "DEFAULT":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                   // Program.fileCabinetService = new FileCabinetService(new DefaultValidator());
                     break;
                 case "CUSTOM":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
@@ -317,199 +333,143 @@ namespace FileCabinetApp
                     break;
                 default:
                     Console.WriteLine($"Using default validation rules.");
-                    // Program.fileCabinetService = new FileCabinetService(new DefaultValidator());
                     break;
             }
         }
 
-        /// <summary>
-        /// Allows you to input first name of a record.
-        /// </summary>
-        /// <param name="firstName">First name.</param>
-        public static void InputFirstName(ref string firstName)
+        public static T ReadInput<T>(Func<string, Tuple<bool, string, T>> converter, Func<T, Tuple<bool, string>> validator)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            do
             {
-                Console.Write("First name: ");
-                firstName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(firstName))
+                T value;
+
+                var input = Console.ReadLine();
+                var conversionResult = converter(input);
+
+                if (!conversionResult.Item1)
                 {
-                    Console.WriteLine("First name shouldn't be empty. Please input again");
+                    Console.WriteLine($"Conversion failed: {conversionResult.Item2}. Please, correct your input.");
+                    continue;
                 }
-                else if (firstName.Length < 2 || firstName.Length > 60)
+
+                value = conversionResult.Item3;
+
+                var validationResult = validator(value);
+                if (!validationResult.Item1)
                 {
-                    Console.WriteLine("First name's length should more than 1 and less than 61. Please input again");
+                    Console.WriteLine($"Validation failed: {validationResult.Item2}. Please, correct your input.");
+                    continue;
                 }
-                else
-                {
-                    isCorrect = true;
-                }
+
+                return value;
             }
+            while (true);
         }
 
-        /// <summary>
-        /// Allows you to input larst name of a record.
-        /// </summary>
-        /// <param name="lastName">Last name.</param>
-        public static void InputLastName(ref string lastName)
+        public static Tuple<bool, string, string> stringConverter (string str)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Last name: ");
-                lastName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(lastName))
-                {
-                    Console.WriteLine("Last name shouldn't be empty. Please input again");
-                }
-                else if (lastName.Length < 2 || lastName.Length > 60)
-                {
-                    Console.WriteLine("Last name's length should more than 1 and less than 61. Please input again");
-                }
-                else
-                {
-                    isCorrect = true;
-                }
-            }
+            return Tuple.Create(true, str, str);
         }
 
-        /// <summary>
-        /// Allows you to input date of birth of a record.
-        /// </summary>
-        /// <param name="dateOfBirth">Date of birth.</param>
-        public static void InputDateOfBirth(ref DateTime dateOfBirth)
+        public static Tuple<bool, string, DateTime> dateConverter(string str)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            bool isSuccess = true;
+            DateTime date = DateTime.Now;
+            try
             {
-                try
-                {
-                    Console.Write("Date of birth: ");
-                    var inputs = Console.ReadLine().Split('/', 3);
-                    dateOfBirth = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
-                    if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
-                    {
-                        Console.WriteLine("Wrong date of birth");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Wrong date of birth");
-                }
+                var inputs = str.Split('/', 3);
+                date = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
             }
+            catch
+            {
+                isSuccess = false;
+            }
+            return Tuple.Create(isSuccess, str, date);
         }
 
-        /// <summary>
-        /// Allows you to input height of a record.
-        /// </summary>
-        /// <param name="height">Height.</param>
-        public static void InputHeight(ref short height)
+        public static Tuple<bool, string, short> shortConverter(string str)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Height (cm): ");
-                string temp = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(temp))
-                {
-                    Console.WriteLine("Height shouldn't be empty. Please input again");
-                }
-                else
-                {
-                    try
-                    {
-                        height = short.Parse(temp);
-                        if (height < 30 || height > 250)
-                        {
-                            Console.WriteLine("Height should be more than 29 and less than 251. Please input again");
-                        }
-                        else
-                        {
-                            isCorrect = true;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Height should be a number. Please imput again");
-                    }
-                }
-            }
+            short sh;
+            bool isSuccess = short.TryParse(str, out sh);
+            return Tuple.Create(isSuccess, str, sh);
         }
 
-        /// <summary>
-        /// Allows you to input weight of a record.
-        /// </summary>
-        /// <param name="weight">Weight.</param>
-        public static void InputWeight(ref decimal weight)
+        public static Tuple<bool, string, decimal> decimalConverter(string str)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
-            {
-                Console.Write("Weight (kg): ");
-                string temp = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(temp))
-                {
-                    Console.WriteLine("Weight shouldn't be empty. Please input again");
-                }
-                else
-                {
-                    try
-                    {
-                        weight = decimal.Parse(temp);
-                        if (weight <= 0)
-                        {
-                            Console.WriteLine("Weight should be a positive number. Please input again");
-                        }
-                        else
-                        {
-                            isCorrect = true;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Weight should be a positive number. Please imput again");
-                    }
-                }
-            }
+            decimal dec;
+            bool isSuccess = decimal.TryParse(str, out dec);
+            return Tuple.Create(isSuccess, str, dec);
         }
 
-        /// <summary>
-        /// Allows you to input gender of a record.
-        /// </summary>
-        /// <param name="gender">Gender.</param>
-        public static void InputGender(ref char gender)
+        public static Tuple<bool, string, char> charConverter(string str)
         {
-            bool isCorrect = false;
-            while (!isCorrect)
+            char ch;
+            bool isSuccess = char.TryParse(str, out ch);
+            return Tuple.Create(isSuccess, str, ch);
+        }
+
+        public static Tuple<bool, string> FirstNameValidator (string firstName)
+        {
+            bool isSuccess = true;
+            if (firstName.Length < 2 || firstName.Length > 60)
             {
-                Console.Write("Gender (m - male, f - female, a - another): ");
-                string gen = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(gen))
-                {
-                    Console.WriteLine("Gender shouldn't be empty. Please input again");
-                }
-                else if (gen.Length > 1)
-                {
-                    Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                }
-                else
-                {
-                    gender = char.Parse(gen);
-                    if (gender != 'm' && gender != 'f' && gender != 'a')
-                    {
-                        Console.WriteLine("Gender should be: m - male, f - female, a - another. Please input again");
-                    }
-                    else
-                    {
-                        isCorrect = true;
-                    }
-                }
+                isSuccess = false;
             }
+            return Tuple.Create(isSuccess, "First name's length should more than 1 and less than 61)");
+        }
+
+        public static Tuple<bool, string> LastNameValidator(string lastName)
+        {
+            bool isSuccess = true;
+            if (lastName.Length < 2 || lastName.Length > 60)
+            {
+                isSuccess = false;
+            }
+            return Tuple.Create(isSuccess, "Last name's length should more than 1 and less than 61");
+        }
+
+        public static Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
+        {
+            bool isSuccess = true;
+            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            {
+                isSuccess = false;
+            }
+            string str = "Wrong date of birth";
+            return Tuple.Create(isSuccess, str);
+        }
+
+        public static Tuple<bool, string> HeightValidator(short height)
+        {
+            bool isSuccess = true;
+            if (height < 30 || height > 250)
+            {
+                isSuccess = false;
+            }
+            string str = "Height should be more than 29 and less than 251";
+            return Tuple.Create(isSuccess, str);
+        }
+
+        public static Tuple<bool, string> WeightValidator(decimal weight)
+        {
+            bool isSuccess = true;
+            if (weight <= 0)
+            {
+                isSuccess = false;
+            }
+            string str = "Weight should be a positive number";
+            return Tuple.Create(isSuccess, str);
+        }
+
+        public static Tuple<bool, string> GenderValidator(char gender)
+        {
+            bool isSuccess = true;
+            if (gender != 'm' && gender != 'f' && gender != 'a')
+            {
+                isSuccess = false;
+            }
+            string str = "Gender should be: m - male, f - female, a - another";
+            return Tuple.Create(isSuccess, str);
         }
     }
 }
