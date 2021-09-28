@@ -25,6 +25,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("stat", Stat),
             new Tuple<string, Action<string>>("list", List),
             new Tuple<string, Action<string>>("edit", Edit),
+            new Tuple<string, Action<string>>("export", Export),
             new Tuple<string, Action<string>>("find", Find),
             new Tuple<string, Action<string>>("exit", Exit),
         };
@@ -36,6 +37,7 @@ namespace FileCabinetApp
             new string[] { "stat", "prints the record's statistics", "The 'stat' command prints the record's statistics." },
             new string[] { "list", "shows existing records", "The 'list' command shows existing records." },
             new string[] { "edit", "edits an existing record", "The 'edit' command edits an existing record." },
+            new string[] { "export", "exports existing records into a file", "The 'export' command exports existing records into a file." },
             new string[] { "find", "finds existing records", "The 'find' command finds existing records." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
@@ -406,6 +408,25 @@ namespace FileCabinetApp
             char ch;
             bool isSuccess = char.TryParse(str, out ch);
             return Tuple.Create(isSuccess, str, ch);
+        }
+
+        private static void Export(string parameters) 
+        {
+            bool isSuccess = true;
+            string[] inputs = new string[2];
+            try
+            {
+                inputs = parameters.Split(' ', 2);
+            }
+            catch
+            {
+                Console.WriteLine("You inputed wrong parameters");
+                isSuccess = false;
+            }
+            if (isSuccess && inputs[0] == "csv")
+            {
+                Program.fileCabinetService.MakeSnapshot();
+            }
         }
     }
 }

@@ -156,6 +156,11 @@
             <param name="gender">Gender.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetCsvWriter">
+            <summary>
+            FileCabinetCsvWriter.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             FileCabinetRecord class
@@ -288,6 +293,22 @@
             </summary>
             <returns>Amount of records</returns>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetServiceSnapshot">
+            <summary>
+            FileCabinetServiceSnapshot.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.#ctor(FileCabinetApp.FileCabinetRecord[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetServiceSnapshot"/> class.
+            </summary>
+            <param name="records">Existing records.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.SaveToCsv">
+            <summary>
+            SaveToCsv.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.IFileCabinetService">
             <summary>
             Interface for FileCabinetService.
@@ -350,6 +371,12 @@
             </summary>
             <param name="dateOfBirth">DateOfBirth.</param>
             <returns>Array of finded records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetService.MakeSnapshot">
+            <summary>
+            Make shapshot.
+            </summary>
+            <returns>Snapshot.</returns>
         </member>
         <member name="T:FileCabinetApp.IRecordValidator">
             <summary>
