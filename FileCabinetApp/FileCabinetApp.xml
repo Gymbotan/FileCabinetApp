@@ -204,7 +204,7 @@
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecordCsvWriter">
             <summary>
-            FileCabinetCsvWriter.
+            FileCabinetRecordCsvWriter.
             </summary>
         </member>
         <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.#ctor(System.IO.TextWriter)">
@@ -214,6 +214,23 @@
             <param name="writer">Text writer.</param>
         </member>
         <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.Write(FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Writes records in file.
+            </summary>
+            <param name="record">Record.</param>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetRecordXmlWriter">
+            <summary>
+            FileCabinetRecordXmlWriter.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordXmlWriter.#ctor(System.Xml.XmlWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetRecordXmlWriter"/> class.
+            </summary>
+            <param name="writer">Text writer.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordXmlWriter.Write(FileCabinetApp.FileCabinetRecord)">
             <summary>
             Writes records in file.
             </summary>
@@ -318,9 +335,15 @@
         </member>
         <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.SaveToCsv(System.IO.StreamWriter)">
             <summary>
-            SaveToCsv.
+            Save to csv.
             </summary>
             <param name="sw">Stream writer.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.SaveToXml(System.Xml.XmlWriter)">
+            <summary>
+            Save to xml.
+            </summary>
+            <param name="xw">Xml writer.</param>
         </member>
         <member name="T:FileCabinetApp.IFileCabinetService">
             <summary>

@@ -6,6 +6,7 @@ namespace FileCabinetApp
 {
     using System;
     using System.IO;
+    using System.Xml;
 
     /// <summary>
     /// FileCabinetServiceSnapshot.
@@ -24,7 +25,7 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// SaveToCsv.
+        /// Save to csv.
         /// </summary>
         /// <param name="sw">Stream writer.</param>
         public void SaveToCsv(StreamWriter sw)
@@ -37,6 +38,24 @@ namespace FileCabinetApp
             }
 
             sw.Close();
+            sw.Dispose();
+        }
+
+        /// <summary>
+        /// Save to xml.
+        /// </summary>
+        /// <param name="xw">Xml writer.</param>
+        public void SaveToXml(XmlWriter xw)
+        {
+            FileCabinetRecordXmlWriter xmlWriter = new FileCabinetRecordXmlWriter(xw);
+
+            foreach (var rec in this.records)
+            {
+                xmlWriter.Write(rec);
+            }
+
+            xw.Close();
+            xw.Dispose();
         }
     }
 }

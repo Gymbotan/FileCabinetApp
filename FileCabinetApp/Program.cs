@@ -5,6 +5,7 @@ namespace FileCabinetApp
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Xml;
 
     /// <summary>
     /// Main class with main functionality.
@@ -487,17 +488,19 @@ namespace FileCabinetApp
 
             if (isSuccess && inputs[0].ToUpper() == "CSV")
             {
-                Console.WriteLine(path);
-
                 StreamWriter sw = new StreamWriter(path);
                 FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
                 
-                /*using (sw)
-                {
-                    //sw.WriteLine("Test");
-                    sw.WriteLine("Id,First Name,Last Name,Height,Weight,Gender");
-                }*/
                 snapshot.SaveToCsv(sw);
+                Console.WriteLine($"All records are exported to file {fileName}");
+            }
+
+            if (isSuccess && inputs[0].ToUpper() == "XML")
+            {
+                XmlWriter xw = XmlWriter.Create(path);
+                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+
+                snapshot.SaveToXml(xw);
                 Console.WriteLine($"All records are exported to file {fileName}");
             }
         }
