@@ -156,11 +156,6 @@
             <param name="gender">Gender.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="T:FileCabinetApp.FileCabinetCsvWriter">
-            <summary>
-            FileCabinetCsvWriter.
-            </summary>
-        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             FileCabinetRecord class
@@ -206,6 +201,23 @@
             Updates information about this record.
             </summary>
             <param name="newData">New data for a record.</param>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetRecordCsvWriter">
+            <summary>
+            FileCabinetCsvWriter.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.#ctor(System.IO.TextWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetRecordCsvWriter"/> class.
+            </summary>
+            <param name="writer">Text writer.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.Write(FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Writes records in file.
+            </summary>
+            <param name="record">Record.</param>
         </member>
         <member name="T:FileCabinetApp.FileCabinetService">
             <summary>
@@ -304,10 +316,11 @@
             </summary>
             <param name="records">Existing records.</param>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.SaveToCsv">
+        <member name="M:FileCabinetApp.FileCabinetServiceSnapshot.SaveToCsv(System.IO.StreamWriter)">
             <summary>
             SaveToCsv.
             </summary>
+            <param name="sw">Stream writer.</param>
         </member>
         <member name="T:FileCabinetApp.IFileCabinetService">
             <summary>

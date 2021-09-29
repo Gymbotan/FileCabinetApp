@@ -5,6 +5,7 @@
 namespace FileCabinetApp
 {
     using System;
+    using System.IO;
 
     /// <summary>
     /// FileCabinetServiceSnapshot.
@@ -25,9 +26,17 @@ namespace FileCabinetApp
         /// <summary>
         /// SaveToCsv.
         /// </summary>
-        public void SaveToCsv()
+        /// <param name="sw">Stream writer.</param>
+        public void SaveToCsv(StreamWriter sw)
         {
-            throw new NotSupportedException();
+            FileCabinetRecordCsvWriter csvWriter = new FileCabinetRecordCsvWriter(sw);
+            sw.WriteLine("Id,First Name,Last Name,Height,Weight,Gender");
+            foreach (var rec in this.records)
+            {
+                csvWriter.Write(rec);
+            }
+
+            sw.Close();
         }
     }
 }

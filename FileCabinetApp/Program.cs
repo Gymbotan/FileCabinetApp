@@ -4,6 +4,7 @@ namespace FileCabinetApp
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
 
     /// <summary>
     /// Main class with main functionality.
@@ -414,18 +415,90 @@ namespace FileCabinetApp
         {
             bool isSuccess = true;
             string[] inputs = new string[2];
+            string path = null;
+            string fileName = null;
+            string directoryName = null;
             try
             {
                 inputs = parameters.Split(' ', 2);
             }
             catch
             {
-                Console.WriteLine("You inputed wrong parameters");
+                Console.WriteLine("Export failed: you inputed wrong parameters");
                 isSuccess = false;
             }
-            if (isSuccess && inputs[0] == "csv")
+
+            if (isSuccess)
             {
-                Program.fileCabinetService.MakeSnapshot();
+                try
+                {
+                    path = inputs[1];
+                    fileName = Path.GetFileName(path);
+                }
+                catch
+                {
+                    Console.WriteLine("Export failed: file namу is incorrect.");
+                    isSuccess = false;
+                }
+            }
+
+            if (isSuccess)
+            {
+                try
+                {
+                    directoryName = Path.GetDirectoryName(path);
+                    if (string.IsNullOrWhiteSpace(directoryName))
+                    {
+                        directoryName = "i:\\";
+                        path = directoryName + path;
+                    }
+                    if (!Directory.Exists(directoryName))
+                    {
+                        Console.WriteLine($"Export failed: can't open file {path}");
+                    }
+                }
+                catch
+                {
+                    isSuccess = false;
+                }
+            }
+
+            if (isSuccess && File.Exists(path))
+            {
+                Console.Write($"File is exist - rewrite {path}? [y/n] ");
+                while (true)
+                {
+                    string input = Console.ReadLine();
+                    if (input.ToUpper() == "N")
+                    {
+                        isSuccess = false;
+                        break;
+                    }
+                    else if (input.ToUpper() == "Y")
+                    { 
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Wrong input. Choose again [y/n] ");
+                    }
+                }
+            }
+
+            if (isSuccess && inputs[0].ToUpper() == "CSV")
+            {
+                Console.WriteLine(path);
+
+                StreamWriter sw = new StreamWriter(path);
+                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                
+                /*using (sw)
+                {
+                    //sw.WriteLine("Test");
+                    sw.WriteLine("Id,First Name,Last Name,Height,Weight,Gender");
+                }*/
+                snapshot.SaveToCsv(sw);
+                Console.WriteLine($"All records are exported to file {fileName}");
             }
         }
     }
