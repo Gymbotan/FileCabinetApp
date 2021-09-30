@@ -61,6 +61,5 @@ namespace FileCabinetApp
         {
             return string.Format("{0:00}", dt.Month) + "/" + string.Format("{0:00}", dt.Day) + "/" + dt.Year.ToString();
         }
-
     }
 }

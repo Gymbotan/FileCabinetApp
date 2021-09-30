@@ -161,6 +161,12 @@
             Class FileCabinetFilesystemService.
             </summary>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetFilesystemService.#ctor(FileCabinetApp.IRecordValidator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetFilesystemService"/> class.
+            </summary>
+            <param name="validator">Validator.</param>
+        </member>
         <member name="P:FileCabinetApp.FileCabinetFilesystemService.Validator">
             <summary>
             Gets or sets validator.

@@ -6,12 +6,25 @@ namespace FileCabinetApp
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     /// <summary>
     /// Class FileCabinetFilesystemService.
     /// </summary>
     public class FileCabinetFilesystemService : IFileCabinetService
     {
+        private readonly FileStream fileStream;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileCabinetFilesystemService"/> class.
+        /// </summary>
+        /// <param name="validator">Validator.</param>
+        public FileCabinetFilesystemService(IRecordValidator validator)
+        {
+            this.Validator = validator;
+            this.fileStream = File.Create("cabinet-records.db");
+        }
+
         /// <summary>
         /// Gets or sets validator.
         /// </summary>

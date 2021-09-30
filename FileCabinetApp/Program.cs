@@ -318,6 +318,10 @@ namespace FileCabinetApp
                 case "VALIDATION-RULES":
                     SetValidationRule(parameters[1]);
                     break;
+                case "S":
+                case "STORAGE":
+                    SetServiceType(parameters[1]);
+                    break;
                 default:
                     SetValidationRule("Default");
                     break;
@@ -334,6 +338,23 @@ namespace FileCabinetApp
                 case "CUSTOM":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
                     Program.fileCabinetService = new FileCabinetMemoryService(new CustomValidator());
+                    break;
+                default:
+                    Console.WriteLine($"Using default validation rules.");
+                    break;
+            }
+        }
+
+        private static void SetServiceType(string parameter)
+        {
+            switch (parameter.ToUpper())
+            {
+                case "MEMORY":
+                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    break;
+                case "FILE":
+                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Program.fileCabinetService = new FileCabinetFilesystemService(new DefaultValidator());
                     break;
                 default:
                     Console.WriteLine($"Using default validation rules.");
