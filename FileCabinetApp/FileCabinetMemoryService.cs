@@ -9,9 +9,9 @@ namespace FileCabinetApp
     /// <summary>
     /// Class that realizes all the services of the main class.
     /// </summary>
-    public class FileCabinetService : IFileCabinetService
+    public class FileCabinetMemoryService : IFileCabinetService
     {
-        public FileCabinetService(IRecordValidator validator)
+        public FileCabinetMemoryService(IRecordValidator validator)
         {
             this.Validator = validator;
         }

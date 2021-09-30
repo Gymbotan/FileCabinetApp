@@ -44,7 +44,7 @@ namespace FileCabinetApp
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
-        private static IFileCabinetService fileCabinetService = new FileCabinetService(new DefaultValidator());
+        private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new DefaultValidator());
 
         public static void Main(string[] args)
         {
@@ -333,7 +333,7 @@ namespace FileCabinetApp
                     break;
                 case "CUSTOM":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    Program.fileCabinetService = new FileCabinetService(new CustomValidator());
+                    Program.fileCabinetService = new FileCabinetMemoryService(new CustomValidator());
                     break;
                 default:
                     Console.WriteLine($"Using default validation rules.");
