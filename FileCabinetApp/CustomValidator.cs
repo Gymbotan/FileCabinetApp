@@ -21,7 +21,6 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            Console.WriteLine("Custom validation");
             if (string.IsNullOrWhiteSpace(data.FirstName))
             {
                 throw new ArgumentNullException(data.FirstName);

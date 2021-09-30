@@ -201,7 +201,6 @@ namespace FileCabinetApp
         /// <returns></returns>
         public IReadOnlyCollection<FileCabinetRecord> GetRecords()
         {
-            // TODO: добавьте реализацию метода
             return Array.Empty<FileCabinetRecord>();
         }
 

@@ -30,7 +30,37 @@ namespace FileCabinetApp
         /// <param name="record">Record.</param>
         public void Write(FileCabinetRecord record)
         {
-            throw new NotSupportedException();
+            this.writer.WriteStartElement("record");
+            this.writer.WriteAttributeString("id", record.Id.ToString());
+
+            this.writer.WriteStartElement("name", string.Empty);
+            this.writer.WriteAttributeString("first", record.FirstName);
+            this.writer.WriteAttributeString("last", record.LastName);
+            this.writer.WriteEndElement();
+
+            this.writer.WriteStartElement("dateOfBirth");
+            this.writer.WriteString(DateAsString(record.DateOfBirth));
+            this.writer.WriteEndElement();
+
+            this.writer.WriteStartElement("height");
+            this.writer.WriteString(record.Height.ToString());
+            this.writer.WriteEndElement();
+
+            this.writer.WriteStartElement("weight");
+            this.writer.WriteString(record.Weight.ToString());
+            this.writer.WriteEndElement();
+
+            this.writer.WriteStartElement("gender");
+            this.writer.WriteString(record.Gender.ToString());
+            this.writer.WriteEndElement();
+
+            this.writer.WriteEndElement();
         }
+
+        private static string DateAsString(DateTime dt)
+        {
+            return string.Format("{0:00}", dt.Month) + "/" + string.Format("{0:00}", dt.Day) + "/" + dt.Year.ToString();
+        }
+
     }
 }

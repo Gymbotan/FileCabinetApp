@@ -497,7 +497,10 @@ namespace FileCabinetApp
 
             if (isSuccess && inputs[0].ToUpper() == "XML")
             {
-                XmlWriter xw = XmlWriter.Create(path);
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.IndentChars = "\t"; 
+                XmlWriter xw = XmlWriter.Create(path, settings);
                 FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
 
                 snapshot.SaveToXml(xw);

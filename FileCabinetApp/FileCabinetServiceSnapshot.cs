@@ -48,12 +48,16 @@ namespace FileCabinetApp
         public void SaveToXml(XmlWriter xw)
         {
             FileCabinetRecordXmlWriter xmlWriter = new FileCabinetRecordXmlWriter(xw);
+            xw.WriteStartDocument();
+            xw.WriteStartElement("records");
 
             foreach (var rec in this.records)
             {
                 xmlWriter.Write(rec);
             }
 
+            xw.WriteEndElement();
+            xw.WriteEndDocument();
             xw.Close();
             xw.Dispose();
         }
