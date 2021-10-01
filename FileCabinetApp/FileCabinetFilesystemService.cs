@@ -7,6 +7,7 @@ namespace FileCabinetApp
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text;
 
     /// <summary>
     /// Class FileCabinetFilesystemService.
@@ -14,6 +15,7 @@ namespace FileCabinetApp
     public class FileCabinetFilesystemService : IFileCabinetService
     {
         private readonly FileStream fileStream;
+        private int size;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCabinetFilesystemService"/> class.
@@ -22,7 +24,9 @@ namespace FileCabinetApp
         public FileCabinetFilesystemService(IRecordValidator validator)
         {
             this.Validator = validator;
-            this.fileStream = File.Create("cabinet-records.db");
+            string path = "cabinet-records.db";
+            this.fileStream = new FileStream(path, FileMode.OpenOrCreate);
+            this.size = (int)(this.fileStream.Length / 270);
         }
 
         /// <summary>
@@ -37,7 +41,27 @@ namespace FileCabinetApp
         /// <returns>Int.</returns>
         public int CreateRecord(DataForRecord data)
         {
-            throw new NotImplementedException();
+            this.fileStream.Write(new byte[2]);
+
+            this.fileStream.Write(BitConverter.GetBytes(++this.size));
+
+            byte[] ar = new UTF8Encoding(true).GetBytes(data.FirstName);
+            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
+            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
+
+            ar = new UTF8Encoding(true).GetBytes(data.LastName);
+            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
+            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
+
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Year));
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Month));
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Day));
+
+            this.fileStream.Write(BitConverter.GetBytes(data.Height));
+
+            this.fileStream.Write(BitConverter.GetBytes(Convert.ToDouble(data.Weight)));
+            this.fileStream.Write(BitConverter.GetBytes(data.Gender));
+            return this.size;
         }
 
         /// <summary>
