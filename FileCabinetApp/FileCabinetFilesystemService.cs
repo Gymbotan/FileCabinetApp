@@ -110,7 +110,7 @@ namespace FileCabinetApp
         /// <returns>Int.</returns>
         public int GetStat()
         {
-            throw new NotImplementedException();
+            return this.size;
         }
 
         /// <summary>
