@@ -41,6 +41,9 @@ namespace FileCabinetApp
         /// <returns>Int.</returns>
         public int CreateRecord(DataForRecord data)
         {
+            this.fileStream.Seek(0, SeekOrigin.End);
+            this.WriteRecordIntoFile(++this.size, data);
+            /*
             this.fileStream.Write(new byte[2]);
 
             this.fileStream.Write(BitConverter.GetBytes(++this.size));
@@ -60,7 +63,7 @@ namespace FileCabinetApp
             this.fileStream.Write(BitConverter.GetBytes(data.Height));
 
             this.fileStream.Write(BitConverter.GetBytes(Convert.ToDouble(data.Weight)));
-            this.fileStream.Write(BitConverter.GetBytes(data.Gender));
+            this.fileStream.Write(BitConverter.GetBytes(data.Gender)); */
             return this.size;
         }
 
@@ -71,7 +74,8 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void EditRecord(int id, DataForRecord data)
         {
-            throw new NotImplementedException();
+            this.fileStream.Seek(270 * (id - 1), SeekOrigin.Begin);
+            this.WriteRecordIntoFile(id, data);
         }
 
         /// <summary>
@@ -120,7 +124,14 @@ namespace FileCabinetApp
         /// <returns>Bool.</returns>
         public bool IsRecordExist(int id)
         {
-            throw new NotImplementedException();
+            if (id <= this.size)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -185,6 +196,30 @@ namespace FileCabinetApp
         public FileCabinetServiceSnapshot MakeSnapshot()
         {
             throw new NotImplementedException();
+        }
+
+        private void WriteRecordIntoFile(int id, DataForRecord data)
+        {
+            this.fileStream.Write(new byte[2]);
+
+            this.fileStream.Write(BitConverter.GetBytes(id));
+
+            byte[] ar = new UTF8Encoding(true).GetBytes(data.FirstName);
+            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
+            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
+
+            ar = new UTF8Encoding(true).GetBytes(data.LastName);
+            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
+            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
+
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Year));
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Month));
+            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Day));
+
+            this.fileStream.Write(BitConverter.GetBytes(data.Height));
+
+            this.fileStream.Write(BitConverter.GetBytes(Convert.ToDouble(data.Weight)));
+            this.fileStream.Write(BitConverter.GetBytes(data.Gender));
         }
     }
 }
