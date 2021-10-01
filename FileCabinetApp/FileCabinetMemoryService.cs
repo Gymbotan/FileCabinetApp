@@ -213,6 +213,10 @@ namespace FileCabinetApp
             return this.list.Count;
         }
 
+        /// <summary>
+        /// Creates snapshot.
+        /// </summary>
+        /// <returns>Shapshot.</returns>
         public FileCabinetServiceSnapshot MakeSnapshot()
         {
             return new FileCabinetServiceSnapshot(this.list.ToArray());

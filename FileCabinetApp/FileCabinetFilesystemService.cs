@@ -132,6 +132,53 @@ namespace FileCabinetApp
         }
 
         /// <summary>
+        /// Returns all the records in a file.
+        /// </summary>
+        /// <returns>Records.</returns>
+        public IReadOnlyCollection<FileCabinetRecord> GetRecords()
+        {
+            List<FileCabinetRecord> list = new List<FileCabinetRecord>();
+            this.fileStream.Seek(0, SeekOrigin.Begin);
+            byte[] byte2 = new byte[2];
+            byte[] byte4 = new byte[4];
+            byte[] byte8 = new byte[8];
+            byte[] byte120 = new byte[120];
+            while (this.fileStream.Position < this.fileStream.Length)
+            {
+                this.fileStream.Seek(2, SeekOrigin.Current);
+                this.fileStream.Read(byte4, 0, 4);
+                int id = BitConverter.ToInt32(byte4);
+
+                this.fileStream.Read(byte120, 0, 120);
+                string firstName = Encoding.Default.GetString(byte120);
+
+                this.fileStream.Read(byte120, 0, 120);
+                string lastName = Encoding.Default.GetString(byte120);
+
+                this.fileStream.Read(byte4, 0, 4);
+                int year = BitConverter.ToInt32(byte4);
+                this.fileStream.Read(byte4, 0, 4);
+                int month = BitConverter.ToInt32(byte4);
+                this.fileStream.Read(byte4, 0, 4);
+                int day = BitConverter.ToInt32(byte4);
+                DateTime dateOfBirth = new DateTime(year, month, day);
+
+                this.fileStream.Read(byte2, 0, 4);
+                short height = BitConverter.ToInt16(byte2);
+
+                this.fileStream.Read(byte8, 0, 8);
+                decimal weight = Convert.ToDecimal(BitConverter.ToDouble(byte8));
+
+                this.fileStream.Read(byte2, 0, 2);
+                char gender = BitConverter.ToChar(byte2);
+
+                list.Add(new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
+            }
+
+            return list;
+        }
+
+        /// <summary>
         /// MakeSnapshot.
         /// </summary>
         /// <returns>FileCabinetServiceSnapshot.</returns>

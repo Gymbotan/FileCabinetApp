@@ -70,6 +70,12 @@ namespace FileCabinetApp
         public IReadOnlyCollection<FileCabinetRecord> FindByDateOfBirth(string dateOfBirth);
 
         /// <summary>
+        /// Returns all the records.
+        /// </summary>
+        /// <returns>Records.</returns>
+        public IReadOnlyCollection<FileCabinetRecord> GetRecords();
+
+        /// <summary>
         /// Make shapshot.
         /// </summary>
         /// <returns>Snapshot.</returns>

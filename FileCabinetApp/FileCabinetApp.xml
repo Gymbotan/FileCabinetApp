@@ -225,6 +225,12 @@
             ListRecords.
             </summary>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetFilesystemService.GetRecords">
+            <summary>
+            Returns all the records in a file.
+            </summary>
+            <returns>Records.</returns>
+        </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.MakeSnapshot">
             <summary>
             MakeSnapshot.
@@ -316,6 +322,12 @@
             Returns amount of records
             </summary>
             <returns>Amount of records</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetMemoryService.MakeSnapshot">
+            <summary>
+            Creates snapshot.
+            </summary>
+            <returns>Shapshot.</returns>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -482,6 +494,12 @@
             </summary>
             <param name="dateOfBirth">DateOfBirth.</param>
             <returns>Array of finded records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetService.GetRecords">
+            <summary>
+            Returns all the records.
+            </summary>
+            <returns>Records.</returns>
         </member>
         <member name="M:FileCabinetApp.IFileCabinetService.MakeSnapshot">
             <summary>
