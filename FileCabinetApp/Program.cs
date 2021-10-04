@@ -49,7 +49,6 @@ namespace FileCabinetApp
         public static void Main(string[] args)
         {
             Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
-
             if (args.Length > 0)
             {
                 string[] parameters = ParseArgs(args);
@@ -276,6 +275,7 @@ namespace FileCabinetApp
         private static void Exit(string parameters)
         {
             Console.WriteLine("Exiting an application...");
+            fileCabinetService.Exit();
             isRunning = false;
         }
 
@@ -312,6 +312,7 @@ namespace FileCabinetApp
 
         private static void SetSettings(string[] parameters)
         {
+            Console.WriteLine($"parameter = {parameters[0]}");
             switch (parameters[0].ToUpper())
             {
                 case "V":
@@ -350,10 +351,10 @@ namespace FileCabinetApp
             switch (parameter.ToUpper())
             {
                 case "MEMORY":
-                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Console.WriteLine($"Using {parameter.ToLower()} service type.");
                     break;
                 case "FILE":
-                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Console.WriteLine($"Using {parameter.ToLower()} service type.");
                     Program.fileCabinetService = new FileCabinetFilesystemService(new DefaultValidator());
                     break;
                 default:

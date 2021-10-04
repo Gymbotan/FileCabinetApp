@@ -221,5 +221,12 @@ namespace FileCabinetApp
         {
             return new FileCabinetServiceSnapshot(this.list.ToArray());
         }
+
+        /// <summary>
+        /// Exit.
+        /// </summary>
+        public void Exit()
+        {
+        }
     }
 }

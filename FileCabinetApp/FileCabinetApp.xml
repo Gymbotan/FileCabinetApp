@@ -237,6 +237,11 @@
             </summary>
             <returns>FileCabinetServiceSnapshot.</returns>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetFilesystemService.Exit">
+            <summary>
+            Exit.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetMemoryService">
             <summary>
             Class that realizes all the services of the main class.
@@ -328,6 +333,11 @@
             Creates snapshot.
             </summary>
             <returns>Shapshot.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetMemoryService.Exit">
+            <summary>
+            Exit.
+            </summary>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -506,6 +516,11 @@
             Make shapshot.
             </summary>
             <returns>Snapshot.</returns>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetService.Exit">
+            <summary>
+            Exit.
+            </summary>
         </member>
         <member name="T:FileCabinetApp.IRecordValidator">
             <summary>

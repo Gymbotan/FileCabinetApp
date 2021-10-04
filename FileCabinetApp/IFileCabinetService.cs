@@ -80,5 +80,10 @@ namespace FileCabinetApp
         /// </summary>
         /// <returns>Snapshot.</returns>
         public FileCabinetServiceSnapshot MakeSnapshot();
+
+        /// <summary>
+        /// Exit.
+        /// </summary>
+        public void Exit();
     }
 }

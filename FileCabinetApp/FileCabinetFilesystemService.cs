@@ -6,7 +6,9 @@ namespace FileCabinetApp
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Text;
 
     /// <summary>
@@ -43,27 +45,6 @@ namespace FileCabinetApp
         {
             this.fileStream.Seek(0, SeekOrigin.End);
             this.WriteRecordIntoFile(++this.size, data);
-            /*
-            this.fileStream.Write(new byte[2]);
-
-            this.fileStream.Write(BitConverter.GetBytes(++this.size));
-
-            byte[] ar = new UTF8Encoding(true).GetBytes(data.FirstName);
-            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
-            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
-
-            ar = new UTF8Encoding(true).GetBytes(data.LastName);
-            this.fileStream.Write(ar, 0, Math.Min(ar.Length, 120));
-            this.fileStream.Write(new byte[120 - Math.Min(ar.Length, 120)]);
-
-            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Year));
-            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Month));
-            this.fileStream.Write(BitConverter.GetBytes(data.DateOfBirth.Day));
-
-            this.fileStream.Write(BitConverter.GetBytes(data.Height));
-
-            this.fileStream.Write(BitConverter.GetBytes(Convert.ToDouble(data.Weight)));
-            this.fileStream.Write(BitConverter.GetBytes(data.Gender)); */
             return this.size;
         }
 
@@ -85,7 +66,17 @@ namespace FileCabinetApp
         /// <returns>Collection.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByDateOfBirth(string dateOfBirth)
         {
-            throw new NotImplementedException();
+            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
+            var result = from rec in list
+                         where GetDateAsString(rec.DateOfBirth).ToUpper() == dateOfBirth.ToUpper()
+                         select rec;
+            List<FileCabinetRecord> resultList = new List<FileCabinetRecord>();
+            foreach (var res in result)
+            {
+                resultList.Add(res);
+            }
+
+            return resultList;
         }
 
         /// <summary>
@@ -95,7 +86,17 @@ namespace FileCabinetApp
         /// <returns>Collection.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByFirstName(string firstName)
         {
-            throw new NotImplementedException();
+            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
+            var result = from rec in list
+                         where rec.FirstName.ToUpper() == firstName.ToUpper()
+                         select rec;
+            List<FileCabinetRecord> resultList = new List<FileCabinetRecord>();
+            foreach (var res in result)
+            {
+                resultList.Add(res);
+            }
+
+            return resultList;
         }
 
         /// <summary>
@@ -105,7 +106,17 @@ namespace FileCabinetApp
         /// <returns>Collection.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByLastName(string lastName)
         {
-            throw new NotImplementedException();
+            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
+            var result = from rec in list
+                         where rec.LastName.ToUpper() == lastName.ToUpper()
+                         select rec;
+            List<FileCabinetRecord> resultList = new List<FileCabinetRecord>();
+            foreach (var res in result)
+            {
+                resultList.Add(res);
+            }
+
+            return resultList;
         }
 
         /// <summary>
@@ -161,10 +172,30 @@ namespace FileCabinetApp
                 int id = BitConverter.ToInt32(byte4);
 
                 this.fileStream.Read(byte120, 0, 120);
-                string firstName = Encoding.Default.GetString(byte120);
+                char[] charArray = Encoding.Default.GetChars(byte120);
+                StringBuilder sb = new StringBuilder();
+                foreach (char ch in charArray)
+                {
+                    if (char.IsLetter(ch))
+                    {
+                        sb.Append(ch);
+                    }
+                }
+
+                string firstName = sb.ToString();
 
                 this.fileStream.Read(byte120, 0, 120);
-                string lastName = Encoding.Default.GetString(byte120);
+                charArray = Encoding.Default.GetChars(byte120);
+                StringBuilder sb2 = new StringBuilder();
+                foreach (char ch in charArray)
+                {
+                    if (char.IsLetter(ch))
+                    {
+                        sb2.Append(ch);
+                    }
+                }
+
+                string lastName = sb2.ToString();
 
                 this.fileStream.Read(byte4, 0, 4);
                 int year = BitConverter.ToInt32(byte4);
@@ -174,7 +205,7 @@ namespace FileCabinetApp
                 int day = BitConverter.ToInt32(byte4);
                 DateTime dateOfBirth = new DateTime(year, month, day);
 
-                this.fileStream.Read(byte2, 0, 4);
+                this.fileStream.Read(byte2, 0, 2);
                 short height = BitConverter.ToInt16(byte2);
 
                 this.fileStream.Read(byte8, 0, 8);
@@ -196,6 +227,20 @@ namespace FileCabinetApp
         public FileCabinetServiceSnapshot MakeSnapshot()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Exit.
+        /// </summary>
+        public void Exit()
+        {
+            this.fileStream.Close();
+            this.fileStream.Dispose();
+        }
+
+        private static string GetDateAsString(DateTime date)
+        {
+            return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();
         }
 
         private void WriteRecordIntoFile(int id, DataForRecord data)
