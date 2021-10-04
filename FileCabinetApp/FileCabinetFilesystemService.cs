@@ -150,7 +150,11 @@ namespace FileCabinetApp
         /// </summary>
         public void ListRecords()
         {
-            throw new NotImplementedException();
+            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
+            foreach (var res in list)
+            {
+                res.ShowRecord();
+            }
         }
 
         /// <summary>

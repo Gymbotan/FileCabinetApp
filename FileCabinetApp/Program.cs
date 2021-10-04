@@ -61,7 +61,6 @@ namespace FileCabinetApp
             
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
-            //fileCabinetService.validator = fileCabinetService.CreateValidator();
             
             do
             {
@@ -285,13 +284,13 @@ namespace FileCabinetApp
             {
                 if (args[0].StartsWith("--"))
                 {
-                    Console.WriteLine("Work with --");
+                    //Console.WriteLine("Work with --");
                     args[0] = args[0].Replace("--", "");
                     string[] parameters = args[0].Split('=', 2);
-                    foreach (string par in parameters)
+                    /*foreach (string par in parameters)
                     {
                         Console.WriteLine(par);
-                    }
+                    }*/
                     return parameters;
                 }
                 else if (args[0].StartsWith('-'))
