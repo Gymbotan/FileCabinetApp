@@ -344,6 +344,11 @@
             FileCabinetRecord class
             </summary>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetRecord.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:FileCabinetApp.FileCabinetRecord.#ctor(System.Int32,System.String,System.String,System.DateTime,System.Int16,System.Decimal,System.Char)">
             <summary>
             Constructor.
@@ -575,6 +580,55 @@
             <param name="gender">Gender.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
+        <member name="T:FileCabinetApp.ListOfXmlRecord">
+            <summary>
+            Class ListOfXmlRecord.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ListOfXmlRecord.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ListOfXmlRecord"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ListOfXmlRecord.#ctor(System.Collections.Generic.List{FileCabinetApp.FileCabinetRecord})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ListOfXmlRecord"/> class.
+            </summary>
+            <param name="list">List of FileCabinetRecord.</param>
+        </member>
+        <member name="M:FileCabinetApp.ListOfXmlRecord.#ctor(System.Collections.Generic.List{FileCabinetApp.XmlRecord})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ListOfXmlRecord"/> class.
+            </summary>
+            <param name="list">List of XmlRecord.</param>
+        </member>
+        <member name="T:FileCabinetApp.Name">
+            <summary>
+            Class Name.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.Name.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.Name"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.Name.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.Name"/> class.
+            </summary>
+            <param name="first">FirstName.</param>
+            <param name="last">LastName.</param>
+        </member>
+        <member name="P:FileCabinetApp.Name.FirstName">
+            <summary>
+            Gets or sets firstName.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.Name.LastName">
+            <summary>
+            Gets or sets lastName.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.Program">
             <summary>
             Main class with main functionality.
@@ -633,6 +687,58 @@
             Exit.
             </summary>
             <param name="parameters">Parameters.</param>
+        </member>
+        <member name="T:FileCabinetApp.XmlRecord">
+            <summary>
+            Class XmlRecord.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.XmlRecord.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.XmlRecord"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.XmlRecord.#ctor(FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.XmlRecord"/> class.
+            </summary>
+            <param name="record">record.</param>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.Id">
+            <summary>
+            Gets or sets id.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.Name">
+            <summary>
+            Gets or sets name.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.DateOfBirth">
+            <summary>
+            Gets or sets dateOfBirth.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.Height">
+            <summary>
+            Gets or sets height.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.Weight">
+            <summary>
+            Gets or sets weight.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.XmlRecord.Gender">
+            <summary>
+            Gets or sets gender.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.XmlRecord.ToFileCabinetRecord">
+            <summary>
+            Transforms this class into FileCabinetRecord.
+            </summary>
+            <returns>new FileCabinetRecord.</returns>
         </member>
     </members>
 </doc>

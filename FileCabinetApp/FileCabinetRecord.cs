@@ -6,13 +6,22 @@ namespace FileCabinetApp
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// FileCabinetRecord class
     /// </summary>
+    //[Serializable]
+    [XmlRoot("records")]
+    [XmlType(TypeName = "record")]
     public class FileCabinetRecord
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public FileCabinetRecord()
+        { }
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -50,10 +59,11 @@ namespace FileCabinetApp
             Gender = data.Gender;
         }
 
+        [XmlAttribute]
         public int Id { get; set; }
 
         public string FirstName { get; set; }
-
+        
         public string LastName { get; set; }
 
         public DateTime DateOfBirth { get; set; }

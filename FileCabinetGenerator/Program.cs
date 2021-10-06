@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 using FileCabinetApp;
 
 namespace FileCabinetGenerator
 {
-    public class Program
+    public static class Program
     {
-        public static string[] firstNames = { "Andrew", "John", "James", "Nick", "Fil", "Robert", "William", "Anastasia", "Holly", "Kate", "Lora", "Mila", "Nadin", "Olga", "Wanda", "Rita", "Betty", "Sam" };
-        public static string[] lastNames = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Thompson", "Clark", "Lee" };
-        public static char[] genders = { 'm', 'f', 'a' };
+        public static readonly string[] firstNames = { "Andrew", "John", "James", "Nick", "Fil", "Robert", "William", "Anastasia", "Holly", "Kate", "Lora", "Mila", "Nadin", "Olga", "Wanda", "Rita", "Betty", "Sam" };
+        public static readonly string[] lastNames = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Thompson", "Clark", "Lee" };
+        public static readonly char[] genders = { 'm', 'f', 'a' };
 
         static void Main(string[] args)
         {
@@ -49,11 +52,95 @@ namespace FileCabinetGenerator
                     }
                 }
             }
-            
-            for (int i = 1; i < 20; i++)
+
+            Console.WriteLine($"Output-type = {outputType}, Output path = {path}, amount of records = {amountOfRecords}, start id = {startId}");
+
+            /*
+            List<FileCabinetRecord> recs = new List<FileCabinetRecord>();
+            for (int i = 1; i <= 5; i++)
+            {
+                recs.Add(RandomRecord(i));
+            }
+
+            ListOfXmlRecord list = new ListOfXmlRecord(recs);
+
+            XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
+            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.Create))
+            {
+                formatter.Serialize(fs, list);
+            }
+            */
+            List<XmlRecord> list = new List<XmlRecord>();
+            XmlRecord[] recs = new XmlRecord[5];
+            for (int i = 1; i <= 5; i++)
+            {
+                list.Add(new XmlRecord(RandomRecord(i)));
+            }
+
+            /*for (int i = 1; i <= 5; i++)
+            {
+                recs[i-1] = new xmlRecord(RandomRecord(i));
+            }*/
+            ListOfXmlRecord list2 = new ListOfXmlRecord(list);
+
+            XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
+            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.Create))
+            {
+                formatter.Serialize(fs, list2);
+            }
+
+            Console.WriteLine();
+            /*
+            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.OpenOrCreate))
+            {
+                xmlRecord[] records = (xmlRecord[])formatter.Deserialize(fs);
+
+                foreach (xmlRecord rec in records)
+                {
+                    rec.ToFileCabinetRecord().ShowRecord();
+                }
+            }*/
+
+            Console.WriteLine();
+
+            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.OpenOrCreate))
+            {
+                ListOfXmlRecord records = (ListOfXmlRecord)formatter.Deserialize(fs);
+
+                foreach (XmlRecord rec in records.List)
+                {
+                    rec.ToFileCabinetRecord().ShowRecord();
+                }
+            }
+
+            using (FileStream fs = new FileStream("i:\\1.xml", FileMode.OpenOrCreate))
+            {
+                ListOfXmlRecord records = (ListOfXmlRecord)formatter.Deserialize(fs);
+
+                foreach (XmlRecord rec in records.List)
+                {
+                    rec.ToFileCabinetRecord().ShowRecord();
+                }
+            }
+
+            /*for (int i = 1; i < 120; i++)
             {
                 RandomRecord(i).ShowRecord();
             }
+
+            if (outputType == "csv")
+            {
+                StreamWriter sw = new StreamWriter(path);
+                FileCabinetRecordCsvWriter writer = new FileCabinetRecordCsvWriter(sw);
+                sw.WriteLine("Id,First Name,Last Name,Height,Weight,Gender");
+                for (int i = 0; i < amountOfRecords; i++)
+                {
+                    writer.Write(RandomRecord(startId + i));
+                }
+
+                sw.Close();
+                sw.Dispose();
+            }*/
         }
 
         private static string[] ParseArgs(string[] args)
@@ -93,8 +180,8 @@ namespace FileCabinetGenerator
         private static FileCabinetRecord RandomRecord(int id)
         {
             Random rand = new Random();
-            string firstName = firstNames[rand.Next(firstNames.Length)];
-            string lastName = lastNames[rand.Next(firstNames.Length)];
+            string firstName = firstNames[rand.Next(firstNames.Length - 1)];
+            string lastName = lastNames[rand.Next(firstNames.Length - 1)];
             DateTime dateOfBirth = new DateTime(1900, 1, 1);
             do
             {
