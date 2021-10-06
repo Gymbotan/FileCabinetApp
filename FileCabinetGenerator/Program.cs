@@ -16,12 +16,7 @@ namespace FileCabinetGenerator
         static void Main(string[] args)
         {
             string[] parameters = ParseArgs(args);
-            Console.WriteLine("parameters in main:");
-            foreach (string par in parameters)
-            {
-                Console.WriteLine(par);
-            }
-
+            
             string outputType = "csv";
             string path = "basic.csv";
             int amountOfRecords = 1;
@@ -53,82 +48,7 @@ namespace FileCabinetGenerator
                 }
             }
 
-            Console.WriteLine($"Output-type = {outputType}, Output path = {path}, amount of records = {amountOfRecords}, start id = {startId}");
-
-            /*
-            List<FileCabinetRecord> recs = new List<FileCabinetRecord>();
-            for (int i = 1; i <= 5; i++)
-            {
-                recs.Add(RandomRecord(i));
-            }
-
-            ListOfXmlRecord list = new ListOfXmlRecord(recs);
-
-            XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
-            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.Create))
-            {
-                formatter.Serialize(fs, list);
-            }
-            */
-            List<XmlRecord> list = new List<XmlRecord>();
-            XmlRecord[] recs = new XmlRecord[5];
-            for (int i = 1; i <= 5; i++)
-            {
-                list.Add(new XmlRecord(RandomRecord(i)));
-            }
-
-            /*for (int i = 1; i <= 5; i++)
-            {
-                recs[i-1] = new xmlRecord(RandomRecord(i));
-            }*/
-            ListOfXmlRecord list2 = new ListOfXmlRecord(list);
-
-            XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
-            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.Create))
-            {
-                formatter.Serialize(fs, list2);
-            }
-
-            Console.WriteLine();
-            /*
-            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.OpenOrCreate))
-            {
-                xmlRecord[] records = (xmlRecord[])formatter.Deserialize(fs);
-
-                foreach (xmlRecord rec in records)
-                {
-                    rec.ToFileCabinetRecord().ShowRecord();
-                }
-            }*/
-
-            Console.WriteLine();
-
-            using (FileStream fs = new FileStream("i:\\2.xml", FileMode.OpenOrCreate))
-            {
-                ListOfXmlRecord records = (ListOfXmlRecord)formatter.Deserialize(fs);
-
-                foreach (XmlRecord rec in records.List)
-                {
-                    rec.ToFileCabinetRecord().ShowRecord();
-                }
-            }
-
-            using (FileStream fs = new FileStream("i:\\1.xml", FileMode.OpenOrCreate))
-            {
-                ListOfXmlRecord records = (ListOfXmlRecord)formatter.Deserialize(fs);
-
-                foreach (XmlRecord rec in records.List)
-                {
-                    rec.ToFileCabinetRecord().ShowRecord();
-                }
-            }
-
-            /*for (int i = 1; i < 120; i++)
-            {
-                RandomRecord(i).ShowRecord();
-            }
-
-            if (outputType == "csv")
+            if (outputType.ToLower() == "csv")
             {
                 StreamWriter sw = new StreamWriter(path);
                 FileCabinetRecordCsvWriter writer = new FileCabinetRecordCsvWriter(sw);
@@ -140,7 +60,28 @@ namespace FileCabinetGenerator
 
                 sw.Close();
                 sw.Dispose();
-            }*/
+
+                Console.WriteLine($"{amountOfRecords} records were written to {path}.");
+            }
+
+            if (outputType.ToLower() == "xml")
+            {
+                List<FileCabinetRecord> records = new List<FileCabinetRecord>();
+                for (int i = 0; i < amountOfRecords; i++)
+                {
+                    records.Add(RandomRecord(startId + i));
+                }
+                Console.WriteLine("test");
+                ListOfXmlRecord xmlList = new ListOfXmlRecord(records);
+
+                XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
+                using (FileStream fs = new FileStream(path, FileMode.Create))
+                {
+                    formatter.Serialize(fs, xmlList);
+                }
+
+                Console.WriteLine($"{amountOfRecords} records were written to {path}.");
+            }
         }
 
         private static string[] ParseArgs(string[] args)
