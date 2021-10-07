@@ -45,6 +45,9 @@ namespace FileCabinetApp
             this.List = list;
         }
 
+        /// <summary>
+        /// Gets or sets list of xml records.
+        /// </summary>
         [XmlElement("record")]
         public List<XmlRecord> List { get; set; }
     }

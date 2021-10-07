@@ -30,7 +30,12 @@ namespace FileCabinetApp
         /// <param name="record">Record.</param>
         public void Write(FileCabinetRecord record)
         {
-            this.writer.WriteLine($"{record.Id},{record.FirstName},{record.LastName},{record.Height},{record.Weight},{record.Gender}");
+            this.writer.WriteLine($"{record.Id},{record.FirstName},{record.LastName},{DateAsString(record.DateOfBirth)},{record.Height},{record.Weight},{record.Gender}");
+        }
+
+        private static string DateAsString(DateTime dt)
+        {
+            return string.Format("{0:00}", dt.Month) + "/" + string.Format("{0:00}", dt.Day) + "/" + dt.Year.ToString();
         }
     }
 }

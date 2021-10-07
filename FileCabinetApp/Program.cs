@@ -28,6 +28,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("list", List),
             new Tuple<string, Action<string>>("edit", Edit),
             new Tuple<string, Action<string>>("export", Export),
+            new Tuple<string, Action<string>>("import", Import),
             new Tuple<string, Action<string>>("find", Find),
             new Tuple<string, Action<string>>("exit", Exit),
         };
@@ -40,6 +41,7 @@ namespace FileCabinetApp
             new string[] { "list", "shows existing records", "The 'list' command shows existing records." },
             new string[] { "edit", "edits an existing record", "The 'edit' command edits an existing record." },
             new string[] { "export", "exports existing records into a file", "The 'export' command exports existing records into a file." },
+            new string[] { "import", "imports records from an existing file", "The 'export' command imports records from an existing file." },
             new string[] { "find", "finds existing records", "The 'find' command finds existing records." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
@@ -284,13 +286,8 @@ namespace FileCabinetApp
             {
                 if (args[0].StartsWith("--"))
                 {
-                    //Console.WriteLine("Work with --");
                     args[0] = args[0].Replace("--", "");
                     string[] parameters = args[0].Split('=', 2);
-                    /*foreach (string par in parameters)
-                    {
-                        Console.WriteLine(par);
-                    }*/
                     return parameters;
                 }
                 else if (args[0].StartsWith('-'))
@@ -527,6 +524,106 @@ namespace FileCabinetApp
                 snapshot.SaveToXml(xw);
                 Console.WriteLine($"All records are exported to file {fileName}");
             }
+        }
+
+        private static void Import(string parameters)
+        {
+            bool isSuccess = true;
+            string[] inputs = new string[2];
+            string path = null;
+            string fileName = null;
+            string directoryName = null;
+            try
+            {
+                inputs = parameters.Split(' ', 2);
+            }
+            catch
+            {
+                Console.WriteLine("Import failed: you inputed wrong parameters");
+                isSuccess = false;
+            }
+
+            if (isSuccess)
+            {
+                try
+                {
+                    path = inputs[1];
+                    fileName = Path.GetFileName(path);
+                }
+                catch
+                {
+                    Console.WriteLine("Import failed: file namу is incorrect.");
+                    isSuccess = false;
+                }
+            }
+
+            if (isSuccess)
+            {
+                try
+                {
+                    directoryName = Path.GetDirectoryName(path);
+                    if (string.IsNullOrWhiteSpace(directoryName))
+                    {
+                        directoryName = "i:\\";
+                        path = directoryName + path;
+                    }
+                    if (!Directory.Exists(directoryName))
+                    {
+                        Console.WriteLine($"Import failed: can't open file {path}");
+                    }
+                }
+                catch
+                {
+                    isSuccess = false;
+                }
+            }
+            /*
+            if (isSuccess && File.Exists(path))
+            {
+                Console.Write($"File is exist - rewrite {path}? [y/n] ");
+                while (true)
+                {
+                    string input = Console.ReadLine();
+                    if (input.ToUpper() == "N")
+                    {
+                        isSuccess = false;
+                        break;
+                    }
+                    else if (input.ToUpper() == "Y")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Wrong input. Choose again [y/n] ");
+                    }
+                }
+            }*/
+
+            if (isSuccess && inputs[0].ToUpper() == "CSV")
+            {
+                FileStream fs = new FileStream(path, FileMode.Open);
+                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+
+                snapshot.LoadFromCsv(fs);
+                Console.WriteLine($"All records are imported from file {fileName}");
+
+                fileCabinetService.Restore(snapshot);
+                fs.Close();
+                fs.Dispose();
+            }
+            /*
+            if (isSuccess && inputs[0].ToUpper() == "XML")
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.IndentChars = "\t";
+                XmlWriter xw = XmlWriter.Create(path, settings);
+                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+
+                snapshot.SaveToXml(xw);
+                Console.WriteLine($"All records are exported to file {fileName}");
+            }*/
         }
     }
 }

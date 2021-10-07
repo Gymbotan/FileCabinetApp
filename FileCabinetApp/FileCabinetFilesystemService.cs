@@ -242,6 +242,15 @@ namespace FileCabinetApp
             this.fileStream.Dispose();
         }
 
+        /// <summary>
+        /// Restores state of FileCabinetService from snapshot.
+        /// </summary>
+        /// <param name="snapshot">Snapshot.</param>
+        public void Restore(FileCabinetServiceSnapshot snapshot)
+        {
+            throw new NotImplementedException();
+        }
+
         private static string GetDateAsString(DateTime date)
         {
             return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();

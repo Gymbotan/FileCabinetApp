@@ -228,5 +228,27 @@ namespace FileCabinetApp
         public void Exit()
         {
         }
+
+        /// <summary>
+        /// Restores state of FileCabinetService from snapshot.
+        /// </summary>
+        /// <param name="snapshot">Snapshot.</param>
+        public void Restore(FileCabinetServiceSnapshot snapshot)
+        {
+            this.list.Clear();
+            this.firstNameDictionary.Clear();
+            this.lastNameDictionary.Clear();
+            this.dateOfBirthDictionary.Clear();
+
+            foreach (FileCabinetRecord record in snapshot.GetRecords())
+            {
+                this.list.Add(record);
+
+                this.AddToDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), record);
+                this.AddToDictionary(this.lastNameDictionary, record.LastName.ToUpper(), record);
+                string dateAsString = GetDateAsString(record.DateOfBirth);
+                this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, record);
+            }
+        }
     }
 }

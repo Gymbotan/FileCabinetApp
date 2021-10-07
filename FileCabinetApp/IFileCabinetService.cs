@@ -82,6 +82,12 @@ namespace FileCabinetApp
         public FileCabinetServiceSnapshot MakeSnapshot();
 
         /// <summary>
+        /// Restores state from snapshot.
+        /// </summary>
+        /// <param name="snapshot">Snapshot.</param>
+        public void Restore(FileCabinetServiceSnapshot snapshot);
+
+        /// <summary>
         /// Exit.
         /// </summary>
         public void Exit();

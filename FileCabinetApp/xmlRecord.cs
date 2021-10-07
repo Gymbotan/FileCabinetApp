@@ -20,7 +20,8 @@ namespace FileCabinetApp
         /// Initializes a new instance of the <see cref="XmlRecord"/> class.
         /// </summary>
         public XmlRecord()
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRecord"/> class.

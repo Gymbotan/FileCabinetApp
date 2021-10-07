@@ -5,6 +5,7 @@
 namespace FileCabinetApp
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Xml;
 
@@ -13,7 +14,7 @@ namespace FileCabinetApp
     /// </summary>
     public class FileCabinetServiceSnapshot
     {
-        private readonly FileCabinetRecord[] records;
+        private FileCabinetRecord[] records;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCabinetServiceSnapshot"/> class.
@@ -31,7 +32,7 @@ namespace FileCabinetApp
         public void SaveToCsv(StreamWriter sw)
         {
             FileCabinetRecordCsvWriter csvWriter = new FileCabinetRecordCsvWriter(sw);
-            sw.WriteLine("Id,First Name,Last Name,Height,Weight,Gender");
+            sw.WriteLine("Id,First Name,Last Name,Date Of Birth,Height,Weight,Gender");
             foreach (var rec in this.records)
             {
                 csvWriter.Write(rec);
@@ -60,6 +61,41 @@ namespace FileCabinetApp
             xw.WriteEndDocument();
             xw.Close();
             xw.Dispose();
+        }
+
+        /// <summary>
+        /// Loads data from csv file.
+        /// </summary>
+        /// <param name="fs">FileStream.</param>
+        public void LoadFromCsv(FileStream fs)
+        {
+            FileCabinetRecordCsvReader reader = new FileCabinetRecordCsvReader(new StreamReader(fs));
+            List<FileCabinetRecord> resultList = new List<FileCabinetRecord>(this.records);
+            List<FileCabinetRecord> readedList = (List<FileCabinetRecord>)reader.ReadAll();
+
+            int index;
+            foreach (FileCabinetRecord record in readedList)
+            {
+                if ((index = resultList.IndexOf(resultList.Find(x => x.Id == record.Id))) != -1)
+                {
+                    resultList[index] = record;
+                }
+                else
+                {
+                    resultList.Add(record);
+                }
+            }
+
+            this.records = resultList.ToArray();
+        }
+
+        /// <summary>
+        /// Returns all the records from snapshot.
+        /// </summary>
+        /// <returns>Array of records.</returns>
+        public FileCabinetRecord[] GetRecords()
+        {
+            return this.records;
         }
     }
 }
