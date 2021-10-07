@@ -231,7 +231,7 @@ namespace FileCabinetApp
         /// <returns>FileCabinetServiceSnapshot.</returns>
         public FileCabinetServiceSnapshot MakeSnapshot()
         {
-            throw new NotImplementedException();
+            return new FileCabinetServiceSnapshot(this.GetRecords().ToArray());
         }
 
         /// <summary>
@@ -249,7 +249,14 @@ namespace FileCabinetApp
         /// <param name="snapshot">Snapshot.</param>
         public void Restore(FileCabinetServiceSnapshot snapshot)
         {
-            throw new NotImplementedException();
+            FileCabinetRecord[] readedRecords = snapshot.GetRecords();
+            this.size = readedRecords.Length;
+            this.fileStream.Seek(0, SeekOrigin.Begin);
+            foreach (FileCabinetRecord rec in readedRecords)
+            {
+                DataForRecord data = new DataForRecord(rec.FirstName, rec.LastName, rec.DateOfBirth, rec.Height, rec.Weight, rec.Gender);
+                this.WriteRecordIntoFile(rec.Id, data);
+            }
         }
 
         private static string GetDateAsString(DateTime date)

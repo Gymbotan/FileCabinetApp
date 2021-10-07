@@ -577,28 +577,6 @@ namespace FileCabinetApp
                     isSuccess = false;
                 }
             }
-            /*
-            if (isSuccess && File.Exists(path))
-            {
-                Console.Write($"File is exist - rewrite {path}? [y/n] ");
-                while (true)
-                {
-                    string input = Console.ReadLine();
-                    if (input.ToUpper() == "N")
-                    {
-                        isSuccess = false;
-                        break;
-                    }
-                    else if (input.ToUpper() == "Y")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.Write("Wrong input. Choose again [y/n] ");
-                    }
-                }
-            }*/
 
             if (isSuccess && inputs[0].ToUpper() == "CSV")
             {
