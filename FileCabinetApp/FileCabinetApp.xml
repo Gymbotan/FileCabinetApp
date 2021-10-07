@@ -177,7 +177,7 @@
             Create record.
             </summary>
             <param name="data">Data.</param>
-            <returns>Int.</returns>
+            <returns>Id of record.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.EditRecord(System.Int32,FileCabinetApp.DataForRecord)">
             <summary>
@@ -191,27 +191,27 @@
             FindByDateOfBirth.
             </summary>
             <param name="dateOfBirth">dateOfBirth.</param>
-            <returns>Collection.</returns>
+            <returns>Collection of records.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.FindByFirstName(System.String)">
             <summary>
             FindByFirstName.
             </summary>
             <param name="firstName">firstName.</param>
-            <returns>Collection.</returns>
+            <returns>Collection of records.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.FindByLastName(System.String)">
             <summary>
             FindByLastName.
             </summary>
             <param name="lastName">lastName.</param>
-            <returns>Collection.</returns>
+            <returns>Collection of records.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.GetStat">
             <summary>
             GetStat.
             </summary>
-            <returns>Int.</returns>
+            <returns>Amount of records.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.IsRecordExist(System.Int32)">
             <summary>

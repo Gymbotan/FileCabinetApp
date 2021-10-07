@@ -40,7 +40,7 @@ namespace FileCabinetApp
         /// Create record.
         /// </summary>
         /// <param name="data">Data.</param>
-        /// <returns>Int.</returns>
+        /// <returns>Id of record.</returns>
         public int CreateRecord(DataForRecord data)
         {
             this.fileStream.Seek(0, SeekOrigin.End);
@@ -63,7 +63,7 @@ namespace FileCabinetApp
         /// FindByDateOfBirth.
         /// </summary>
         /// <param name="dateOfBirth">dateOfBirth.</param>
-        /// <returns>Collection.</returns>
+        /// <returns>Collection of records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByDateOfBirth(string dateOfBirth)
         {
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
@@ -83,7 +83,7 @@ namespace FileCabinetApp
         /// FindByFirstName.
         /// </summary>
         /// <param name="firstName">firstName.</param>
-        /// <returns>Collection.</returns>
+        /// <returns>Collection of records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByFirstName(string firstName)
         {
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
@@ -103,7 +103,7 @@ namespace FileCabinetApp
         /// FindByLastName.
         /// </summary>
         /// <param name="lastName">lastName.</param>
-        /// <returns>Collection.</returns>
+        /// <returns>Collection of records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByLastName(string lastName)
         {
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
@@ -122,7 +122,7 @@ namespace FileCabinetApp
         /// <summary>
         /// GetStat.
         /// </summary>
-        /// <returns>Int.</returns>
+        /// <returns>Amount of records.</returns>
         public int GetStat()
         {
             return this.size;
@@ -135,7 +135,8 @@ namespace FileCabinetApp
         /// <returns>Bool.</returns>
         public bool IsRecordExist(int id)
         {
-            if (id <= this.size)
+            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
+            if (list.Find(x => x.Id == id) != null)
             {
                 return true;
             }
