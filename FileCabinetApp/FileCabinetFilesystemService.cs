@@ -166,60 +166,69 @@ namespace FileCabinetApp
         {
             List<FileCabinetRecord> list = new List<FileCabinetRecord>();
             this.fileStream.Seek(0, SeekOrigin.Begin);
+            byte byte1;
             byte[] byte2 = new byte[2];
             byte[] byte4 = new byte[4];
             byte[] byte8 = new byte[8];
             byte[] byte120 = new byte[120];
             while (this.fileStream.Position < this.fileStream.Length)
             {
-                this.fileStream.Seek(2, SeekOrigin.Current);
-                this.fileStream.Read(byte4, 0, 4);
-                int id = BitConverter.ToInt32(byte4);
-
-                this.fileStream.Read(byte120, 0, 120);
-                char[] charArray = Encoding.Default.GetChars(byte120);
-                StringBuilder sb = new StringBuilder();
-                foreach (char ch in charArray)
+                this.fileStream.Seek(1, SeekOrigin.Current);
+                byte1 = (byte)this.fileStream.ReadByte();
+                if ((byte)(byte1 & (byte)4) == (byte)4)
                 {
-                    if (char.IsLetter(ch))
-                    {
-                        sb.Append(ch);
-                    }
+                    this.fileStream.Seek(268, SeekOrigin.Current);
                 }
-
-                string firstName = sb.ToString();
-
-                this.fileStream.Read(byte120, 0, 120);
-                charArray = Encoding.Default.GetChars(byte120);
-                StringBuilder sb2 = new StringBuilder();
-                foreach (char ch in charArray)
+                else
                 {
-                    if (char.IsLetter(ch))
+                    this.fileStream.Read(byte4, 0, 4);
+                    int id = BitConverter.ToInt32(byte4);
+
+                    this.fileStream.Read(byte120, 0, 120);
+                    char[] charArray = Encoding.Default.GetChars(byte120);
+                    StringBuilder sb = new StringBuilder();
+                    foreach (char ch in charArray)
                     {
-                        sb2.Append(ch);
+                        if (char.IsLetter(ch))
+                        {
+                            sb.Append(ch);
+                        }
                     }
+
+                    string firstName = sb.ToString();
+
+                    this.fileStream.Read(byte120, 0, 120);
+                    charArray = Encoding.Default.GetChars(byte120);
+                    StringBuilder sb2 = new StringBuilder();
+                    foreach (char ch in charArray)
+                    {
+                        if (char.IsLetter(ch))
+                        {
+                            sb2.Append(ch);
+                        }
+                    }
+
+                    string lastName = sb2.ToString();
+
+                    this.fileStream.Read(byte4, 0, 4);
+                    int year = BitConverter.ToInt32(byte4);
+                    this.fileStream.Read(byte4, 0, 4);
+                    int month = BitConverter.ToInt32(byte4);
+                    this.fileStream.Read(byte4, 0, 4);
+                    int day = BitConverter.ToInt32(byte4);
+                    DateTime dateOfBirth = new DateTime(year, month, day);
+
+                    this.fileStream.Read(byte2, 0, 2);
+                    short height = BitConverter.ToInt16(byte2);
+
+                    this.fileStream.Read(byte8, 0, 8);
+                    decimal weight = Convert.ToDecimal(BitConverter.ToDouble(byte8));
+
+                    this.fileStream.Read(byte2, 0, 2);
+                    char gender = BitConverter.ToChar(byte2);
+
+                    list.Add(new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
                 }
-
-                string lastName = sb2.ToString();
-
-                this.fileStream.Read(byte4, 0, 4);
-                int year = BitConverter.ToInt32(byte4);
-                this.fileStream.Read(byte4, 0, 4);
-                int month = BitConverter.ToInt32(byte4);
-                this.fileStream.Read(byte4, 0, 4);
-                int day = BitConverter.ToInt32(byte4);
-                DateTime dateOfBirth = new DateTime(year, month, day);
-
-                this.fileStream.Read(byte2, 0, 2);
-                short height = BitConverter.ToInt16(byte2);
-
-                this.fileStream.Read(byte8, 0, 8);
-                decimal weight = Convert.ToDecimal(BitConverter.ToDouble(byte8));
-
-                this.fileStream.Read(byte2, 0, 2);
-                char gender = BitConverter.ToChar(byte2);
-
-                list.Add(new FileCabinetRecord(id, firstName, lastName, dateOfBirth, height, weight, gender));
             }
 
             return list;
@@ -262,10 +271,29 @@ namespace FileCabinetApp
         /// <summary>
         /// Removes anexisting record.
         /// </summary>
-        /// <param name="id">Id.</param>
-        public void RemoveRecord(int id)
+        /// <param name="recordId">recordId.</param>
+        public void RemoveRecord(int recordId)
         {
-            throw new NotImplementedException();
+            byte removingBit = 4;
+            byte[] byte4 = new byte[4];
+            this.fileStream.Seek(2, SeekOrigin.Begin);
+            while (this.fileStream.Position < this.fileStream.Length)
+            {
+                this.fileStream.Read(byte4, 0, 4);
+                int id = BitConverter.ToInt32(byte4);
+                if (id == recordId)
+                {
+                    break;
+                }
+
+                this.fileStream.Seek(266, SeekOrigin.Current);
+            }
+
+            this.fileStream.Seek(-5, SeekOrigin.Current);
+            byte byte1 = (byte)this.fileStream.ReadByte();
+            byte1 = (byte)(byte1 | removingBit);
+            this.fileStream.Seek(-1, SeekOrigin.Current);
+            this.fileStream.WriteByte(byte1);
         }
 
         private static string GetDateAsString(DateTime date)

@@ -90,8 +90,8 @@ namespace FileCabinetApp
         /// <summary>
         /// Removes an existing record.
         /// </summary>
-        /// <param name="id">Id.</param>
-        public void RemoveRecord(int id);
+        /// <param name="recordId">Record's id.</param>
+        public void RemoveRecord(int recordId);
 
         /// <summary>
         /// Exit.

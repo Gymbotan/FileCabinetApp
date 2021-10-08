@@ -252,7 +252,7 @@
             <summary>
             Removes anexisting record.
             </summary>
-            <param name="id">Id.</param>
+            <param name="recordId">recordId.</param>
         </member>
         <member name="T:FileCabinetApp.FileCabinetMemoryService">
             <summary>
@@ -361,7 +361,7 @@
             <summary>
             Removes anexisting record.
             </summary>
-            <param name="id">Id.</param>
+            <param name="recordId">Record's id.</param>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -608,7 +608,7 @@
             <summary>
             Removes an existing record.
             </summary>
-            <param name="id">Id.</param>
+            <param name="recordId">Record's id.</param>
         </member>
         <member name="M:FileCabinetApp.IFileCabinetService.Exit">
             <summary>

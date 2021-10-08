@@ -254,16 +254,16 @@ namespace FileCabinetApp
         /// <summary>
         /// Removes anexisting record.
         /// </summary>
-        /// <param name="id">Id.</param>
-        public void RemoveRecord(int id)
+        /// <param name="recordId">Record's id.</param>
+        public void RemoveRecord(int recordId)
         {
-            FileCabinetRecord record = this.list.Find(x => x.Id == id);
+            FileCabinetRecord record = this.list.Find(x => x.Id == recordId);
             this.list.Remove(record);
 
-            this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), id);
-            this.RemoveFromDictionary(this.lastNameDictionary, record.LastName.ToUpper(), id);
+            this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), recordId);
+            this.RemoveFromDictionary(this.lastNameDictionary, record.LastName.ToUpper(), recordId);
             string dateAsString = GetDateAsString(record.DateOfBirth);
-            this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, id);
+            this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, recordId);
         }
     }
 }
