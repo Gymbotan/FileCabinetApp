@@ -265,5 +265,12 @@ namespace FileCabinetApp
             string dateAsString = GetDateAsString(record.DateOfBirth);
             this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, recordId);
         }
+
+        /// <summary>
+        /// Deletes removed records.
+        /// </summary>
+        public void Purge()
+        {
+        }
     }
 }

@@ -94,6 +94,11 @@ namespace FileCabinetApp
         public void RemoveRecord(int recordId);
 
         /// <summary>
+        /// Deletes removed records.
+        /// </summary>
+        public void Purge();
+
+        /// <summary>
         /// Exit.
         /// </summary>
         public void Exit();

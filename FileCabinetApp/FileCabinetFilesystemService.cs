@@ -281,6 +281,7 @@ namespace FileCabinetApp
         {
             FileCabinetRecord[] readedRecords = snapshot.GetRecords();
             this.size = readedRecords.Length;
+            this.fileStream.SetLength(270 * this.size);
             this.fileStream.Seek(0, SeekOrigin.Begin);
             foreach (FileCabinetRecord rec in readedRecords)
             {
@@ -315,6 +316,16 @@ namespace FileCabinetApp
             byte1 = (byte)(byte1 | removingBit);
             this.fileStream.Seek(-1, SeekOrigin.Current);
             this.fileStream.WriteByte(byte1);
+        }
+
+        /// <summary>
+        /// Deletes removed records.
+        /// </summary>
+        public void Purge()
+        {
+            var stat = this.GetStat();
+            this.Restore(this.MakeSnapshot());
+            Console.WriteLine($"Data file processing is completed: {stat.Item2} of {stat.Item1 + stat.Item2} records were purged.");
         }
 
         private static string GetDateAsString(DateTime date)

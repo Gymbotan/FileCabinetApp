@@ -32,6 +32,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("import", Import),
             new Tuple<string, Action<string>>("find", Find),
             new Tuple<string, Action<string>>("remove", Remove),
+            new Tuple<string, Action<string>>("purge", Purge),
             new Tuple<string, Action<string>>("exit", Exit),
         };
 
@@ -46,6 +47,7 @@ namespace FileCabinetApp
             new string[] { "import", "imports records from an existing file", "The 'export' command imports records from an existing file." },
             new string[] { "find", "finds existing records", "The 'find' command finds existing records." },
             new string[] { "remove", "removes an existing record", "The 'remove' command removes an existing record." },
+            new string[] { "purge", "deletes removed records", "The 'purge' command deletes removed records." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
@@ -641,6 +643,11 @@ namespace FileCabinetApp
                     Console.WriteLine($" Record #{recordId} is removed.");
                 }
             }
+        }
+
+        private static void Purge(string parameters)
+        {
+            fileCabinetService.Purge();
         }
     }
 }

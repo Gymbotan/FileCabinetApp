@@ -254,6 +254,11 @@
             </summary>
             <param name="recordId">recordId.</param>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetFilesystemService.Purge">
+            <summary>
+            Deletes removed records.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetMemoryService">
             <summary>
             Class that realizes all the services of the main class.
@@ -362,6 +367,11 @@
             Removes anexisting record.
             </summary>
             <param name="recordId">Record's id.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetMemoryService.Purge">
+            <summary>
+            Deletes removed records.
+            </summary>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -609,6 +619,11 @@
             Removes an existing record.
             </summary>
             <param name="recordId">Record's id.</param>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetService.Purge">
+            <summary>
+            Deletes removed records.
+            </summary>
         </member>
         <member name="M:FileCabinetApp.IFileCabinetService.Exit">
             <summary>
