@@ -250,5 +250,20 @@ namespace FileCabinetApp
                 this.AddToDictionary(this.dateOfBirthDictionary, dateAsString, record);
             }
         }
+
+        /// <summary>
+        /// Removes anexisting record.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        public void RemoveRecord(int id)
+        {
+            FileCabinetRecord record = this.list.Find(x => x.Id == id);
+            this.list.Remove(record);
+
+            this.RemoveFromDictionary(this.firstNameDictionary, record.FirstName.ToUpper(), id);
+            this.RemoveFromDictionary(this.lastNameDictionary, record.LastName.ToUpper(), id);
+            string dateAsString = GetDateAsString(record.DateOfBirth);
+            this.RemoveFromDictionary(this.dateOfBirthDictionary, dateAsString, id);
+        }
     }
 }

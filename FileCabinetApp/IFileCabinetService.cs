@@ -88,6 +88,12 @@ namespace FileCabinetApp
         public void Restore(FileCabinetServiceSnapshot snapshot);
 
         /// <summary>
+        /// Removes an existing record.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        public void RemoveRecord(int id);
+
+        /// <summary>
         /// Exit.
         /// </summary>
         public void Exit();

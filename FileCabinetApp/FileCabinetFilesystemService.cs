@@ -259,6 +259,15 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Removes anexisting record.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        public void RemoveRecord(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         private static string GetDateAsString(DateTime date)
         {
             return $"{date.Year}-{date.ToString("MMM", CultureInfo.GetCultureInfo("en-us"))}-{date.Day}".ToUpper();

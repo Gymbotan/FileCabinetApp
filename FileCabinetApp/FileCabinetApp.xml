@@ -248,6 +248,12 @@
             </summary>
             <param name="snapshot">Snapshot.</param>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetFilesystemService.RemoveRecord(System.Int32)">
+            <summary>
+            Removes anexisting record.
+            </summary>
+            <param name="id">Id.</param>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetMemoryService">
             <summary>
             Class that realizes all the services of the main class.
@@ -350,6 +356,12 @@
             Restores state of FileCabinetService from snapshot.
             </summary>
             <param name="snapshot">Snapshot.</param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetMemoryService.RemoveRecord(System.Int32)">
+            <summary>
+            Removes anexisting record.
+            </summary>
+            <param name="id">Id.</param>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -591,6 +603,12 @@
             Restores state from snapshot.
             </summary>
             <param name="snapshot">Snapshot.</param>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetService.RemoveRecord(System.Int32)">
+            <summary>
+            Removes an existing record.
+            </summary>
+            <param name="id">Id.</param>
         </member>
         <member name="M:FileCabinetApp.IFileCabinetService.Exit">
             <summary>

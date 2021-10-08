@@ -31,6 +31,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("export", Export),
             new Tuple<string, Action<string>>("import", Import),
             new Tuple<string, Action<string>>("find", Find),
+            new Tuple<string, Action<string>>("remove", Remove),
             new Tuple<string, Action<string>>("exit", Exit),
         };
 
@@ -44,6 +45,7 @@ namespace FileCabinetApp
             new string[] { "export", "exports existing records into a file", "The 'export' command exports existing records into a file." },
             new string[] { "import", "imports records from an existing file", "The 'export' command imports records from an existing file." },
             new string[] { "find", "finds existing records", "The 'find' command finds existing records." },
+            new string[] { "remove", "removes an existing record", "The 'remove' command removes an existing record." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
         };
 
@@ -309,7 +311,6 @@ namespace FileCabinetApp
 
         private static void SetSettings(string[] parameters)
         {
-            Console.WriteLine($"parameter = {parameters[0]}");
             switch (parameters[0].ToUpper())
             {
                 case "V":
@@ -355,7 +356,7 @@ namespace FileCabinetApp
                     Program.fileCabinetService = new FileCabinetFilesystemService(new DefaultValidator());
                     break;
                 default:
-                    Console.WriteLine($"Using default validation rules.");
+                    Console.WriteLine($"Using default service type.");
                     break;
             }
         }
@@ -616,6 +617,28 @@ namespace FileCabinetApp
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        private static void Remove(string parameters)
+        {
+            int recordId = -1;
+
+            if (!int.TryParse(parameters, out recordId))
+            {
+                Console.WriteLine("Record's number is missed. Please input again.");
+            }
+            else
+            {
+                if (!fileCabinetService.IsRecordExist(recordId))
+                {
+                    Console.WriteLine($" Record #{recordId} doesn't exist.");
+                }
+                else
+                {
+                    fileCabinetService.RemoveRecord(recordId);
+                    Console.WriteLine($" Record #{recordId} is removed.");
                 }
             }
         }
