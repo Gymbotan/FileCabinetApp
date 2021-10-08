@@ -6,6 +6,7 @@ namespace FileCabinetApp
     using System.Globalization;
     using System.IO;
     using System.Xml;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Main class with main functionality.
@@ -580,28 +581,43 @@ namespace FileCabinetApp
 
             if (isSuccess && inputs[0].ToUpper() == "CSV")
             {
-                FileStream fs = new FileStream(path, FileMode.Open);
-                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                try
+                {
+                    FileStream fs = new FileStream(path, FileMode.Open);
+                    FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
 
-                snapshot.LoadFromCsv(fs);
-                Console.WriteLine($"All records are imported from file {fileName}");
+                    snapshot.LoadFromCsv(fs);
+                    Console.WriteLine($"All records were imported from file {fileName}");
 
-                fileCabinetService.Restore(snapshot);
-                fs.Close();
-                fs.Dispose();
+                    fileCabinetService.Restore(snapshot);
+                    fs.Close();
+                    fs.Dispose();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            /*
+            
             if (isSuccess && inputs[0].ToUpper() == "XML")
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-                settings.IndentChars = "\t";
-                XmlWriter xw = XmlWriter.Create(path, settings);
-                FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                try
+                {
+                    FileStream fs = new FileStream(path, FileMode.Open);
+                    FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
 
-                snapshot.SaveToXml(xw);
-                Console.WriteLine($"All records are exported to file {fileName}");
-            }*/
+                    snapshot.LoadFromXml(fs);
+                    Console.WriteLine($"All records were imported from file {fileName}");
+
+                    fileCabinetService.Restore(snapshot);
+                    fs.Close();
+                    fs.Dispose();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
     }
 }

@@ -90,6 +90,32 @@ namespace FileCabinetApp
         }
 
         /// <summary>
+        /// Loads data from xml file.
+        /// </summary>
+        /// <param name="fs">FileStream.</param>
+        public void LoadFromXml(FileStream fs)
+        {
+            FileCabinetRecordXmlReader reader = new FileCabinetRecordXmlReader(fs);
+            List<FileCabinetRecord> resultList = new List<FileCabinetRecord>(this.records);
+            List<FileCabinetRecord> readedList = (List<FileCabinetRecord>)reader.ReadAll();
+
+            int index;
+            foreach (FileCabinetRecord record in readedList)
+            {
+                if ((index = resultList.IndexOf(resultList.Find(x => x.Id == record.Id))) != -1)
+                {
+                    resultList[index] = record;
+                }
+                else
+                {
+                    resultList.Add(record);
+                }
+            }
+
+            this.records = resultList.ToArray();
+        }
+
+        /// <summary>
         /// Returns all the records from snapshot.
         /// </summary>
         /// <returns>Array of records.</returns>

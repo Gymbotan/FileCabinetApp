@@ -71,7 +71,7 @@ namespace FileCabinetGenerator
                 {
                     records.Add(RandomRecord(startId + i));
                 }
-                Console.WriteLine("test");
+
                 ListOfXmlRecord xmlList = new ListOfXmlRecord(records);
 
                 XmlSerializer formatter = new XmlSerializer(typeof(ListOfXmlRecord));
