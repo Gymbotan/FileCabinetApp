@@ -39,7 +39,7 @@ namespace FileCabinetApp
         /// Returns amount of records.
         /// </summary>
         /// <returns>Amount of records.</returns>
-        public int GetStat();
+        public (int, int) GetStat();
 
         /// <summary>
         /// Checks is a record with this id is exist.

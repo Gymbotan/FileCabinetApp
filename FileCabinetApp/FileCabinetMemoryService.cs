@@ -208,9 +208,9 @@ namespace FileCabinetApp
         /// Returns amount of records
         /// </summary>
         /// <returns>Amount of records</returns>
-        public int GetStat()
+        public (int, int) GetStat()
         {
-            return this.list.Count;
+            return (this.list.Count, 0);
         }
 
         /// <summary>

@@ -123,9 +123,30 @@ namespace FileCabinetApp
         /// GetStat.
         /// </summary>
         /// <returns>Amount of records.</returns>
-        public int GetStat()
+        public (int, int) GetStat()
         {
-            return this.size;
+            int existingRecords = 0;
+            int removedRecords = 0;
+            byte byte1;
+            this.fileStream.Seek(0, SeekOrigin.Begin);
+
+            while (this.fileStream.Position < this.fileStream.Length)
+            {
+                this.fileStream.Seek(1, SeekOrigin.Current);
+                byte1 = (byte)this.fileStream.ReadByte();
+                if ((byte)(byte1 & (byte)4) == (byte)4)
+                {
+                    removedRecords++;
+                }
+                else
+                {
+                    existingRecords++;
+                }
+
+                this.fileStream.Seek(268, SeekOrigin.Current);
+            }
+
+            return (existingRecords, removedRecords);
         }
 
         /// <summary>

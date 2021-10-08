@@ -143,7 +143,7 @@ namespace FileCabinetApp
         private static void Stat(string parameters)
         {
             var recordsCount = Program.fileCabinetService.GetStat();
-            Console.WriteLine($"{recordsCount} record(s).");
+            Console.WriteLine($"There are {recordsCount.Item1} record(s), {recordsCount.Item2} record(s) were removed.");
         }
 
         /// <summary>
