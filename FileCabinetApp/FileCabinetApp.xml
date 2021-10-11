@@ -4,6 +4,193 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.CommandHandlers.AppCommandRequest">
+            <summary>
+            Class AppCommandRequest.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.AppCommandRequest.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.CommandHandlers.AppCommandRequest"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.AppCommandRequest.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.CommandHandlers.AppCommandRequest"/> class.
+            </summary>
+            <param name="command">Command.</param>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="P:FileCabinetApp.CommandHandlers.AppCommandRequest.Command">
+            <summary>
+            Gets Command.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.CommandHandlers.AppCommandRequest.Parameters">
+            <summary>
+            Gets Parameters.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.CommandHandlers.CommandHandler">
+            <summary>
+            Class CommandHandler.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.ReadInput``1(System.Func{System.String,System.Tuple{System.Boolean,System.String,``0}},System.Func{``0,System.Tuple{System.Boolean,System.String}})">
+            <summary>
+            Reads input of record's parameters.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <param name="converter">Used converter.</param>
+            <param name="validator">Used validator.</param>
+            <returns>Inputed value.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.StringConverter(System.String)">
+            <summary>
+            StringConverter.
+            </summary>
+            <param name="str">Inputed string.</param>
+            <returns>Converted tuple.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.DateConverter(System.String)">
+            <summary>
+            DateConverter.
+            </summary>
+            <param name="str">Inputed string.</param>
+            <returns>Converted tuple.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.ShortConverter(System.String)">
+            <summary>
+            ShortConverter.
+            </summary>
+            <param name="str">Inputed string.</param>
+            <returns>Converted tuple.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.DecimalConverter(System.String)">
+            <summary>
+            DecimalConverter.
+            </summary>
+            <param name="str">Inputed string.</param>
+            <returns>Converted tuple.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.CharConverter(System.String)">
+            <summary>
+            CharConverter.
+            </summary>
+            <param name="str">Inputed string.</param>
+            <returns>Converted tuple.</returns>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
+            <summary>
+            Handles request.
+            </summary>
+            <param name="request">Request.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.SetNext(FileCabinetApp.CommandHandlers.ICommandHandler)">
+            <summary>
+            Set next handler.
+            </summary>
+            <param name="handler">Handler.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.PrintHelp(System.String)">
+            <summary>
+            Prints help for existing commands.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.PrintMissedCommandInfo(System.String)">
+            <summary>
+            Prints information about missed command.
+            </summary>
+            <param name="command">command's name.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Stat(System.String)">
+            <summary>
+            Shows amount of records.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Create(System.String)">
+            <summary>
+            Creates new record.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Edit(System.String)">
+            <summary>
+            Edits an existing record.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Find(System.String)">
+            <summary>
+            Finds records that fit inputed conditions.
+            </summary>
+            <param name="parameters">2 parameters: field for search, value for search.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.ShowArray(System.Collections.Generic.IReadOnlyCollection{FileCabinetApp.FileCabinetRecord})">
+            <summary>
+            Prints an array.
+            </summary>
+            <param name="array">Array to print.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.List(System.String)">
+            <summary>
+            Shows all the records.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Exit(System.String)">
+            <summary>
+            Exit.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandler.Export(System.String)">
+            <summary>
+            Exports data to file.
+            </summary>
+            <param name="parameters">Parameters.</param>
+        </member>
+        <member name="T:FileCabinetApp.CommandHandlers.CommandHandlerBase">
+            <summary>
+            Class CommandHandlerBase.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.CommandHandlers.CommandHandlerBase.nextHandler">
+            <summary>
+            NextHandler.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandlerBase.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
+            <summary>
+            Handles request.
+            </summary>
+            <param name="request">Request.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.CommandHandlerBase.SetNext(FileCabinetApp.CommandHandlers.ICommandHandler)">
+            <summary>
+            Set next handler.
+            </summary>
+            <param name="handler">Next handler.</param>
+        </member>
+        <member name="T:FileCabinetApp.CommandHandlers.ICommandHandler">
+            <summary>
+            Interface ICommandHandler.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.ICommandHandler.SetNext(FileCabinetApp.CommandHandlers.ICommandHandler)">
+            <summary>
+            Set next handler.
+            </summary>
+            <param name="handler">Handler.</param>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.ICommandHandler.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
+            <summary>
+            Handles request.
+            </summary>
+            <param name="request">Request.</param>
+        </member>
         <member name="T:FileCabinetApp.CustomValidator">
             <summary>
             Custom validator.
@@ -741,60 +928,6 @@
             <summary>
             Main class with main functionality.
             </summary>
-        </member>
-        <member name="M:FileCabinetApp.Program.PrintMissedCommandInfo(System.String)">
-            <summary>
-            Prints information about missed command.
-            </summary>
-            <param name="command">command's name.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.PrintHelp(System.String)">
-            <summary>
-            Prints help for existing commands.
-            </summary>
-            <param name="parameters">Parameters.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.Stat(System.String)">
-            <summary>
-            Shows amount of records
-            </summary>
-            <param name="parameters">Parameters</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.Create(System.String)">
-            <summary>
-            Creates new record.
-            </summary>
-            <param name="parameters">Parameters.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.Edit(System.String)">
-            <summary>
-            Edits an existing record.
-            </summary>
-            <param name="parameters">Parameters.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.Find(System.String)">
-            <summary>
-            Finds records that fit inputed conditions.
-            </summary>
-            <param name="parameters">2 parameters: field for search, value for search.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.ShowArray(System.Collections.Generic.IReadOnlyCollection{FileCabinetApp.FileCabinetRecord})">
-            <summary>
-            Prints an array.
-            </summary>
-            <param name="array">Array to print.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.List(System.String)">
-            <summary>
-            Shows all the records.
-            </summary>
-            <param name="parameters">Parameters.</param>
-        </member>
-        <member name="M:FileCabinetApp.Program.Exit(System.String)">
-            <summary>
-            Exit.
-            </summary>
-            <param name="parameters">Parameters.</param>
         </member>
         <member name="T:FileCabinetApp.XmlRecord">
             <summary>
