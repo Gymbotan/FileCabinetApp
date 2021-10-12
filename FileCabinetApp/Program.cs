@@ -4,10 +4,6 @@ namespace FileCabinetApp
     using System;
     using FileCabinetApp.CommandHandlers;
     using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Xml;
-    using System.Xml.Serialization;
 
     /// <summary>
     /// Main class with main functionality.
@@ -16,27 +12,8 @@ namespace FileCabinetApp
     {
         private const string DeveloperName = "Anatoliy Pecherny";
         private const string HintMessage = "Enter your command, or enter 'help' to get help.";
-        private const int CommandHelpIndex = 0;
-        private const int DescriptionHelpIndex = 1;
-        private const int ExplanationHelpIndex = 2;
 
         public static bool isRunning = true;
-
-        /*
-        private static Tuple<string, Action<string>>[] commands = new Tuple<string, Action<string>>[]
-        {
-            new Tuple<string, Action<string>>("help", PrintHelp),
-            new Tuple<string, Action<string>>("create", Create),
-            new Tuple<string, Action<string>>("stat", Stat),
-            new Tuple<string, Action<string>>("list", List),
-            new Tuple<string, Action<string>>("edit", Edit),
-            new Tuple<string, Action<string>>("export", Export),
-            new Tuple<string, Action<string>>("import", Import),
-            new Tuple<string, Action<string>>("find", Find),
-            new Tuple<string, Action<string>>("remove", Remove),
-            new Tuple<string, Action<string>>("purge", Purge),
-            new Tuple<string, Action<string>>("exit", Exit),
-        };*/
 
         public static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new DefaultValidator());
 
@@ -56,36 +33,14 @@ namespace FileCabinetApp
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
 
-            ICommandHandler handler = Program.CreateCommandHandlers();
+            var commandHandler = Program.CreateCommandHandlers();
 
             do
             {
                 Console.Write("> ");
                 var inputs = Console.ReadLine().Split(' ', 2);
                 var parameters = inputs.Length > 1 ? inputs[1] : string.Empty;
-                handler.Handle(new AppCommandRequest(inputs[0], parameters));
-                /*
-                const int commandIndex = 0;
-                var command = inputs[commandIndex];
-
-                if (string.IsNullOrEmpty(command))
-                {
-                    Console.WriteLine(Program.HintMessage);
-                    continue;
-                }
-
-                var index = Array.FindIndex(commands, 0, commands.Length, i => i.Item1.Equals(command, StringComparison.InvariantCultureIgnoreCase));
-                if (index >= 0)
-                {
-                    const int parametersIndex = 1;
-                    var parameters = inputs.Length > 1 ? inputs[parametersIndex] : string.Empty;
-                    //commands[index].Item2(parameters);
-                    handler.Handle(new AppCommandRequest(inputs[0], parameters));
-                }
-                else
-                {
-                    PrintMissedCommandInfo(command);
-                }*/
+                commandHandler.Handle(new AppCommandRequest(inputs[0], parameters));
             }
             while (isRunning);
         }
@@ -170,7 +125,30 @@ namespace FileCabinetApp
 
         private static ICommandHandler CreateCommandHandlers()
         {
-            return new CommandHandler();
+            var helpHandler = new HelpCommandHandler();
+            var createHandler = new CreateCommandHandler();
+            var statHandler = new StatCommandHandler();
+            var listHandler = new ListCommandHandler();
+            var editHandler = new EditCommandHandler();
+            var exportHandler = new ExportCommandHandler();
+            var importHandler = new ImportCommandHandler();
+            var findHandler = new FindCommandHandler();
+            var removeHandler = new RemoveCommandHandler();
+            var purgeHandler = new PurgeCommandHandler();
+            var exitHandler = new ExitCommandHandler();
+
+            helpHandler.SetNext(createHandler);
+            createHandler.SetNext(statHandler);
+            statHandler.SetNext(listHandler);
+            listHandler.SetNext(editHandler);
+            editHandler.SetNext(exportHandler);
+            exportHandler.SetNext(importHandler);
+            importHandler.SetNext(findHandler);
+            findHandler.SetNext(removeHandler);
+            removeHandler.SetNext(purgeHandler);
+            purgeHandler.SetNext(exitHandler);
+
+            return helpHandler;
         }
     }
 }

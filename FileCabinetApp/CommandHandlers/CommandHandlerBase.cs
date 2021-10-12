@@ -12,18 +12,31 @@ namespace FileCabinetApp.CommandHandlers
         /// <summary>
         /// NextHandler.
         /// </summary>
-        private readonly ICommandHandler nextHandler;
+        private ICommandHandler nextHandler;
 
         /// <summary>
         /// Handles request.
         /// </summary>
         /// <param name="request">Request.</param>
-        public abstract void Handle(AppCommandRequest request);
+        public virtual void Handle(AppCommandRequest request)
+        {
+            if (this.nextHandler != null)
+            {
+                this.nextHandler.Handle(request);
+            }
+            else
+            {
+                CommonMethods.PrintMissedCommandInfo(request.Command);
+            }
+        }
 
         /// <summary>
         /// Set next handler.
         /// </summary>
         /// <param name="handler">Next handler.</param>
-        public abstract void SetNext(ICommandHandler handler);
+        public void SetNext(ICommandHandler handler)
+        {
+            this.nextHandler = handler;
+        }
     }
 }
