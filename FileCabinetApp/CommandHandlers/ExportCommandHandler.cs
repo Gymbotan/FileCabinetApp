@@ -13,6 +13,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class ExportCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExportCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public ExportCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -97,7 +108,7 @@ namespace FileCabinetApp.CommandHandlers
                 if (isSuccess && inputs[0].ToUpper() == "CSV")
                 {
                     StreamWriter sw = new StreamWriter(path);
-                    FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                    FileCabinetServiceSnapshot snapshot = this.service.MakeSnapshot();
 
                     snapshot.SaveToCsv(sw);
                     Console.WriteLine($"All records are exported to file {fileName}");
@@ -109,7 +120,7 @@ namespace FileCabinetApp.CommandHandlers
                     settings.Indent = true;
                     settings.IndentChars = "\t";
                     XmlWriter xw = XmlWriter.Create(path, settings);
-                    FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                    FileCabinetServiceSnapshot snapshot = this.service.MakeSnapshot();
 
                     snapshot.SaveToXml(xw);
                     Console.WriteLine($"All records are exported to file {fileName}");

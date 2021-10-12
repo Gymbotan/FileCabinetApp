@@ -11,6 +11,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class ExitCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExitCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public ExitCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -20,7 +31,7 @@ namespace FileCabinetApp.CommandHandlers
             if (this.CanHandle(request))
             {
                 Console.WriteLine("Exiting an application...");
-                Program.fileCabinetService.Exit();
+                this.service.Exit();
                 Program.isRunning = false;
             }
             else

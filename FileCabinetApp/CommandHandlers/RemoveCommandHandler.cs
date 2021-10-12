@@ -14,6 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class RemoveCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoveCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public RemoveCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -30,13 +41,13 @@ namespace FileCabinetApp.CommandHandlers
                 }
                 else
                 {
-                    if (!Program.fileCabinetService.IsRecordExist(recordId))
+                    if (!this.service.IsRecordExist(recordId))
                     {
                         Console.WriteLine($" Record #{recordId} doesn't exist.");
                     }
                     else
                     {
-                        Program.fileCabinetService.RemoveRecord(recordId);
+                        this.service.RemoveRecord(recordId);
                         Console.WriteLine($" Record #{recordId} is removed.");
                     }
                 }

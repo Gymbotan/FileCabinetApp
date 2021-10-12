@@ -15,7 +15,7 @@ namespace FileCabinetApp
 
         public static bool isRunning = true;
 
-        public static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new DefaultValidator());
+        private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new DefaultValidator());
 
         public static void Main(string[] args)
         {
@@ -126,16 +126,16 @@ namespace FileCabinetApp
         private static ICommandHandler CreateCommandHandlers()
         {
             var helpHandler = new HelpCommandHandler();
-            var createHandler = new CreateCommandHandler();
-            var statHandler = new StatCommandHandler();
-            var listHandler = new ListCommandHandler();
-            var editHandler = new EditCommandHandler();
-            var exportHandler = new ExportCommandHandler();
-            var importHandler = new ImportCommandHandler();
-            var findHandler = new FindCommandHandler();
-            var removeHandler = new RemoveCommandHandler();
-            var purgeHandler = new PurgeCommandHandler();
-            var exitHandler = new ExitCommandHandler();
+            var createHandler = new CreateCommandHandler(Program.fileCabinetService);
+            var statHandler = new StatCommandHandler(Program.fileCabinetService);
+            var listHandler = new ListCommandHandler(Program.fileCabinetService);
+            var editHandler = new EditCommandHandler(Program.fileCabinetService);
+            var exportHandler = new ExportCommandHandler(Program.fileCabinetService);
+            var importHandler = new ImportCommandHandler(Program.fileCabinetService);
+            var findHandler = new FindCommandHandler(Program.fileCabinetService);
+            var removeHandler = new RemoveCommandHandler(Program.fileCabinetService);
+            var purgeHandler = new PurgeCommandHandler(Program.fileCabinetService);
+            var exitHandler = new ExitCommandHandler(Program.fileCabinetService);
 
             helpHandler.SetNext(createHandler);
             createHandler.SetNext(statHandler);

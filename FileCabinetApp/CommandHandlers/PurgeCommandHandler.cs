@@ -14,6 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class PurgeCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PurgeCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public PurgeCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -22,7 +33,7 @@ namespace FileCabinetApp.CommandHandlers
         {
             if (this.CanHandle(request))
             {
-                Program.fileCabinetService.Purge();
+                this.service.Purge();
             }
             else
             {

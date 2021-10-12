@@ -12,6 +12,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class ImportCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImportCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public ImportCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -76,12 +87,12 @@ namespace FileCabinetApp.CommandHandlers
                     try
                     {
                         FileStream fs = new FileStream(path, FileMode.Open);
-                        FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                        FileCabinetServiceSnapshot snapshot = this.service.MakeSnapshot();
 
                         snapshot.LoadFromCsv(fs);
                         Console.WriteLine($"All records were imported from file {fileName}");
 
-                        Program.fileCabinetService.Restore(snapshot);
+                        this.service.Restore(snapshot);
                         fs.Close();
                         fs.Dispose();
                     }
@@ -96,12 +107,12 @@ namespace FileCabinetApp.CommandHandlers
                     try
                     {
                         FileStream fs = new FileStream(path, FileMode.Open);
-                        FileCabinetServiceSnapshot snapshot = Program.fileCabinetService.MakeSnapshot();
+                        FileCabinetServiceSnapshot snapshot = this.service.MakeSnapshot();
 
                         snapshot.LoadFromXml(fs);
                         Console.WriteLine($"All records were imported from file {fileName}");
 
-                        Program.fileCabinetService.Restore(snapshot);
+                        this.service.Restore(snapshot);
                         fs.Close();
                         fs.Dispose();
                     }

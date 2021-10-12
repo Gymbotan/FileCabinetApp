@@ -14,6 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class StatCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public StatCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -22,7 +33,7 @@ namespace FileCabinetApp.CommandHandlers
         {
             if (this.CanHandle(request))
             {
-                var recordsCount = Program.fileCabinetService.GetStat();
+                var recordsCount = this.service.GetStat();
                 Console.WriteLine($"There are {recordsCount.Item1} record(s), {recordsCount.Item2} record(s) were removed.");
             }
             else

@@ -14,6 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class FindCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public FindCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -26,15 +37,15 @@ namespace FileCabinetApp.CommandHandlers
                 switch (inputs[0].ToLower())
                 {
                     case "firstname":
-                        IReadOnlyCollection<FileCabinetRecord> findedArray = Program.fileCabinetService.FindByFirstName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
+                        IReadOnlyCollection<FileCabinetRecord> findedArray = this.service.FindByFirstName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
                         CommonMethods.ShowArray(findedArray);
                         break;
                     case "lastname":
-                        findedArray = Program.fileCabinetService.FindByLastName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
+                        findedArray = this.service.FindByLastName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
                         CommonMethods.ShowArray(findedArray);
                         break;
                     case "dateofbirth":
-                        findedArray = Program.fileCabinetService.FindByDateOfBirth(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
+                        findedArray = this.service.FindByDateOfBirth(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
                         CommonMethods.ShowArray(findedArray);
                         break;
                     default:

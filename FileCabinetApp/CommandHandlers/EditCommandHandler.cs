@@ -11,6 +11,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class EditCommandHandler : CommandHandlerBase
     {
+        private readonly IFileCabinetService service;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditCommandHandler"/> class.
+        /// </summary>
+        /// <param name="service">FileCabinetService.</param>
+        public EditCommandHandler(IFileCabinetService service)
+        {
+            this.service = service;
+        }
+
         /// <summary>
         /// Handles request.
         /// </summary>
@@ -27,33 +38,33 @@ namespace FileCabinetApp.CommandHandlers
                 }
                 else
                 {
-                    if (!Program.fileCabinetService.IsRecordExist(recordId))
+                    if (this.service.IsRecordExist(recordId))
                     {
                         Console.WriteLine($"#{recordId} record is not found.");
                     }
                     else
                     {
                         Console.Write("First name: ");
-                        string firstName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, Program.fileCabinetService.Validator.FirstNameValidator);
+                        string firstName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.FirstNameValidator);
 
                         Console.Write("Last name: ");
-                        var lastName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, Program.fileCabinetService.Validator.LastNameValidator);
+                        var lastName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.LastNameValidator);
 
                         Console.Write("Date of birth: ");
-                        var dateOfBirth = CommonMethods.ReadInput<DateTime>(CommonMethods.DateConverter, Program.fileCabinetService.Validator.DateOfBirthValidator);
+                        var dateOfBirth = CommonMethods.ReadInput<DateTime>(CommonMethods.DateConverter, this.service.Validator.DateOfBirthValidator);
 
                         Console.Write("Height: ");
-                        var height = CommonMethods.ReadInput<short>(CommonMethods.ShortConverter, Program.fileCabinetService.Validator.HeightValidator);
+                        var height = CommonMethods.ReadInput<short>(CommonMethods.ShortConverter, this.service.Validator.HeightValidator);
 
                         Console.Write("Weight: ");
-                        var weight = CommonMethods.ReadInput<decimal>(CommonMethods.DecimalConverter, Program.fileCabinetService.Validator.WeightValidator);
+                        var weight = CommonMethods.ReadInput<decimal>(CommonMethods.DecimalConverter, this.service.Validator.WeightValidator);
 
                         Console.Write("Gender (m, f or a): ");
-                        var gender = CommonMethods.ReadInput<char>(CommonMethods.CharConverter, Program.fileCabinetService.Validator.GenderValidator);
+                        var gender = CommonMethods.ReadInput<char>(CommonMethods.CharConverter, this.service.Validator.GenderValidator);
 
                         DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 
-                        Program.fileCabinetService.EditRecord(recordId, data);
+                        this.service.EditRecord(recordId, data);
                         Console.WriteLine($"Record #{recordId} is updated.");
                     }
                 }
