@@ -14,13 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class FindCommandHandler : ServiceCommandHandlerBase
     {
+        private readonly IRecordPrinter printer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FindCommandHandler"/> class.
         /// </summary>
         /// <param name="service">FileCabinetService.</param>
-        public FindCommandHandler(IFileCabinetService service)
+        /// <param name="printer">Printer.</param>
+        public FindCommandHandler(IFileCabinetService service, IRecordPrinter printer)
             : base(service)
         {
+            this.printer = printer;
         }
 
         /// <summary>
@@ -36,15 +40,15 @@ namespace FileCabinetApp.CommandHandlers
                 {
                     case "firstname":
                         IReadOnlyCollection<FileCabinetRecord> findedArray = this.service.FindByFirstName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        CommonMethods.ShowArray(findedArray);
+                        this.printer.Print(findedArray);
                         break;
                     case "lastname":
                         findedArray = this.service.FindByLastName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        CommonMethods.ShowArray(findedArray);
+                        this.printer.Print(findedArray);
                         break;
                     case "dateofbirth":
                         findedArray = this.service.FindByDateOfBirth(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        CommonMethods.ShowArray(findedArray);
+                        this.printer.Print(findedArray);
                         break;
                     default:
                         Console.WriteLine("You unput wrong parameters.");

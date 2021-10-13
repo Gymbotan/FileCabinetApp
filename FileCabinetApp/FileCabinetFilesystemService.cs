@@ -168,15 +168,12 @@ namespace FileCabinetApp
         }
 
         /// <summary>
-        /// ListRecords.
+        /// Return List of existing records.
         /// </summary>
-        public void ListRecords()
+        /// <returns>List of existing records.</returns>
+        public IReadOnlyCollection<FileCabinetRecord> ListRecords()
         {
-            List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.GetRecords();
-            foreach (var res in list)
-            {
-                res.ShowRecord();
-            }
+            return (List<FileCabinetRecord>)this.GetRecords();
         }
 
         /// <summary>

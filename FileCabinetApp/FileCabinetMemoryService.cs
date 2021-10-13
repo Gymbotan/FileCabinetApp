@@ -89,12 +89,9 @@ namespace FileCabinetApp
         /// <summary>
         /// Prints all the existing records.
         /// </summary>
-        public void ListRecords()
+        public IReadOnlyCollection<FileCabinetRecord> ListRecords()
         {
-            foreach (FileCabinetRecord record in this.list)
-            {
-                record.ShowRecord();
-            }
+            return this.list;
         }
 
         /// <summary>
@@ -144,10 +141,6 @@ namespace FileCabinetApp
         /// <returns>Array of finded records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> FindByFirstName(string firstName) 
         {
-            /*var result = from rec in this.list
-                         where rec.FirstName.ToUpper() == firstName.ToUpper()
-                         select rec;
-            return result.ToArray();*/ //Realization with LINQ
             if (firstNameDictionary.ContainsKey(firstName.ToUpper()) && this.firstNameDictionary[firstName.ToUpper()].Count > 0)
             {
                 return this.firstNameDictionary[firstName.ToUpper()];

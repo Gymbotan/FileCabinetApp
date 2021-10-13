@@ -33,7 +33,8 @@ namespace FileCabinetApp
         /// <summary>
         /// Prints all the existing records.
         /// </summary>
-        public void ListRecords();
+        /// <returns>List of existing records.</returns>
+        public IReadOnlyCollection<FileCabinetRecord> ListRecords();
 
         /// <summary>
         /// Returns amount of records.

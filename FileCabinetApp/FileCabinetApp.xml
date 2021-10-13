@@ -138,6 +138,17 @@
             <param name="request">Request.</param>
             <returns>Can or not.</returns>
         </member>
+        <member name="T:FileCabinetApp.CommandHandlers.DefaultRecordPrinter">
+            <summary>
+            Class DefaultRecordPrinter.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.DefaultRecordPrinter.Print(System.Collections.Generic.IEnumerable{FileCabinetApp.FileCabinetRecord})">
+            <summary>
+            Prints records.
+            </summary>
+            <param name="records">Records.</param>
+        </member>
         <member name="T:FileCabinetApp.CommandHandlers.EditCommandHandler">
             <summary>
             Handler of edit function.
@@ -221,11 +232,12 @@
             Handler of find function.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.CommandHandlers.FindCommandHandler.#ctor(FileCabinetApp.IFileCabinetService)">
+        <member name="M:FileCabinetApp.CommandHandlers.FindCommandHandler.#ctor(FileCabinetApp.IFileCabinetService,FileCabinetApp.CommandHandlers.IRecordPrinter)">
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.CommandHandlers.FindCommandHandler"/> class.
             </summary>
             <param name="service">FileCabinetService.</param>
+            <param name="printer">Printer.</param>
         </member>
         <member name="M:FileCabinetApp.CommandHandlers.FindCommandHandler.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
             <summary>
@@ -299,16 +311,28 @@
             <param name="request">Request.</param>
             <returns>Can or not.</returns>
         </member>
+        <member name="T:FileCabinetApp.CommandHandlers.IRecordPrinter">
+            <summary>
+            Interface for printing records.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.IRecordPrinter.Print(System.Collections.Generic.IEnumerable{FileCabinetApp.FileCabinetRecord})">
+            <summary>
+            Prints records.
+            </summary>
+            <param name="records">Records.</param>
+        </member>
         <member name="T:FileCabinetApp.CommandHandlers.ListCommandHandler">
             <summary>
             Handler of list function.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.CommandHandlers.ListCommandHandler.#ctor(FileCabinetApp.IFileCabinetService)">
+        <member name="M:FileCabinetApp.CommandHandlers.ListCommandHandler.#ctor(FileCabinetApp.IFileCabinetService,FileCabinetApp.CommandHandlers.IRecordPrinter)">
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.CommandHandlers.ListCommandHandler"/> class.
             </summary>
             <param name="service">FileCabinetService.</param>
+            <param name="printer">Printer.</param>
         </member>
         <member name="M:FileCabinetApp.CommandHandlers.ListCommandHandler.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
             <summary>
@@ -629,8 +653,9 @@
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.ListRecords">
             <summary>
-            ListRecords.
+            Return List of existing records.
             </summary>
+            <returns>List of existing records.</returns>
         </member>
         <member name="M:FileCabinetApp.FileCabinetFilesystemService.GetRecords">
             <summary>
@@ -968,6 +993,7 @@
             <summary>
             Prints all the existing records.
             </summary>
+            <returns>List of existing records.</returns>
         </member>
         <member name="M:FileCabinetApp.IFileCabinetService.GetStat">
             <summary>
