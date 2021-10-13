@@ -12,12 +12,19 @@ namespace FileCabinetApp.CommandHandlers
     public class ExitCommandHandler : ServiceCommandHandlerBase
     {
         /// <summary>
+        /// Delegate (get function from Program to change the field isRunning).
+        /// </summary>
+        private readonly Action<bool> action;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ExitCommandHandler"/> class.
         /// </summary>
         /// <param name="service">FileCabinetService.</param>
-        public ExitCommandHandler(IFileCabinetService service)
+        /// <param name="action">Function from Program.</param>
+        public ExitCommandHandler(IFileCabinetService service, Action<bool> action)
             : base(service)
         {
+            this.action = action;
         }
 
         /// <summary>
@@ -30,7 +37,7 @@ namespace FileCabinetApp.CommandHandlers
             {
                 Console.WriteLine("Exiting an application...");
                 this.service.Exit();
-                Program.isRunning = false;
+                this.action(false);
             }
             else
             {

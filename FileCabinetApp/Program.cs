@@ -13,7 +13,7 @@ namespace FileCabinetApp
         private const string DeveloperName = "Anatoliy Pecherny";
         private const string HintMessage = "Enter your command, or enter 'help' to get help.";
 
-        public static bool isRunning = true;
+        private static bool isRunning = true;
 
         private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new DefaultValidator());
 
@@ -123,6 +123,15 @@ namespace FileCabinetApp
             }
         }
 
+        /// <summary>
+        /// Sets value for isRunning field.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        private static void SetIsRunning(bool value)
+        {
+            isRunning = value;
+        }
+
         private static ICommandHandler CreateCommandHandlers()
         {
             var helpHandler = new HelpCommandHandler();
@@ -135,7 +144,7 @@ namespace FileCabinetApp
             var findHandler = new FindCommandHandler(Program.fileCabinetService);
             var removeHandler = new RemoveCommandHandler(Program.fileCabinetService);
             var purgeHandler = new PurgeCommandHandler(Program.fileCabinetService);
-            var exitHandler = new ExitCommandHandler(Program.fileCabinetService);
+            var exitHandler = new ExitCommandHandler(Program.fileCabinetService, SetIsRunning);
 
             helpHandler.SetNext(createHandler);
             createHandler.SetNext(statHandler);

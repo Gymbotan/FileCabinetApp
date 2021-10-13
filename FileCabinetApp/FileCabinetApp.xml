@@ -167,11 +167,17 @@
             Handler of exit function.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.CommandHandlers.ExitCommandHandler.#ctor(FileCabinetApp.IFileCabinetService)">
+        <member name="F:FileCabinetApp.CommandHandlers.ExitCommandHandler.action">
+            <summary>
+            Delegate (get function from Program to change the field isRunning).
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CommandHandlers.ExitCommandHandler.#ctor(FileCabinetApp.IFileCabinetService,System.Action{System.Boolean})">
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.CommandHandlers.ExitCommandHandler"/> class.
             </summary>
             <param name="service">FileCabinetService.</param>
+            <param name="action">Function from Program.</param>
         </member>
         <member name="M:FileCabinetApp.CommandHandlers.ExitCommandHandler.Handle(FileCabinetApp.CommandHandlers.AppCommandRequest)">
             <summary>
@@ -1142,6 +1148,12 @@
             <summary>
             Main class with main functionality.
             </summary>
+        </member>
+        <member name="M:FileCabinetApp.Program.SetIsRunning(System.Boolean)">
+            <summary>
+            Sets value for isRunning field.
+            </summary>
+            <param name="value">Value.</param>
         </member>
         <member name="T:FileCabinetApp.XmlRecord">
             <summary>
