@@ -21,12 +21,12 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            this.ValidateFirstName(data.FirstName);
-            this.ValidateLastName(data.LastName);
-            this.ValidateDateOfBirth(data.DateOfBirth);
-            this.ValidateHeight(data.Height);
-            this.ValidateWeight(data.Weight);
-            this.ValidateGender(data.Gender);
+            this.ValidateFirstName(data);
+            this.ValidateLastName(data);
+            this.ValidateDateOfBirth(data);
+            this.ValidateHeight(data);
+            this.ValidateWeight(data);
+            this.ValidateGender(data);
         }
 
         /// <summary>
@@ -129,61 +129,62 @@ namespace FileCabinetApp
             return Tuple.Create(isSuccess, str);
         }
 
-        private void ValidateFirstName(string firstName)
+
+        private void ValidateFirstName(DataForRecord data)
         {
-            if (string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(data.FirstName))
             {
-                throw new ArgumentNullException(firstName);
+                throw new ArgumentNullException(data.FirstName);
             }
 
-            if (firstName.Length < 2 || firstName.Length > 60)
+            if (data.FirstName.Length < 2 || data.FirstName.Length > 60)
             {
-                throw new ArgumentException(firstName);
+                throw new ArgumentException(data.FirstName);
             }
         }
 
-        private void ValidateLastName(string lastName)
+        private void ValidateLastName(DataForRecord data)
         {
-            if (string.IsNullOrWhiteSpace(lastName))
+            if (string.IsNullOrWhiteSpace(data.LastName))
             {
-                throw new ArgumentNullException(lastName);
+                throw new ArgumentNullException(data.LastName);
             }
 
-            if (lastName.Length < 2 || lastName.Length > 60)
+            if (data.LastName.Length < 2 || data.LastName.Length > 60)
             {
-                throw new ArgumentException(lastName);
+                throw new ArgumentException(data.LastName);
             }
         }
 
-        private void ValidateDateOfBirth(DateTime dateOfBirth)
+        private void ValidateDateOfBirth(DataForRecord data)
         {
-            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            if (data.DateOfBirth < new DateTime(1950, 01, 01) || data.DateOfBirth > DateTime.Now)
             {
                 throw new ArgumentException("Wrong dateOfBirth");
             }
         }
 
-        private void ValidateHeight(short height)
+        private void ValidateHeight(DataForRecord data)
         {
-            if (height < 30 || height > 250)
+            if (data.Height < 30 || data.Height > 250)
             {
-                throw new ArgumentException(height.ToString());
+                throw new ArgumentException(data.Height.ToString());
             }
         }
 
-        private void ValidateWeight(decimal weight)
+        private void ValidateWeight(DataForRecord data)
         {
-            if (weight <= 0)
+            if (data.Weight <= 0)
             {
-                throw new ArgumentException(weight.ToString());
+                throw new ArgumentException(data.Weight.ToString());
             }
         }
 
-        private void ValidateGender(char gender)
+        private void ValidateGender(DataForRecord data)
         {
-            if (gender != 'm' && gender != 'f' && gender != 'a')
+            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
             {
-                throw new ArgumentException(gender.ToString());
+                throw new ArgumentException(data.Gender.ToString());
             }
         }
     }
