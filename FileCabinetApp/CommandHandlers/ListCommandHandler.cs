@@ -14,17 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class ListCommandHandler : ServiceCommandHandlerBase
     {
-        private readonly IRecordPrinter printer;
+        private readonly Action<IEnumerable<FileCabinetRecord>> print;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCommandHandler"/> class.
         /// </summary>
         /// <param name="service">FileCabinetService.</param>
-        /// <param name="printer">Printer.</param>
-        public ListCommandHandler(IFileCabinetService service, IRecordPrinter printer)
+        /// <param name="print">Printer.</param>
+        public ListCommandHandler(IFileCabinetService service, Action<IEnumerable<FileCabinetRecord>> print)
             : base(service)
         {
-            this.printer = printer;
+            this.print = print;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FileCabinetApp.CommandHandlers
             if (this.CanHandle(request))
             {
                 IReadOnlyCollection<FileCabinetRecord> list = this.service.ListRecords();
-                this.printer.Print(list);
+                this.print(list);
             }
             else
             {

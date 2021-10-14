@@ -139,11 +139,11 @@ namespace FileCabinetApp
             var helpHandler = new HelpCommandHandler();
             var createHandler = new CreateCommandHandler(Program.fileCabinetService);
             var statHandler = new StatCommandHandler(Program.fileCabinetService);
-            var listHandler = new ListCommandHandler(Program.fileCabinetService, recordPrinter);
+            var listHandler = new ListCommandHandler(Program.fileCabinetService, Print);
             var editHandler = new EditCommandHandler(Program.fileCabinetService);
             var exportHandler = new ExportCommandHandler(Program.fileCabinetService);
             var importHandler = new ImportCommandHandler(Program.fileCabinetService);
-            var findHandler = new FindCommandHandler(Program.fileCabinetService, recordPrinter);
+            var findHandler = new FindCommandHandler(Program.fileCabinetService, Print);
             var removeHandler = new RemoveCommandHandler(Program.fileCabinetService);
             var purgeHandler = new PurgeCommandHandler(Program.fileCabinetService);
             var exitHandler = new ExitCommandHandler(Program.fileCabinetService, SetIsRunning);
@@ -160,6 +160,21 @@ namespace FileCabinetApp
             purgeHandler.SetNext(exitHandler);
 
             return helpHandler;
+        }
+
+        /// <summary>
+        /// Prints records.
+        /// </summary>
+        /// <param name="records">Records.</param>
+        private static void Print(IEnumerable<FileCabinetRecord> records)
+        {
+            if (records != null)
+            {
+                foreach (var ar in records)
+                {
+                    ar.ShowRecord();
+                }
+            }
         }
     }
 }

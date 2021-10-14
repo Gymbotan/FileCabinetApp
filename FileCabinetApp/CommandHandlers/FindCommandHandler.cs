@@ -14,17 +14,17 @@ namespace FileCabinetApp.CommandHandlers
     /// </summary>
     public class FindCommandHandler : ServiceCommandHandlerBase
     {
-        private readonly IRecordPrinter printer;
+        private readonly Action<IEnumerable<FileCabinetRecord>> print;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FindCommandHandler"/> class.
         /// </summary>
         /// <param name="service">FileCabinetService.</param>
-        /// <param name="printer">Printer.</param>
-        public FindCommandHandler(IFileCabinetService service, IRecordPrinter printer)
+        /// <param name="print">Printer.</param>
+        public FindCommandHandler(IFileCabinetService service, Action<IEnumerable<FileCabinetRecord>> print)
             : base(service)
         {
-            this.printer = printer;
+            this.print = print;
         }
 
         /// <summary>
@@ -40,15 +40,15 @@ namespace FileCabinetApp.CommandHandlers
                 {
                     case "firstname":
                         IReadOnlyCollection<FileCabinetRecord> findedArray = this.service.FindByFirstName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        this.printer.Print(findedArray);
+                        this.print(findedArray);
                         break;
                     case "lastname":
                         findedArray = this.service.FindByLastName(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        this.printer.Print(findedArray);
+                        this.print(findedArray);
                         break;
                     case "dateofbirth":
                         findedArray = this.service.FindByDateOfBirth(inputs[1].Replace("\"", string.Empty).Replace("\'", string.Empty));
-                        this.printer.Print(findedArray);
+                        this.print(findedArray);
                         break;
                     default:
                         Console.WriteLine("You unput wrong parameters.");
