@@ -21,12 +21,12 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            this.ValidateFirstName(data);
-            this.ValidateLastName(data);
-            this.ValidateDateOfBirth(data);
-            this.ValidateHeight(data);
-            this.ValidateWeight(data);
-            this.ValidateGender(data);
+            new CustomFirstNameValidator().ValidateParameters(data);
+            new CustomLastNameValidator().ValidateParameters(data);
+            new CustomDateOfBirthValidator().ValidateParameters(data);
+            new CustomHeightValidator().ValidateParameters(data);
+            new CustomWeightValidator().ValidateParameters(data);
+            new CustomGenderValidator().ValidateParameters(data);
         }
 
         /// <summary>
@@ -127,64 +127,6 @@ namespace FileCabinetApp
 
             string str = "Gender should be: m - male, f - female, a - another";
             return Tuple.Create(isSuccess, str);
-        }
-
-        private void ValidateFirstName(DataForRecord data)
-        {
-            if (string.IsNullOrWhiteSpace(data.FirstName))
-            {
-                throw new ArgumentNullException(data.FirstName);
-            }
-
-            if (data.FirstName.Length < 2 || data.FirstName.Length > 50)
-            {
-                throw new ArgumentException(data.FirstName);
-            }
-        }
-
-        private void ValidateLastName(DataForRecord data)
-        {
-            if (string.IsNullOrWhiteSpace(data.LastName))
-            {
-                throw new ArgumentNullException(data.LastName);
-            }
-
-            if (data.LastName.Length < 2 || data.LastName.Length > 50)
-            {
-                throw new ArgumentException(data.LastName);
-            }
-        }
-
-        private void ValidateDateOfBirth(DataForRecord data)
-        {
-            if (data.DateOfBirth < new DateTime(1930, 01, 01) || data.DateOfBirth > DateTime.Now)
-            {
-                throw new ArgumentException("Wrong dateOfBirth");
-            }
-        }
-
-        private void ValidateHeight(DataForRecord data)
-        {
-            if (data.Height < 30 || data.Height > 250)
-            {
-                throw new ArgumentException(data.Height.ToString());
-            }
-        }
-
-        private void ValidateWeight(DataForRecord data)
-        {
-            if (data.Weight <= 0)
-            {
-                throw new ArgumentException(data.Weight.ToString());
-            }
-        }
-
-        private void ValidateGender(DataForRecord data)
-        {
-            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
-            {
-                throw new ArgumentException(data.Gender.ToString());
-            }
         }
     }
 }
