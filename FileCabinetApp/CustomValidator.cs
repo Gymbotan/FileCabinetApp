@@ -21,45 +21,12 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            if (string.IsNullOrWhiteSpace(data.FirstName))
-            {
-                throw new ArgumentNullException(data.FirstName);
-            }
-
-            if (string.IsNullOrWhiteSpace(data.LastName))
-            {
-                throw new ArgumentNullException(data.LastName);
-            }
-
-            if (data.FirstName.Length < 2 || data.FirstName.Length > 50)
-            {
-                throw new ArgumentException(data.FirstName);
-            }
-
-            if (data.LastName.Length < 2 || data.LastName.Length > 50)
-            {
-                throw new ArgumentException(data.LastName);
-            }
-
-            if (data.DateOfBirth < new DateTime(1930, 01, 01) || data.DateOfBirth > DateTime.Now)
-            {
-                throw new ArgumentException("Wrong dateOfBirth");
-            }
-
-            if (data.Height < 30 || data.Height > 250)
-            {
-                throw new ArgumentException(data.Height.ToString());
-            }
-
-            if (data.Weight <= 0)
-            {
-                throw new ArgumentException(data.Weight.ToString());
-            }
-
-            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
-            {
-                throw new ArgumentException(data.Gender.ToString());
-            }
+            this.ValidateFirstName(data.FirstName);
+            this.ValidateLastName(data.LastName);
+            this.ValidateDateOfBirth(data.DateOfBirth);
+            this.ValidateHeight(data.Height);
+            this.ValidateWeight(data.Weight);
+            this.ValidateGender(data.Gender);
         }
 
         /// <summary>
@@ -160,6 +127,64 @@ namespace FileCabinetApp
 
             string str = "Gender should be: m - male, f - female, a - another";
             return Tuple.Create(isSuccess, str);
+        }
+
+        private void ValidateFirstName(string firstName)
+        {
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentNullException(firstName);
+            }
+
+            if (firstName.Length < 2 || firstName.Length > 50)
+            {
+                throw new ArgumentException(firstName);
+            }
+        }
+
+        private void ValidateLastName(string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentNullException(lastName);
+            }
+
+            if (lastName.Length < 2 || lastName.Length > 50)
+            {
+                throw new ArgumentException(lastName);
+            }
+        }
+
+        private void ValidateDateOfBirth(DateTime dateOfBirth)
+        {
+            if (dateOfBirth < new DateTime(1930, 01, 01) || dateOfBirth > DateTime.Now)
+            {
+                throw new ArgumentException("Wrong dateOfBirth");
+            }
+        }
+
+        private void ValidateHeight(short height)
+        {
+            if (height < 30 || height > 250)
+            {
+                throw new ArgumentException(height.ToString());
+            }
+        }
+
+        private void ValidateWeight(decimal weight)
+        {
+            if (weight <= 0)
+            {
+                throw new ArgumentException(weight.ToString());
+            }
+        }
+
+        private void ValidateGender(char gender)
+        {
+            if (gender != 'm' && gender != 'f' && gender != 'a')
+            {
+                throw new ArgumentException(gender.ToString());
+            }
         }
     }
 }
