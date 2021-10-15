@@ -29,22 +29,22 @@ namespace FileCabinetApp.CommandHandlers
             if (this.CanHandle(request))
             {
                 Console.Write("First name: ");
-                string firstName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.FirstNameValidator);
+                string firstName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.FirstNameValidation);
 
                 Console.Write("Last name: ");
-                var lastName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.LastNameValidator);
+                var lastName = CommonMethods.ReadInput<string>(CommonMethods.StringConverter, this.service.Validator.LastNameValidation);
 
                 Console.Write("Date of birth: ");
-                var dateOfBirth = CommonMethods.ReadInput<DateTime>(CommonMethods.DateConverter, this.service.Validator.DateOfBirthValidator);
+                var dateOfBirth = CommonMethods.ReadInput<DateTime>(CommonMethods.DateConverter, this.service.Validator.DateOfBirthValidation);
 
                 Console.Write("Height: ");
-                var height = CommonMethods.ReadInput<short>(CommonMethods.ShortConverter, this.service.Validator.HeightValidator);
+                var height = CommonMethods.ReadInput<short>(CommonMethods.ShortConverter, this.service.Validator.HeightValidation);
 
                 Console.Write("Weight: ");
-                var weight = CommonMethods.ReadInput<decimal>(CommonMethods.DecimalConverter, this.service.Validator.WeightValidator);
+                var weight = CommonMethods.ReadInput<decimal>(CommonMethods.DecimalConverter, this.service.Validator.WeightValidation);
 
                 Console.Write("Gender (m, f or a): ");
-                var gender = CommonMethods.ReadInput<char>(CommonMethods.CharConverter, this.service.Validator.GenderValidator);
+                var gender = CommonMethods.ReadInput<char>(CommonMethods.CharConverter, this.service.Validator.GenderValidation);
 
                 DataForRecord data = new DataForRecord(firstName, lastName, dateOfBirth, height, weight, gender);
 

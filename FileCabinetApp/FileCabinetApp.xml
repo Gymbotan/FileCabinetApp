@@ -435,271 +435,6 @@
             <param name="request">Request.</param>
             <returns>Can or not.</returns>
         </member>
-        <member name="T:FileCabinetApp.CustomDateOfBirthValidator">
-            <summary>
-            Class CustomDateOfBirthValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomDateOfBirthValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.CustomFirstNameValidator">
-            <summary>
-            Class CustomFirstNameValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomFirstNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.CustomGenderValidator">
-            <summary>
-            Class CustomGenderValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomGenderValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.CustomHeightValidator">
-            <summary>
-            Class CustomHeightValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomHeightValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.CustomLastNameValidator">
-            <summary>
-            Class CustomLastNameValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomLastNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
         <member name="T:FileCabinetApp.CustomValidator">
             <summary>
             Custom validator.
@@ -711,100 +446,47 @@
             </summary>
             <param name="data">Data.</param>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.FirstNameValidator(System.String)">
+        <member name="M:FileCabinetApp.CustomValidator.FirstNameValidation(System.String)">
             <summary>
             Validation of the first name.
             </summary>
             <param name="firstName">First name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.LastNameValidator(System.String)">
+        <member name="M:FileCabinetApp.CustomValidator.LastNameValidation(System.String)">
             <summary>
             Validation of the last name.
             </summary>
             <param name="lastName">Last name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.CustomValidator.DateOfBirthValidation(System.DateTime)">
             <summary>
             Validation of the date of birth.
             </summary>
             <param name="dateOfBirth">Date of birth.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.HeightValidator(System.Int16)">
+        <member name="M:FileCabinetApp.CustomValidator.HeightValidation(System.Int16)">
             <summary>
             Validation of the height.
             </summary>
             <param name="height">Height.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.WeightValidator(System.Decimal)">
+        <member name="M:FileCabinetApp.CustomValidator.WeightValidation(System.Decimal)">
             <summary>
             Validation of the weight.
             </summary>
             <param name="weight">Weight.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.GenderValidator(System.Char)">
+        <member name="M:FileCabinetApp.CustomValidator.GenderValidation(System.Char)">
             <summary>
             Validation of the gender.
             </summary>
             <param name="gender">Gender.</param>
             <returns>Tuple(is successful, error message).</returns>
-        </member>
-        <member name="T:FileCabinetApp.CustomWeightValidator">
-            <summary>
-            Class CustomWeightValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.CustomWeightValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
         </member>
         <member name="T:FileCabinetApp.DataForRecord">
             <summary>
@@ -852,266 +534,61 @@
             Gets or sets Gender.
             </summary>
         </member>
-        <member name="T:FileCabinetApp.DefaultDateOfBirthValidator">
+        <member name="T:FileCabinetApp.DateOfBirthValidator">
             <summary>
-            Class DefaultDateOfBirthValidator.
+            Class DateOfBirthValidator.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.#ctor(System.DateTime,System.DateTime)">
             <summary>
-            Unused validator.
+            Initializes a new instance of the <see cref="T:FileCabinetApp.DateOfBirthValidator"/> class.
             </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
+            <param name="from">Date from.</param>
+            <param name="to">Date to.</param>
         </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultDateOfBirthValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.DefaultFirstNameValidator">
-            <summary>
-            Class DefaultFirstNameValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.DateOfBirthValidation(System.DateTime)">
             <summary>
             Unused validator.
             </summary>
             <param name="dateOfBirth">DateOfBirth.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.FirstNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.FirstNameValidation(System.String)">
             <summary>
             Unused validator.
             </summary>
             <param name="firstName">firstName.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.GenderValidator(System.Char)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.GenderValidation(System.Char)">
             <summary>
             Unused validator.
             </summary>
             <param name="gender">gender.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.HeightValidator(System.Int16)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.HeightValidation(System.Int16)">
             <summary>
             Unused validator.
             </summary>
             <param name="height">height.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.LastNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.LastNameValidation(System.String)">
             <summary>
             Unused validator.
             </summary>
             <param name="lastName">lastName.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.WeightValidator(System.Decimal)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.WeightValidation(System.Decimal)">
             <summary>
             Unused validator.
             </summary>
             <param name="weight">weight.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultFirstNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.DefaultGenderValidator">
-            <summary>
-            Class DefaultGenderValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultGenderValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.DefaultHeightValidator">
-            <summary>
-            Class DefaultHeightValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultHeightValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
-            <summary>
-            Validates parameter.
-            </summary>
-            <param name="data">Data.</param>
-        </member>
-        <member name="T:FileCabinetApp.DefaultLastNameValidator">
-            <summary>
-            Class DefaultLastNameValidator.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.DateOfBirthValidator(System.DateTime)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="dateOfBirth">DateOfBirth.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.FirstNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="firstName">firstName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.GenderValidator(System.Char)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="gender">gender.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.HeightValidator(System.Int16)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="height">height.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.LastNameValidator(System.String)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="lastName">lastName.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.WeightValidator(System.Decimal)">
-            <summary>
-            Unused validator.
-            </summary>
-            <param name="weight">weight.</param>
-            <returns>Nothing.</returns>
-        </member>
-        <member name="M:FileCabinetApp.DefaultLastNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+        <member name="M:FileCabinetApp.DateOfBirthValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
             <summary>
             Validates parameter.
             </summary>
@@ -1128,42 +605,42 @@
             </summary>
             <param name="data">Data.</param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.FirstNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DefaultValidator.FirstNameValidation(System.String)">
             <summary>
             Validation of the first name.
             </summary>
             <param name="firstName">First name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.LastNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DefaultValidator.LastNameValidation(System.String)">
             <summary>
             Validation of the last name.
             </summary>
             <param name="lastName">Last name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.DefaultValidator.DateOfBirthValidation(System.DateTime)">
             <summary>
             Validation of the date of birth.
             </summary>
             <param name="dateOfBirth">Date of birth.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.HeightValidator(System.Int16)">
+        <member name="M:FileCabinetApp.DefaultValidator.HeightValidation(System.Int16)">
             <summary>
             Validation of the height.
             </summary>
             <param name="height">Height.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.WeightValidator(System.Decimal)">
+        <member name="M:FileCabinetApp.DefaultValidator.WeightValidation(System.Decimal)">
             <summary>
             Validation of the weight.
             </summary>
             <param name="weight">Weight.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.GenderValidator(System.Char)">
+        <member name="M:FileCabinetApp.DefaultValidator.GenderValidation(System.Char)">
             <summary>
             Validation of the gender.
             </summary>
@@ -1175,42 +652,42 @@
             Class DefaultWeightValidator.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.DateOfBirthValidation(System.DateTime)">
             <summary>
             Unused validator.
             </summary>
             <param name="dateOfBirth">DateOfBirth.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.FirstNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.FirstNameValidation(System.String)">
             <summary>
             Unused validator.
             </summary>
             <param name="firstName">firstName.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.GenderValidator(System.Char)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.GenderValidation(System.Char)">
             <summary>
             Unused validator.
             </summary>
             <param name="gender">gender.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.HeightValidator(System.Int16)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.HeightValidation(System.Int16)">
             <summary>
             Unused validator.
             </summary>
             <param name="height">height.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.LastNameValidator(System.String)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.LastNameValidation(System.String)">
             <summary>
             Unused validator.
             </summary>
             <param name="lastName">lastName.</param>
             <returns>Nothing.</returns>
         </member>
-        <member name="M:FileCabinetApp.DefaultWeightValidator.WeightValidator(System.Decimal)">
+        <member name="M:FileCabinetApp.DefaultWeightValidator.WeightValidation(System.Decimal)">
             <summary>
             Unused validator.
             </summary>
@@ -1601,6 +1078,185 @@
             </summary>
             <returns>Array of records.</returns>
         </member>
+        <member name="T:FileCabinetApp.FirstNameValidator">
+            <summary>
+            Class FirstNameValidator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FirstNameValidator"/> class.
+            </summary>
+            <param name="minLength">MinLength.</param>
+            <param name="maxLength">MaxLength.</param>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.DateOfBirthValidation(System.DateTime)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="dateOfBirth">DateOfBirth.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.FirstNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.GenderValidation(System.Char)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="gender">gender.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.HeightValidation(System.Int16)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="height">height.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.LastNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.WeightValidation(System.Decimal)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="weight">weight.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.FirstNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameter.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
+        <member name="T:FileCabinetApp.GenderValidator">
+            <summary>
+            Class GenderValidator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.#ctor(System.Char[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.GenderValidator"/> class.
+            </summary>
+            <param name="array">Array of possible values.</param>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.DateOfBirthValidation(System.DateTime)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="dateOfBirth">DateOfBirth.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.FirstNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.GenderValidation(System.Char)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="gender">gender.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.HeightValidation(System.Int16)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="height">height.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.LastNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.WeightValidation(System.Decimal)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="weight">weight.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.GenderValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameter.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
+        <member name="T:FileCabinetApp.HeightValidator">
+            <summary>
+            Class HeightValidator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.#ctor(System.Int16,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.HeightValidator"/> class.
+            </summary>
+            <param name="minHeight">MinHeight.</param>
+            <param name="maxHeight">MaxHeight.</param>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.DateOfBirthValidation(System.DateTime)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="dateOfBirth">DateOfBirth.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.FirstNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.GenderValidation(System.Char)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="gender">gender.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.HeightValidation(System.Int16)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="height">height.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.LastNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.WeightValidation(System.Decimal)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="weight">weight.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.HeightValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameter.
+            </summary>
+            <param name="data">Data.</param>
+        </member>
         <member name="T:FileCabinetApp.IFileCabinetService">
             <summary>
             Interface for FileCabinetService.
@@ -1710,47 +1366,107 @@
             </summary>
             <param name="data">Data.</param>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.FirstNameValidator(System.String)">
+        <member name="M:FileCabinetApp.IRecordValidator.FirstNameValidation(System.String)">
             <summary>
             Validation of the first name.
             </summary>
             <param name="firstName">First name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.LastNameValidator(System.String)">
+        <member name="M:FileCabinetApp.IRecordValidator.LastNameValidation(System.String)">
             <summary>
             Validation of the last name.
             </summary>
             <param name="lastName">Last name.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.DateOfBirthValidator(System.DateTime)">
+        <member name="M:FileCabinetApp.IRecordValidator.DateOfBirthValidation(System.DateTime)">
             <summary>
             Validation of the date of birth.
             </summary>
             <param name="dateOfBirth">Date of birth.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.HeightValidator(System.Int16)">
+        <member name="M:FileCabinetApp.IRecordValidator.HeightValidation(System.Int16)">
             <summary>
             Validation of the height.
             </summary>
             <param name="height">Height.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.WeightValidator(System.Decimal)">
+        <member name="M:FileCabinetApp.IRecordValidator.WeightValidation(System.Decimal)">
             <summary>
             Validation of the weight.
             </summary>
             <param name="weight">Weight.</param>
             <returns>Tuple(is successful, error message).</returns>
         </member>
-        <member name="M:FileCabinetApp.IRecordValidator.GenderValidator(System.Char)">
+        <member name="M:FileCabinetApp.IRecordValidator.GenderValidation(System.Char)">
             <summary>
             Validation of the gender.
             </summary>
             <param name="gender">Gender.</param>
             <returns>Tuple(is successful, error message).</returns>
+        </member>
+        <member name="T:FileCabinetApp.LastNameValidator">
+            <summary>
+            Class LastNameValidator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.LastNameValidator"/> class.
+            </summary>
+            <param name="minLength">MinLength.</param>
+            <param name="maxLength">MaxLength.</param>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.DateOfBirthValidation(System.DateTime)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="dateOfBirth">DateOfBirth.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.FirstNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.GenderValidation(System.Char)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="gender">gender.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.HeightValidation(System.Int16)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="height">height.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.LastNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.WeightValidation(System.Decimal)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="weight">weight.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.LastNameValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameter.
+            </summary>
+            <param name="data">Data.</param>
         </member>
         <member name="T:FileCabinetApp.ListOfXmlRecord">
             <summary>
@@ -1822,6 +1538,66 @@
             Prints records.
             </summary>
             <param name="records">Records.</param>
+        </member>
+        <member name="T:FileCabinetApp.WeightValidator">
+            <summary>
+            Class WeightValidator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.#ctor(System.Decimal,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.WeightValidator"/> class.
+            </summary>
+            <param name="minWeight">MinWeight.</param>
+            <param name="maxWeight">MaxWeight.</param>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.DateOfBirthValidation(System.DateTime)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="dateOfBirth">DateOfBirth.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.FirstNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.GenderValidation(System.Char)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="gender">gender.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.HeightValidation(System.Int16)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="height">height.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.LastNameValidation(System.String)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.WeightValidation(System.Decimal)">
+            <summary>
+            Unused validator.
+            </summary>
+            <param name="weight">weight.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:FileCabinetApp.WeightValidator.ValidateParameters(FileCabinetApp.DataForRecord)">
+            <summary>
+            Validates parameter.
+            </summary>
+            <param name="data">Data.</param>
         </member>
         <member name="T:FileCabinetApp.XmlRecord">
             <summary>

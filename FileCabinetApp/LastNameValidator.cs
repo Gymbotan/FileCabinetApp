@@ -1,4 +1,4 @@
-﻿// <copyright file="DefaultFirstNameValidator.cs" company="PlaceholderCompany">
+﻿// <copyright file="LastNameValidator.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -8,16 +8,30 @@ namespace FileCabinetApp
     using System.Collections.Generic;
 
     /// <summary>
-    /// Class DefaultFirstNameValidator.
+    /// Class LastNameValidator.
     /// </summary>
-    public class DefaultFirstNameValidator : IRecordValidator
+    public class LastNameValidator : IRecordValidator
     {
+        private readonly int minLength;
+        private readonly int maxLength;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LastNameValidator"/> class.
+        /// </summary>
+        /// <param name="minLength">MinLength.</param>
+        /// <param name="maxLength">MaxLength.</param>
+        public LastNameValidator(int minLength, int maxLength)
+        {
+            this.minLength = minLength;
+            this.maxLength = maxLength;
+        }
+
         /// <summary>
         /// Unused validator.
         /// </summary>
         /// <param name="dateOfBirth">DateOfBirth.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
+        public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +41,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">firstName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> FirstNameValidator(string firstName)
+        public Tuple<bool, string> FirstNameValidation(string firstName)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +51,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="gender">gender.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> GenderValidator(char gender)
+        public Tuple<bool, string> GenderValidation(char gender)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +61,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="height">height.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> HeightValidator(short height)
+        public Tuple<bool, string> HeightValidation(short height)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +71,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="lastName">lastName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> LastNameValidator(string lastName)
+        public Tuple<bool, string> LastNameValidation(string lastName)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +81,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="weight">weight.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> WeightValidator(decimal weight)
+        public Tuple<bool, string> WeightValidation(decimal weight)
         {
             throw new NotImplementedException();
         }
@@ -78,14 +92,14 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            if (string.IsNullOrWhiteSpace(data.FirstName))
+            if (string.IsNullOrWhiteSpace(data.LastName))
             {
-                throw new ArgumentNullException(data.FirstName);
+                throw new ArgumentNullException(data.LastName);
             }
 
-            if (data.FirstName.Length < 2 || data.FirstName.Length > 60)
+            if (data.LastName.Length < this.minLength || data.LastName.Length > this.maxLength)
             {
-                throw new ArgumentException(data.FirstName);
+                throw new ArgumentException(data.LastName);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿// <copyright file="DefaultGenderValidator.cs" company="PlaceholderCompany">
+﻿// <copyright file="DateOfBirthValidator.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -8,16 +8,30 @@ namespace FileCabinetApp
     using System.Collections.Generic;
 
     /// <summary>
-    /// Class DefaultGenderValidator.
+    /// Class DateOfBirthValidator.
     /// </summary>
-    public class DefaultGenderValidator : IRecordValidator
+    public class DateOfBirthValidator : IRecordValidator
     {
+        private readonly DateTime from;
+        private readonly DateTime to;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateOfBirthValidator"/> class.
+        /// </summary>
+        /// <param name="from">Date from.</param>
+        /// <param name="to">Date to.</param>
+        public DateOfBirthValidator(DateTime from, DateTime to)
+        {
+            this.from = from;
+            this.to = to;
+        }
+
         /// <summary>
         /// Unused validator.
         /// </summary>
         /// <param name="dateOfBirth">DateOfBirth.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
+        public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +41,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">firstName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> FirstNameValidator(string firstName)
+        public Tuple<bool, string> FirstNameValidation(string firstName)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +51,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="gender">gender.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> GenderValidator(char gender)
+        public Tuple<bool, string> GenderValidation(char gender)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +61,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="height">height.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> HeightValidator(short height)
+        public Tuple<bool, string> HeightValidation(short height)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +71,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="lastName">lastName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> LastNameValidator(string lastName)
+        public Tuple<bool, string> LastNameValidation(string lastName)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +81,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="weight">weight.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> WeightValidator(decimal weight)
+        public Tuple<bool, string> WeightValidation(decimal weight)
         {
             throw new NotImplementedException();
         }
@@ -78,9 +92,9 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            if (data.Gender != 'm' && data.Gender != 'f' && data.Gender != 'a')
+            if (data.DateOfBirth < this.from || data.DateOfBirth > this.to)
             {
-                throw new ArgumentException(data.Gender.ToString());
+                throw new ArgumentException("Wrong dateOfBirth");
             }
         }
     }

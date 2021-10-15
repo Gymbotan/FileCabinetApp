@@ -21,12 +21,12 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            new CustomFirstNameValidator().ValidateParameters(data);
-            new CustomLastNameValidator().ValidateParameters(data);
-            new CustomDateOfBirthValidator().ValidateParameters(data);
-            new CustomHeightValidator().ValidateParameters(data);
-            new CustomWeightValidator().ValidateParameters(data);
-            new CustomGenderValidator().ValidateParameters(data);
+            new FirstNameValidator(2, 50).ValidateParameters(data);
+            new LastNameValidator(2, 50).ValidateParameters(data);
+            new DateOfBirthValidator(new DateTime(1930, 1, 1), DateTime.Now).ValidateParameters(data);
+            new HeightValidator(30, 250).ValidateParameters(data);
+            new WeightValidator(1, 200).ValidateParameters(data);
+            new GenderValidator(new char[] { 'm', 'f', 'a' }).ValidateParameters(data);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">First name.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> FirstNameValidator(string firstName)
+        public Tuple<bool, string> FirstNameValidation(string firstName)
         {
             bool isSuccess = true;
             if (firstName.Length < 2 || firstName.Length > 50)
@@ -50,7 +50,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="lastName">Last name.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> LastNameValidator(string lastName)
+        public Tuple<bool, string> LastNameValidation(string lastName)
         {
             bool isSuccess = true;
             if (lastName.Length < 2 || lastName.Length > 50)
@@ -66,7 +66,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="dateOfBirth">Date of birth.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
+        public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth)
         {
             bool isSuccess = true;
             if (dateOfBirth < new DateTime(1930, 01, 01) || dateOfBirth > DateTime.Now)
@@ -83,7 +83,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="height">Height.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> HeightValidator(short height)
+        public Tuple<bool, string> HeightValidation(short height)
         {
             bool isSuccess = true;
             if (height < 30 || height > 250)
@@ -100,7 +100,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="weight">Weight.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> WeightValidator(decimal weight)
+        public Tuple<bool, string> WeightValidation(decimal weight)
         {
             bool isSuccess = true;
             if (weight <= 0)
@@ -117,7 +117,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="gender">Gender.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> GenderValidator(char gender)
+        public Tuple<bool, string> GenderValidation(char gender)
         {
             bool isSuccess = true;
             if (gender != 'm' && gender != 'f' && gender != 'a')

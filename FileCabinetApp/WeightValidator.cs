@@ -1,4 +1,4 @@
-﻿// <copyright file="DefaultHeightValidator.cs" company="PlaceholderCompany">
+﻿// <copyright file="WeightValidator.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -8,16 +8,30 @@ namespace FileCabinetApp
     using System.Collections.Generic;
 
     /// <summary>
-    /// Class DefaultHeightValidator.
+    /// Class WeightValidator.
     /// </summary>
-    public class DefaultHeightValidator : IRecordValidator
+    public class WeightValidator : IRecordValidator
     {
+        private readonly decimal minWeight;
+        private readonly decimal maxWeight;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WeightValidator"/> class.
+        /// </summary>
+        /// <param name="minWeight">MinWeight.</param>
+        /// <param name="maxWeight">MaxWeight.</param>
+        public WeightValidator(decimal minWeight, decimal maxWeight)
+        {
+            this.minWeight = minWeight;
+            this.maxWeight = maxWeight;
+        }
+
         /// <summary>
         /// Unused validator.
         /// </summary>
         /// <param name="dateOfBirth">DateOfBirth.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth)
+        public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +41,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">firstName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> FirstNameValidator(string firstName)
+        public Tuple<bool, string> FirstNameValidation(string firstName)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +51,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="gender">gender.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> GenderValidator(char gender)
+        public Tuple<bool, string> GenderValidation(char gender)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +61,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="height">height.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> HeightValidator(short height)
+        public Tuple<bool, string> HeightValidation(short height)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +71,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="lastName">lastName.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> LastNameValidator(string lastName)
+        public Tuple<bool, string> LastNameValidation(string lastName)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +81,7 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="weight">weight.</param>
         /// <returns>Nothing.</returns>
-        public Tuple<bool, string> WeightValidator(decimal weight)
+        public Tuple<bool, string> WeightValidation(decimal weight)
         {
             throw new NotImplementedException();
         }
@@ -78,9 +92,9 @@ namespace FileCabinetApp
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            if (data.Height < 30 || data.Height > 250)
+            if (data.Height < this.minWeight || data.Height > this.maxWeight)
             {
-                throw new ArgumentException(data.Height.ToString());
+                throw new ArgumentException(data.Weight.ToString());
             }
         }
     }

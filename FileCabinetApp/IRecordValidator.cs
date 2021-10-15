@@ -22,41 +22,41 @@ namespace FileCabinetApp
         /// </summary>
         /// <param name="firstName">First name.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> FirstNameValidator(string firstName);
+        public Tuple<bool, string> FirstNameValidation(string firstName);
 
         /// <summary>
         /// Validation of the last name.
         /// </summary>
         /// <param name="lastName">Last name.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> LastNameValidator(string lastName);
+        public Tuple<bool, string> LastNameValidation(string lastName);
 
         /// <summary>
         /// Validation of the date of birth.
         /// </summary>
         /// <param name="dateOfBirth">Date of birth.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> DateOfBirthValidator(DateTime dateOfBirth);
+        public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth);
 
         /// <summary>
         /// Validation of the height.
         /// </summary>
         /// <param name="height">Height.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> HeightValidator(short height);
+        public Tuple<bool, string> HeightValidation(short height);
 
         /// <summary>
         /// Validation of the weight.
         /// </summary>
         /// <param name="weight">Weight.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> WeightValidator(decimal weight);
+        public Tuple<bool, string> WeightValidation(decimal weight);
 
         /// <summary>
         /// Validation of the gender.
         /// </summary>
         /// <param name="gender">Gender.</param>
         /// <returns>Tuple(is successful, error message).</returns>
-        public Tuple<bool, string> GenderValidator(char gender);
+        public Tuple<bool, string> GenderValidation(char gender);
     }
 }
