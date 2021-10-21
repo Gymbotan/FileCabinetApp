@@ -1,4 +1,4 @@
-﻿// <copyright file="DefaultValidator.cs" company="PlaceholderCompany">
+﻿// <copyright file="CompositeValidator.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -11,22 +11,41 @@ namespace FileCabinetApp
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Defult validator.
+    /// Class CompositeValidator.
     /// </summary>
-    public class DefaultValidator : IRecordValidator
+    public class CompositeValidator : IRecordValidator
     {
+        private readonly List<IRecordValidator> validators;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositeValidator"/> class.
+        /// </summary>
+        /// <param name="recordValidators">Validators.</param>
+        public CompositeValidator(IEnumerable<IRecordValidator> recordValidators)
+        {
+            this.validators = new List<IRecordValidator>();
+            if (recordValidators != null)
+            {
+                foreach (var val in recordValidators)
+                {
+                    if (val != null)
+                    {
+                        this.validators.Add(val);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Validates parameters.
         /// </summary>
         /// <param name="data">Data.</param>
         public void ValidateParameters(DataForRecord data)
         {
-            new FirstNameValidator(2, 60).ValidateParameters(data);
-            new LastNameValidator(2, 60).ValidateParameters(data);
-            new DateOfBirthValidator(new DateTime(1950, 1, 1), DateTime.Now).ValidateParameters(data);
-            new HeightValidator(30, 250).ValidateParameters(data);
-            new WeightValidator(1, 200).ValidateParameters(data);
-            new GenderValidator(new char[] { 'm', 'f', 'a' }).ValidateParameters(data);
+            foreach (var validator in this.validators)
+            {
+                validator.ValidateParameters(data);
+            }
         }
 
         /// <summary>
@@ -37,12 +56,12 @@ namespace FileCabinetApp
         public Tuple<bool, string> FirstNameValidation(string firstName)
         {
             bool isSuccess = true;
-            if (firstName.Length < 2 || firstName.Length > 60)
+            if (firstName.Length < 2 || firstName.Length > 50)
             {
                 isSuccess = false;
             }
 
-            return Tuple.Create(isSuccess, "First name's length should more than 1 and less than 61)");
+            return Tuple.Create(isSuccess, "First name's length should more than 1 and less than 51)");
         }
 
         /// <summary>
@@ -53,12 +72,12 @@ namespace FileCabinetApp
         public Tuple<bool, string> LastNameValidation(string lastName)
         {
             bool isSuccess = true;
-            if (lastName.Length < 2 || lastName.Length > 60)
+            if (lastName.Length < 2 || lastName.Length > 50)
             {
                 isSuccess = false;
             }
 
-            return Tuple.Create(isSuccess, "Last name's length should more than 1 and less than 61");
+            return Tuple.Create(isSuccess, "Last name's length should more than 1 and less than 51");
         }
 
         /// <summary>
@@ -69,7 +88,7 @@ namespace FileCabinetApp
         public Tuple<bool, string> DateOfBirthValidation(DateTime dateOfBirth)
         {
             bool isSuccess = true;
-            if (dateOfBirth < new DateTime(1950, 01, 01) || dateOfBirth > DateTime.Now)
+            if (dateOfBirth < new DateTime(1930, 01, 01) || dateOfBirth > DateTime.Now)
             {
                 isSuccess = false;
             }
