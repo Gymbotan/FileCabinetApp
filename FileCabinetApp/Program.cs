@@ -15,14 +15,7 @@ namespace FileCabinetApp
 
         private static bool isRunning = true;
         
-        private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder()
-            .ValidateFirstName(2, 60)
-            .ValidateLastName(2, 60)
-            .ValidateDateOfBirth(new DateTime(1950, 1, 1), DateTime.Now)
-            .ValidateHeight(30,250)
-            .ValidateWeight(1, 200)
-            .ValidatorGender(new char[] { 'm', 'f', 'a' })
-            .Create());
+        private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder().CreateDefault());
 
         public static void Main(string[] args)
         {
@@ -105,14 +98,7 @@ namespace FileCabinetApp
                     break;
                 case "CUSTOM":
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder()
-                            .ValidateFirstName(2, 50)
-                            .ValidateLastName(2, 50)
-                            .ValidateDateOfBirth(new DateTime(1930, 1, 1), DateTime.Now)
-                            .ValidateHeight(30, 250)
-                            .ValidateWeight(1, 200)
-                            .ValidatorGender(new char[] { 'm', 'f', 'a' })
-                            .Create());
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder().CreateCustom());
                     break;
                 default:
                     Console.WriteLine($"Using default validation rules.");
@@ -129,14 +115,7 @@ namespace FileCabinetApp
                     break;
                 case "FILE":
                     Console.WriteLine($"Using {parameter.ToLower()} service type.");
-                    Program.fileCabinetService = new FileCabinetFilesystemService(new ValidatorBuilder()
-                            .ValidateFirstName(2, 60)
-                            .ValidateLastName(2, 60)
-                            .ValidateDateOfBirth(new DateTime(1950, 1, 1), DateTime.Now)
-                            .ValidateHeight(30, 250)
-                            .ValidateWeight(1, 200)
-                            .ValidatorGender(new char[] { 'm', 'f', 'a' })
-                            .Create());
+                    Program.fileCabinetService = new FileCabinetFilesystemService(new ValidatorBuilder().CreateDefault());
                     break;
                 default:
                     Console.WriteLine($"Using default service type.");

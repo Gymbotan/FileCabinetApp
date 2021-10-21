@@ -1550,6 +1550,18 @@
             </summary>
             <returns>CompositeValidator.</returns>
         </member>
+        <member name="M:FileCabinetApp.ValidatorBuilder.CreateDefault">
+            <summary>
+            Create default CompositeValidator.
+            </summary>
+            <returns>CompositeValidator.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ValidatorBuilder.CreateCustom">
+            <summary>
+            Create custom CompositeValidator.
+            </summary>
+            <returns>CompositeValidator.</returns>
+        </member>
         <member name="T:FileCabinetApp.WeightValidator">
             <summary>
             Class WeightValidator.

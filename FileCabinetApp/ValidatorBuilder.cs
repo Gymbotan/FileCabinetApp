@@ -96,5 +96,35 @@ namespace FileCabinetApp
         {
             return new CompositeValidator(this.validators);
         }
+
+        /// <summary>
+        /// Create default CompositeValidator.
+        /// </summary>
+        /// <returns>CompositeValidator.</returns>
+        public CompositeValidator CreateDefault()
+        {
+            this.ValidateFirstName(2, 60)
+            .ValidateLastName(2, 60)
+            .ValidateDateOfBirth(new DateTime(1950, 1, 1), DateTime.Now)
+            .ValidateHeight(30, 250)
+            .ValidateWeight(1, 200)
+            .ValidatorGender(new char[] { 'm', 'f', 'a' });
+            return new CompositeValidator(this.validators);
+        }
+
+        /// <summary>
+        /// Create custom CompositeValidator.
+        /// </summary>
+        /// <returns>CompositeValidator.</returns>
+        public CompositeValidator CreateCustom()
+        {
+            this.ValidateFirstName(2, 50)
+            .ValidateLastName(2, 50)
+            .ValidateDateOfBirth(new DateTime(1930, 1, 1), DateTime.Now)
+            .ValidateHeight(30, 250)
+            .ValidateWeight(1, 200)
+            .ValidatorGender(new char[] { 'm', 'f', 'a' });
+            return new CompositeValidator(this.validators);
+        }
     }
 }
