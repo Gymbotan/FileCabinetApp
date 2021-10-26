@@ -29,16 +29,67 @@ namespace FileCabinetApp
                 .Build();
 
             Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
-            if (args.Length > 0)
+
+            string[] arguments = ParseArgs(args);
+
+            string validationType = "default";
+            string storageType = "memory";
+            bool isStopwatch = false;
+            bool isLogger = false;
+
+            if (args.Length != 0)
             {
-                string[] parameters = ParseArgs(args);
-                SetSettings(parameters);
+                for (int i = 0; i < arguments.Length; i += 2)
+                {
+                    switch (arguments[i].ToLower())
+                    {
+                        case "v":
+                        case "validation-rules":
+                            if (arguments[i + 1].ToLower() == "custom")
+                            {
+                                validationType = "custom";
+                            }
+                            break;
+                        case "s":
+                        case "storage":
+                            if (arguments[i + 1].ToLower() == "file")
+                            {
+                                storageType = "file";
+                            }
+                            break;
+                        case "use":
+                            if (arguments[i + 1].ToLower() == "stopwatch")
+                            {
+                                isStopwatch = true;
+                            }
+                            if (arguments[i + 1].ToLower() == "logger")
+                            {
+                                isLogger = true;
+                            }
+                            break;
+                    }
+                }
+            }
+
+            Console.WriteLine($"validationType = {validationType}");
+            Console.WriteLine($"storageType = {storageType}");
+            Console.WriteLine($"isStopwatch = {isStopwatch}");
+            Console.WriteLine($"isLogger = {isLogger}");
+            Console.WriteLine();
+
+            rules = builder.GetSection(validationType).Get<ValidationRules>();
+            if (storageType == "file")
+            {
+                Program.fileCabinetService = new FileCabinetFilesystemService(new ValidatorBuilder(rules).CreateFromJson());
             }
             else
             {
-                rules = builder.GetSection("default").Get<ValidationRules>();
                 Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                Console.WriteLine($"Using default validation rules.");
+            }
+
+            if (isStopwatch)
+            {
+                Program.fileCabinetService = new ServiceMeter(Program.fileCabinetService);
             }
 
             Console.WriteLine(Program.HintMessage);
@@ -58,98 +109,38 @@ namespace FileCabinetApp
 
         private static string[] ParseArgs(string[] args)
         {
-            try
+            if (args.Length == 0)
             {
-                if (args[0].StartsWith("--"))
+                return new string[0];
+            }
+
+            List<string> parameters = new List<string>();
+
+            int i = 0;
+            while (i < args.Length)
+            {
+                if (args[i].StartsWith("--"))
                 {
-                    args[0] = args[0].Replace("--", "");
-                    string[] parameters = args[0].Split('=', 2);
-                    return parameters;
+                    string[] temp = args[i].Split('='); 
+                    parameters.Add(temp[0].Replace("--", ""));
+                    parameters.Add(temp[1]);
+                    i++;
                 }
-                else if (args[0].StartsWith('-'))
+                else if (args[i].StartsWith("-"))
                 {
-                    string[] parameters = new string[2] { args[0].Replace("-", ""), args[1] };
-                    return parameters;
+                    parameters.Add(args[i++].Substring(1));
+                    parameters.Add(args[i++]);
                 }
                 else
                 {
-                    return null;
+                    string[] temp = args[i].Split('-');
+                    parameters.Add(temp[0]);
+                    parameters.Add(temp[1]);
+                    i++;
                 }
             }
-            catch(ArgumentException e)
-            {
-                throw new ArgumentException(e.Message);
-            }
-        }
 
-        private static void SetSettings(string[] parameters)
-        {
-            switch (parameters[0].ToUpper())
-            {
-                case "V":
-                case "VALIDATION-RULES":
-                    SetValidationRule(parameters[1]);
-                    break;
-                case "S":
-                case "STORAGE":
-                    SetServiceType(parameters[1]);
-                    break;
-                default:
-                    SetValidationRule("Default");
-                    break;
-            }
-        }
-
-        private static void SetValidationRule(string parameter)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("validation-rules.json")
-                .Build();
-            switch (parameter.ToUpper())
-            {
-                case "DEFAULT":
-                    rules = builder.GetSection("default").Get<ValidationRules>();
-                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    break;
-                case "CUSTOM":
-                    rules = builder.GetSection("custom").Get<ValidationRules>();
-                    Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    break;
-                default:
-                    rules = builder.GetSection("default").Get<ValidationRules>();
-                    Console.WriteLine($"Using default validation rules.");
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    break;
-            }
-        }
-
-        private static void SetServiceType(string parameter)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("validation-rules.json")
-                .Build();
-            switch (parameter.ToUpper())
-            {
-                case "MEMORY":
-                    rules = builder.GetSection("default").Get<ValidationRules>();
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    Console.WriteLine($"Using {parameter.ToLower()} service type.");
-                    break;
-                case "FILE":
-                    Console.WriteLine($"Using {parameter.ToLower()} service type.");
-                    rules = builder.GetSection("default").Get<ValidationRules>();
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    break;
-                default:
-                    rules = builder.GetSection("default").Get<ValidationRules>();
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
-                    Console.WriteLine($"Using default service type.");
-                    break;
-            }
+            return parameters.ToArray();
         }
 
         /// <summary>

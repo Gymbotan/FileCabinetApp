@@ -1492,6 +1492,11 @@
             </summary>
             <param name="records">Records.</param>
         </member>
+        <member name="T:FileCabinetApp.ServiceMeter">
+            <summary>
+            Decorator class for checking method's working time.
+            </summary>
+        </member>
         <member name="M:FileCabinetApp.ServiceMeter.#ctor(FileCabinetApp.IFileCabinetService)">
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.ServiceMeter"/> class.

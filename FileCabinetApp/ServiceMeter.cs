@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="ServiceMeter.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace FileCabinetApp
 {
-    class ServiceMeter : IFileCabinetService
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
+    /// <summary>
+    /// Decorator class for checking method's working time.
+    /// </summary>
+    public class ServiceMeter : IFileCabinetService
     {
         private readonly IFileCabinetService service;
-        private Stopwatch watch = new Stopwatch();
+        private readonly Stopwatch watch = new Stopwatch();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceMeter"/> class.
@@ -18,6 +22,7 @@ namespace FileCabinetApp
         /// <param name="service">IFileCabinetService.</param>
         public ServiceMeter(IFileCabinetService service)
         {
+            Console.WriteLine("ServiceMeter created!");
             this.service = service;
             this.Validator = service.Validator;
         }
