@@ -4,6 +4,9 @@ namespace FileCabinetApp
     using System;
     using FileCabinetApp.CommandHandlers;
     using System.Collections.Generic;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Configuration.Json;
+    using System.IO;
 
     /// <summary>
     /// Main class with main functionality.
@@ -16,9 +19,15 @@ namespace FileCabinetApp
         private static bool isRunning = true;
         
         private static IFileCabinetService fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder().CreateDefault());
+        private static ValidationRules rules;
 
         public static void Main(string[] args)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("validation-rules.json")
+                .Build();
+
             Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
             if (args.Length > 0)
             {
@@ -27,9 +36,16 @@ namespace FileCabinetApp
             }
             else
             {
+                rules = builder.GetSection("default").Get<ValidationRules>();
                 Console.WriteLine($"Using default validation rules.");
             }
-            
+
+            Console.WriteLine($"First name diapazon: {rules.FirstName.Min} - {rules.FirstName.Max}");
+            Console.WriteLine($"Last name diapazon: {rules.LastName.Min} - {rules.LastName.Max}");
+            Console.WriteLine($"DoB diapazon: {rules.DateOfBirth.From} - {rules.DateOfBirth.To}");
+            Console.WriteLine($"Height diapazon: {rules.Height.Min} - {rules.Height.Max}");
+            Console.WriteLine($"Weight diapazon: {rules.Weight.Min} - {rules.Weight.Max}");
+
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
 
@@ -91,12 +107,18 @@ namespace FileCabinetApp
 
         private static void SetValidationRule(string parameter)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("validation-rules.json")
+                .Build();
             switch (parameter.ToUpper())
             {
                 case "DEFAULT":
+                    rules = builder.GetSection("default").Get<ValidationRules>();
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
                     break;
                 case "CUSTOM":
+                    rules = builder.GetSection("custom").Get<ValidationRules>();
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
                     Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder().CreateCustom());
                     break;

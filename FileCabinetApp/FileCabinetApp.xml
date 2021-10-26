@@ -1492,6 +1492,116 @@
             </summary>
             <param name="records">Records.</param>
         </member>
+        <member name="T:FileCabinetApp.ValidationParameters.DateOfBirth">
+            <summary>
+            DateOfBirth parameters.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.DateOfBirth.From">
+            <summary>
+            Gets or sets DateOfBirth from.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.DateOfBirth.To">
+            <summary>
+            Gets or sets DateOfBirth to.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.ValidationParameters.FirstName">
+            <summary>
+            FirstName parameters.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.FirstName.Min">
+            <summary>
+            Gets or sets Min length of firstName.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.FirstName.Max">
+            <summary>
+            Gets or sets Max length of firstName.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.ValidationParameters.Height">
+            <summary>
+            Height parameters.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.Height.Min">
+            <summary>
+            Gets or sets Min value of Height.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.Height.Max">
+            <summary>
+            Gets or sets Max value of Height.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.ValidationParameters.LastName">
+            <summary>
+            LastName parameters.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.LastName.Min">
+            <summary>
+            Gets or sets Min length of LastName.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.LastName.Max">
+            <summary>
+            Gets or sets Max length of LastName.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.ValidationParameters.Weight">
+            <summary>
+            Weight parameters.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.Weight.Min">
+            <summary>
+            Gets or sets Min value of Weight.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationParameters.Weight.Max">
+            <summary>
+            Gets or sets Max value of Weight.
+            </summary>
+        </member>
+        <member name="T:FileCabinetApp.ValidationRules">
+            <summary>
+            ValidationRules class.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.FirstName">
+            <summary>
+            Gets or sets firstName.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.LastName">
+            <summary>
+            Gets or sets lastName.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.DateOfBirth">
+            <summary>
+            Gets or sets dateOfBirth.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.Height">
+            <summary>
+            Gets or sets height.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.Weight">
+            <summary>
+            Gets or sets weight.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.ValidationRules.Gender">
+            <summary>
+            Gets or sets gender.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.ValidatorBuilder">
             <summary>
             Class ValidatorBuilder.
