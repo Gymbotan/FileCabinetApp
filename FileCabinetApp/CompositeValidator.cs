@@ -6,9 +6,6 @@ namespace FileCabinetApp
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Class CompositeValidator.
@@ -26,11 +23,11 @@ namespace FileCabinetApp
             this.validators = new List<IRecordValidator>();
             if (recordValidators != null)
             {
-                foreach (var val in recordValidators)
+                foreach (var validator in recordValidators)
                 {
-                    if (val != null)
+                    if (validator != null)
                     {
-                        this.validators.Add(val);
+                        this.validators.Add(validator);
                     }
                 }
             }

@@ -16,6 +16,23 @@ namespace FileCabinetApp
     public class ValidatorBuilder
     {
         private readonly List<IRecordValidator> validators = new List<IRecordValidator>();
+        private readonly ValidationRules rules;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidatorBuilder"/> class.
+        /// </summary>
+        public ValidatorBuilder()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidatorBuilder"/> class.
+        /// </summary>
+        /// <param name="rules">ValidationRules.</param>
+        public ValidatorBuilder(ValidationRules rules)
+        {
+            this.rules = rules;
+        }
 
         /// <summary>
         /// ValidateFirstName.
@@ -125,6 +142,37 @@ namespace FileCabinetApp
             .ValidateWeight(1, 200)
             .ValidatorGender(new char[] { 'm', 'f', 'a' });
             return new CompositeValidator(this.validators);
+        }
+
+        /// <summary>
+        /// Creates Validators based on JSON file.
+        /// </summary>
+        /// <returns>CompositeValidator.</returns>
+        public CompositeValidator CreateFromJson()
+        {
+            this.ValidateFirstName(this.rules.FirstName.Min, this.rules.FirstName.Max)
+            .ValidateLastName(this.rules.LastName.Min, this.rules.LastName.Max)
+            .ValidateDateOfBirth(this.DateFromString(this.rules.DateOfBirth.From), this.DateFromString(this.rules.DateOfBirth.To))
+            .ValidateHeight(this.rules.Height.Min, this.rules.Height.Max)
+            .ValidateWeight(this.rules.Weight.Min, this.rules.Weight.Max)
+            .ValidatorGender(this.rules.Gender);
+            return new CompositeValidator(this.validators);
+        }
+
+        private DateTime DateFromString(string str)
+        {
+            DateTime date;
+            try
+            {
+                var inputs = str.Split('/', 3);
+                date = new DateTime(int.Parse(inputs[2]), int.Parse(inputs[0]), int.Parse(inputs[1]));
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+
+            return date;
         }
     }
 }

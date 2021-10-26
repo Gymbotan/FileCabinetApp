@@ -1607,6 +1607,17 @@
             Class ValidatorBuilder.
             </summary>
         </member>
+        <member name="M:FileCabinetApp.ValidatorBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ValidatorBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ValidatorBuilder.#ctor(FileCabinetApp.ValidationRules)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ValidatorBuilder"/> class.
+            </summary>
+            <param name="rules">ValidationRules.</param>
+        </member>
         <member name="M:FileCabinetApp.ValidatorBuilder.ValidateFirstName(System.Int32,System.Int32)">
             <summary>
             ValidateFirstName.
@@ -1669,6 +1680,12 @@
         <member name="M:FileCabinetApp.ValidatorBuilder.CreateCustom">
             <summary>
             Create custom CompositeValidator.
+            </summary>
+            <returns>CompositeValidator.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ValidatorBuilder.CreateFromJson">
+            <summary>
+            Creates Validators based on JSON file.
             </summary>
             <returns>CompositeValidator.</returns>
         </member>

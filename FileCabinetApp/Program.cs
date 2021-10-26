@@ -37,14 +37,9 @@ namespace FileCabinetApp
             else
             {
                 rules = builder.GetSection("default").Get<ValidationRules>();
+                Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                 Console.WriteLine($"Using default validation rules.");
             }
-
-            Console.WriteLine($"First name diapazon: {rules.FirstName.Min} - {rules.FirstName.Max}");
-            Console.WriteLine($"Last name diapazon: {rules.LastName.Min} - {rules.LastName.Max}");
-            Console.WriteLine($"DoB diapazon: {rules.DateOfBirth.From} - {rules.DateOfBirth.To}");
-            Console.WriteLine($"Height diapazon: {rules.Height.Min} - {rules.Height.Max}");
-            Console.WriteLine($"Weight diapazon: {rules.Weight.Min} - {rules.Weight.Max}");
 
             Console.WriteLine(Program.HintMessage);
             Console.WriteLine();
@@ -116,30 +111,42 @@ namespace FileCabinetApp
                 case "DEFAULT":
                     rules = builder.GetSection("default").Get<ValidationRules>();
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     break;
                 case "CUSTOM":
                     rules = builder.GetSection("custom").Get<ValidationRules>();
                     Console.WriteLine($"Using {parameter.ToLower()} validation rules.");
-                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder().CreateCustom());
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     break;
                 default:
+                    rules = builder.GetSection("default").Get<ValidationRules>();
                     Console.WriteLine($"Using default validation rules.");
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     break;
             }
         }
 
         private static void SetServiceType(string parameter)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("validation-rules.json")
+                .Build();
             switch (parameter.ToUpper())
             {
                 case "MEMORY":
+                    rules = builder.GetSection("default").Get<ValidationRules>();
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     Console.WriteLine($"Using {parameter.ToLower()} service type.");
                     break;
                 case "FILE":
                     Console.WriteLine($"Using {parameter.ToLower()} service type.");
-                    Program.fileCabinetService = new FileCabinetFilesystemService(new ValidatorBuilder().CreateDefault());
+                    rules = builder.GetSection("default").Get<ValidationRules>();
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     break;
                 default:
+                    rules = builder.GetSection("default").Get<ValidationRules>();
+                    Program.fileCabinetService = new FileCabinetMemoryService(new ValidatorBuilder(rules).CreateFromJson());
                     Console.WriteLine($"Using default service type.");
                     break;
             }
