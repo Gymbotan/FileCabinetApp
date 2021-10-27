@@ -2,7 +2,7 @@
   "profiles": {
     "FileCabinetApp": {
       "commandName": "Project",
-      "commandLineArgs": "uSE-stOPWatCH -s meMoRy--validaTION-ruLEs=custom"
+      "commandLineArgs": "uSE-stOPWatCH -s meMoRy--validaTION-ruLEs=custom UsE-LoGGeR"
     }
   }
 }

@@ -1492,6 +1492,110 @@
             </summary>
             <param name="records">Records.</param>
         </member>
+        <member name="T:FileCabinetApp.ServiceLogger">
+            <summary>
+            ServiceLogger class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.#ctor(FileCabinetApp.IFileCabinetService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.ServiceLogger"/> class.
+            </summary>
+            <param name="service">IFileCabinetService.</param>
+        </member>
+        <member name="P:FileCabinetApp.ServiceLogger.Validator">
+            <summary>
+            Gets or sets validator.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.CreateRecord(FileCabinetApp.DataForRecord)">
+            <summary>
+            Creates record.
+            </summary>
+            <param name="data">DataForRecord.</param>
+            <returns>Record's id.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.EditRecord(System.Int32,FileCabinetApp.DataForRecord)">
+            <summary>
+            Edits record.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="data">DataForRecord.</param>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.Exit">
+            <summary>
+            Exit.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.FindByDateOfBirth(System.String)">
+            <summary>
+            Finds records.
+            </summary>
+            <param name="dateOfBirth">dateOfBirth.</param>
+            <returns>Finded records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.FindByFirstName(System.String)">
+            <summary>
+            Finds records.
+            </summary>
+            <param name="firstName">firstName.</param>
+            <returns>Finded records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.FindByLastName(System.String)">
+            <summary>
+            Finds records.
+            </summary>
+            <param name="lastName">lastName.</param>
+            <returns>Finded records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.GetRecords">
+            <summary>
+            Gets all the records.
+            </summary>
+            <returns>Records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.GetStat">
+            <summary>
+            Gets statistics of records.
+            </summary>
+            <returns>Statistics.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.IsRecordExist(System.Int32)">
+            <summary>
+            Checks is record exist.
+            </summary>
+            <param name="id">Record's id.</param>
+            <returns>isExist.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.ListRecords">
+            <summary>
+            Returns list of records.
+            </summary>
+            <returns>List of records.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.MakeSnapshot">
+            <summary>
+            Makes snapshot.
+            </summary>
+            <returns>Snapshot.</returns>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.Purge">
+            <summary>
+            Purges removed records.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.RemoveRecord(System.Int32)">
+            <summary>
+            Removes chosen record.
+            </summary>
+            <param name="recordId">RecordId.</param>
+        </member>
+        <member name="M:FileCabinetApp.ServiceLogger.Restore(FileCabinetApp.FileCabinetServiceSnapshot)">
+            <summary>
+            Restores FileCabinetService from snapshot.
+            </summary>
+            <param name="snapshot">Snapshot.</param>
+        </member>
         <member name="T:FileCabinetApp.ServiceMeter">
             <summary>
             Decorator class for checking method's working time.

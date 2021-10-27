@@ -22,7 +22,6 @@ namespace FileCabinetApp
         /// <param name="service">IFileCabinetService.</param>
         public ServiceMeter(IFileCabinetService service)
         {
-            Console.WriteLine("ServiceMeter created!");
             this.service = service;
             this.Validator = service.Validator;
         }
@@ -43,6 +42,7 @@ namespace FileCabinetApp
             int id = this.service.CreateRecord(data);
             this.watch.Stop();
             Console.WriteLine($"Create method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return id;
         }
 
@@ -57,6 +57,7 @@ namespace FileCabinetApp
             this.service.EditRecord(id, data);
             this.watch.Stop();
             Console.WriteLine($"Edit method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
         }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace FileCabinetApp
             this.service.Exit();
             this.watch.Stop();
             Console.WriteLine($"Exit method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
         }
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace FileCabinetApp
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.service.FindByDateOfBirth(dateOfBirth);
             this.watch.Stop();
             Console.WriteLine($"FindByDateOfBirth method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return list;
         }
 
@@ -95,6 +98,7 @@ namespace FileCabinetApp
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.service.FindByFirstName(firstName);
             this.watch.Stop();
             Console.WriteLine($"FindByFirstName method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return list;
         }
 
@@ -109,6 +113,7 @@ namespace FileCabinetApp
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.service.FindByLastName(lastName);
             this.watch.Stop();
             Console.WriteLine($"FindByLastName method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return list;
         }
 
@@ -118,10 +123,7 @@ namespace FileCabinetApp
         /// <returns>Records.</returns>
         public IReadOnlyCollection<FileCabinetRecord> GetRecords()
         {
-            this.watch.Start();
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.service.GetRecords();
-            this.watch.Stop();
-            Console.WriteLine($"GetRecords method execution duration is {this.watch.ElapsedTicks} ticks.");
             return list;
         }
 
@@ -134,7 +136,8 @@ namespace FileCabinetApp
             this.watch.Start();
             (int, int) stats = this.service.GetStat();
             this.watch.Stop();
-            Console.WriteLine($"GetStat method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"Stat method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return stats;
         }
 
@@ -145,10 +148,7 @@ namespace FileCabinetApp
         /// <returns>isExist.</returns>
         public bool IsRecordExist(int id)
         {
-            this.watch.Start();
             bool isExist = this.service.IsRecordExist(id);
-            this.watch.Stop();
-            Console.WriteLine($"FindByLastName method execution duration is {this.watch.ElapsedTicks} ticks.");
             return isExist;
         }
 
@@ -161,7 +161,8 @@ namespace FileCabinetApp
             this.watch.Start();
             List<FileCabinetRecord> list = (List<FileCabinetRecord>)this.service.ListRecords();
             this.watch.Stop();
-            Console.WriteLine($"FindByLastName method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"List method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return list;
         }
 
@@ -174,7 +175,8 @@ namespace FileCabinetApp
             this.watch.Start();
             FileCabinetServiceSnapshot snapshot = this.service.MakeSnapshot();
             this.watch.Stop();
-            Console.WriteLine($"FindByLastName method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"MakeSnapshot method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
             return snapshot;
         }
 
@@ -186,7 +188,8 @@ namespace FileCabinetApp
             this.watch.Start();
             this.service.Purge();
             this.watch.Stop();
-            Console.WriteLine($"Edit method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"Purge method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
         }
 
         /// <summary>
@@ -198,7 +201,8 @@ namespace FileCabinetApp
             this.watch.Start();
             this.service.RemoveRecord(recordId);
             this.watch.Stop();
-            Console.WriteLine($"Edit method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"Remove method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
         }
 
         /// <summary>
@@ -210,7 +214,8 @@ namespace FileCabinetApp
             this.watch.Start();
             this.service.Restore(snapshot);
             this.watch.Stop();
-            Console.WriteLine($"Edit method execution duration is {this.watch.ElapsedTicks} ticks.");
+            Console.WriteLine($"Restore method execution duration is {this.watch.ElapsedTicks} ticks.");
+            this.watch.Reset();
         }
     }
 }

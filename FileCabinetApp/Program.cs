@@ -71,12 +71,6 @@ namespace FileCabinetApp
                 }
             }
 
-            Console.WriteLine($"validationType = {validationType}");
-            Console.WriteLine($"storageType = {storageType}");
-            Console.WriteLine($"isStopwatch = {isStopwatch}");
-            Console.WriteLine($"isLogger = {isLogger}");
-            Console.WriteLine();
-
             rules = builder.GetSection(validationType).Get<ValidationRules>();
             if (storageType == "file")
             {
@@ -90,6 +84,11 @@ namespace FileCabinetApp
             if (isStopwatch)
             {
                 Program.fileCabinetService = new ServiceMeter(Program.fileCabinetService);
+            }
+
+            if (isLogger)
+            {
+                Program.fileCabinetService = new ServiceLogger(Program.fileCabinetService);
             }
 
             Console.WriteLine(Program.HintMessage);
